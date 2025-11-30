@@ -93,6 +93,36 @@ ng test ui-kit
 5.  Ensure it follows the Atomic Design structure (atoms, molecules, organisms).
 6.  Add a Storybook story (`.stories.ts`) and documentation.
 
+### 🛠️ Generators
+
+Use Plop to generate new components automatically:
+
+```bash
+npm run generate
+```
+
+Follow the prompts to select the component type (atom, molecule, etc.) and name.
+
+### 🧹 Code Quality
+
+We use **Prettier** for formatting.
+
+```bash
+# Format code
+npm run format
+```
+
+### 🚀 Releasing
+
+We use **Changesets** for versioning.
+
+1.  Run `npx changeset` to create a release intent.
+2.  Select the impact (Major/Minor/Patch).
+3.  Commit the changeset file.
+4.  Push to `main`.
+5.  The CI will create a "Version Packages" PR.
+6.  Merge that PR to publish to NPM.
+
 ## 📄 License
 
 MIT

@@ -19,7 +19,7 @@ export const DarkMode: Story = {
   parameters: {
     themes: {
       default: 'dark',
-    }
+    },
   },
   render: () => ({
     template: `

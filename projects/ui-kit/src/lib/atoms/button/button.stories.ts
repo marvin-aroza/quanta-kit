@@ -53,9 +53,9 @@ Use the \`icon-start\` or \`icon-end\` attributes to project icons.
 
 - Uses the native \`<button>\` element for built-in keyboard navigation and focus management.
 - Supports \`disabled\` state with correct ARIA attributes.
-        `
-      }
-    }
+        `,
+      },
+    },
   },
   argTypes: {
     variant: {
@@ -132,14 +132,14 @@ export const Interactive: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button');
-    
+
     // Verify initial state
     await expect(button).toBeInTheDocument();
     await expect(button).toHaveTextContent('Button');
-    
+
     // Simulate click
     await userEvent.click(button);
-    
+
     // In a real app, we might check for a side effect, but here we just verify it's clickable
     await expect(button).not.toBeDisabled();
   },

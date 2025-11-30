@@ -9,11 +9,12 @@ export type ButtonColor = 'primary' | 'secondary' | 'tertiary' | 'error';
   standalone: true,
   imports: [CommonModule],
   template: `
-    <button 
+    <button
       [type]="type()"
       [class]="buttonClasses()"
       [disabled]="disabled()"
-      (click)="clicked.emit($event)">
+      (click)="clicked.emit($event)"
+    >
       <div class="state-layer"></div>
       <ng-content select="[icon-start]"></ng-content>
       <span class="label"><ng-content></ng-content></span>
@@ -21,7 +22,7 @@ export type ButtonColor = 'primary' | 'secondary' | 'tertiary' | 'error';
     </button>
   `,
   styleUrls: ['./button.component.scss'],
-  encapsulation: ViewEncapsulation.None // To allow styling projected content easily if needed, though :host context is safer. Let's stick to default for now but I used ::ng-deep in SCSS which is deprecated. Better to use ViewEncapsulation.None or just expect user to size icons.
+  encapsulation: ViewEncapsulation.None, // To allow styling projected content easily if needed, though :host context is safer. Let's stick to default for now but I used ::ng-deep in SCSS which is deprecated. Better to use ViewEncapsulation.None or just expect user to size icons.
   // Actually, let's remove ViewEncapsulation.None and rely on the user or global styles for icon sizing, or use a specific selector.
   // Reverting to default encapsulation.
 })

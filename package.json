@@ -9,7 +9,21 @@
     "test": "ng test",
     "storybook": "ng run ui-kit:storybook",
     "build-storybook": "ng run ui-kit:build-storybook",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "format": "prettier --write \"**/*.{ts,js,json,md,html,scss}\"",
+    "prepare": "husky",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "node scripts/publish-library.js",
+    "generate": "plop"
+  },
+  "lint-staged": {
+    "*.{ts,js,json,md,html,scss}": [
+      "prettier --write"
+    ],
+    "*.ts": [
+      "eslint --fix"
+    ]
   },
   "prettier": {
     "printWidth": 100,
@@ -43,14 +57,22 @@
     "@angular/cli": "^21.0.1",
     "@angular/compiler-cli": "^21.0.0",
     "@angular/platform-browser-dynamic": "^21.0.0",
+    "@changesets/cli": "^2.29.8",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@compodoc/compodoc": "^1.1.32",
     "@storybook/addon-a11y": "^10.1.2",
     "@storybook/addon-docs": "^10.1.2",
     "@storybook/angular": "^10.1.2",
     "angular-eslint": "21.0.1",
     "eslint": "^9.39.1",
+    "husky": "^9.1.7",
     "jsdom": "^27.1.0",
+    "lint-staged": "^16.2.7",
     "ng-packagr": "^21.0.0",
+    "plop": "^4.0.4",
+    "prettier": "^3.7.3",
+    "prettier-plugin-organize-imports": "^4.3.0",
     "storybook": "^10.1.2",
     "typescript": "~5.9.2",
     "typescript-eslint": "8.46.4",
