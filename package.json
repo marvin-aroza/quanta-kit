@@ -15,6 +15,9 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "node scripts/publish-library.js",
+    "release:alpha:enter": "changeset pre enter alpha",
+    "release:alpha:exit": "changeset pre exit",
+    "release:snapshot": "changeset version --snapshot && changeset publish --tag canary",
     "generate": "plop"
   },
   "lint-staged": {

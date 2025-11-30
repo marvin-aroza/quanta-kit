@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/angular';
 import { userEvent, within, expect } from 'storybook/test';
-import { ButtonComponent } from './button.component';
+import { QuantaButtonComponent } from './button.component';
 
-const meta: Meta<ButtonComponent> = {
+const meta: Meta<QuantaButtonComponent> = {
   title: 'Atoms/Button',
-  component: ButtonComponent,
+  component: QuantaButtonComponent,
   tags: ['autodocs'],
   parameters: {
     docs: {
@@ -78,7 +78,7 @@ Use the \`icon-start\` or \`icon-end\` attributes to project icons.
 };
 
 export default meta;
-type Story = StoryObj<ButtonComponent>;
+type Story = StoryObj<QuantaButtonComponent>;
 
 export const Filled: Story = {
   args: {

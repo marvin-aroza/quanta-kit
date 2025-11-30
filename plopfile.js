@@ -64,6 +64,32 @@ type Story = StoryObj<Quanta{{pascalCase name}}Component>;
 export const Default: Story = {};
 `,
       },
+      {
+        type: 'add',
+        path: 'projects/ui-kit/src/lib/{{type}}/{{name}}/{{name}}.component.spec.ts',
+        template: `import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { Quanta{{pascalCase name}}Component } from './{{name}}.component';
+
+describe('Quanta{{pascalCase name}}Component', () => {
+  let component: Quanta{{pascalCase name}}Component;
+  let fixture: ComponentFixture<Quanta{{pascalCase name}}Component>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [Quanta{{pascalCase name}}Component],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(Quanta{{pascalCase name}}Component);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+`,
+      },
     ],
   });
 };

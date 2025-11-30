@@ -26,7 +26,7 @@ export type ButtonColor = 'primary' | 'secondary' | 'tertiary' | 'error';
   // Actually, let's remove ViewEncapsulation.None and rely on the user or global styles for icon sizing, or use a specific selector.
   // Reverting to default encapsulation.
 })
-export class ButtonComponent {
+export class QuantaButtonComponent {
   variant = input<ButtonVariant>('filled');
   color = input<ButtonColor>('primary');
   type = input<'button' | 'submit' | 'reset'>('button');
