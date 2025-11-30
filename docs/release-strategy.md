@@ -6,7 +6,7 @@ Big companies (like Google, Facebook, Airbnb) typically use a tiered release str
 
 ### 🐣 Canary / Snapshot Releases
 
-**"The Nightly Build"**
+#### The Nightly Build
 
 - **What**: Every commit to `main` is automatically published.
 - **Version**: `0.0.0-snapshot-20231130-abcdef`
@@ -17,7 +17,7 @@ Big companies (like Google, Facebook, Airbnb) typically use a tiered release str
 
 ### 🚧 Prerelease (Alpha / Beta / RC)
 
-**"The Testing Phase"**
+#### The Testing Phase
 
 - **What**: A stabilized version ready for testing but not production.
   - **Alpha**: Feature incomplete, potential breaking changes (`1.0.0-alpha.1`).
@@ -28,7 +28,7 @@ Big companies (like Google, Facebook, Airbnb) typically use a tiered release str
 
 ### 🚀 Stable / General Availability (GA)
 
-**"The Production Release"**
+#### The Production Release
 
 - **What**: The official, battle-tested release.
 - **Version**: `1.0.0`

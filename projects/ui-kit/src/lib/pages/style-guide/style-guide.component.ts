@@ -1,10 +1,213 @@
-import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 
 @Component({
+  imports: [CommonModule],
   selector: 'quanta-style-guide',
   standalone: true,
-  imports: [CommonModule],
+  styles: [
+    `
+      .style-guide {
+        padding: 4rem;
+        background-color: var(--md-sys-color-background);
+        color: var(--md-sys-color-on-background);
+        font-family: var(--font-family-sans);
+      }
+
+      section {
+        margin-bottom: 4rem;
+      }
+
+      h1,
+      h2,
+      h3 {
+        margin: 0 0 1rem;
+      }
+
+      header {
+        margin-bottom: 4rem;
+        border-bottom: 1px solid var(--md-sys-color-outline-variant);
+        padding-bottom: 2rem;
+      }
+
+      /* Colors */
+      .color-group {
+        margin-bottom: 2rem;
+      }
+
+      .color-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .color-card {
+        padding: 1.5rem;
+        border-radius: var(--md-sys-shape-corner-medium);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        min-height: 120px;
+
+        .label {
+          font-weight: bold;
+          margin-bottom: 0.5rem;
+        }
+
+        code {
+          font-size: 0.75rem;
+          opacity: 0.8;
+        }
+      }
+
+      /* Typography */
+      .typography-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .type-row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--md-sys-color-outline-variant);
+        padding-bottom: 0.5rem;
+
+        code {
+          color: var(--md-sys-color-outline);
+          font-size: 0.875rem;
+        }
+      }
+
+      .divider {
+        height: 1rem;
+      }
+
+      /* Utility classes for typography */
+      .display-large {
+        font: var(--md-sys-typescale-display-large);
+      }
+      .display-medium {
+        font: var(--md-sys-typescale-display-medium);
+      }
+      .display-small {
+        font: var(--md-sys-typescale-display-small);
+      }
+
+      .headline-large {
+        font: var(--md-sys-typescale-headline-large);
+      }
+      .headline-medium {
+        font: var(--md-sys-typescale-headline-medium);
+      }
+      .headline-small {
+        font: var(--md-sys-typescale-headline-small);
+      }
+
+      .title-large {
+        font: var(--md-sys-typescale-title-large);
+      }
+      .title-medium {
+        font: var(--md-sys-typescale-title-medium);
+      }
+      .title-small {
+        font: var(--md-sys-typescale-title-small);
+      }
+
+      .body-large {
+        font: var(--md-sys-typescale-body-large);
+      }
+      .body-medium {
+        font: var(--md-sys-typescale-body-medium);
+      }
+      .body-small {
+        font: var(--md-sys-typescale-body-small);
+      }
+
+      .label-large {
+        font: var(--md-sys-typescale-label-large);
+      }
+      .label-medium {
+        font: var(--md-sys-typescale-label-medium);
+      }
+      .label-small {
+        font: var(--md-sys-typescale-label-small);
+      }
+
+      /* Elevation */
+      .elevation-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 2rem;
+      }
+
+      .elevation-card {
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--md-sys-color-surface-container-low, #f3f6ea); /* Fallback */
+        color: var(--md-sys-color-on-surface);
+        border-radius: var(--md-sys-shape-corner-medium);
+      }
+
+      .level-0 {
+        box-shadow: var(--md-sys-elevation-0);
+      }
+      .level-1 {
+        box-shadow: var(--md-sys-elevation-1);
+      }
+      .level-2 {
+        box-shadow: var(--md-sys-elevation-2);
+      }
+      .level-3 {
+        box-shadow: var(--md-sys-elevation-3);
+      }
+      .level-4 {
+        box-shadow: var(--md-sys-elevation-4);
+      }
+      .level-5 {
+        box-shadow: var(--md-sys-elevation-5);
+      }
+
+      /* Shapes */
+      .shape-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 2rem;
+      }
+
+      .shape-card {
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--md-sys-color-primary-container);
+        color: var(--md-sys-color-on-primary-container);
+        border: 1px solid var(--md-sys-color-outline);
+      }
+
+      .xs {
+        border-radius: var(--md-sys-shape-corner-extra-small);
+      }
+      .sm {
+        border-radius: var(--md-sys-shape-corner-small);
+      }
+      .md {
+        border-radius: var(--md-sys-shape-corner-medium);
+      }
+      .lg {
+        border-radius: var(--md-sys-shape-corner-large);
+      }
+      .xl {
+        border-radius: var(--md-sys-shape-corner-extra-large);
+      }
+      .full {
+        border-radius: var(--md-sys-shape-corner-full);
+      }
+    `,
+  ],
   template: `
     <div class="style-guide">
       <header>
@@ -317,208 +520,5 @@ import { CommonModule } from '@angular/common';
       </section>
     </div>
   `,
-  styles: [
-    `
-      .style-guide {
-        padding: 4rem;
-        background-color: var(--md-sys-color-background);
-        color: var(--md-sys-color-on-background);
-        font-family: var(--font-family-sans);
-      }
-
-      section {
-        margin-bottom: 4rem;
-      }
-
-      h1,
-      h2,
-      h3 {
-        margin: 0 0 1rem;
-      }
-
-      header {
-        margin-bottom: 4rem;
-        border-bottom: 1px solid var(--md-sys-color-outline-variant);
-        padding-bottom: 2rem;
-      }
-
-      /* Colors */
-      .color-group {
-        margin-bottom: 2rem;
-      }
-
-      .color-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-        gap: 1rem;
-      }
-
-      .color-card {
-        padding: 1.5rem;
-        border-radius: var(--md-sys-shape-corner-medium);
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        min-height: 120px;
-
-        .label {
-          font-weight: bold;
-          margin-bottom: 0.5rem;
-        }
-
-        code {
-          font-size: 0.75rem;
-          opacity: 0.8;
-        }
-      }
-
-      /* Typography */
-      .typography-list {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
-      }
-
-      .type-row {
-        display: flex;
-        align-items: baseline;
-        justify-content: space-between;
-        border-bottom: 1px solid var(--md-sys-color-outline-variant);
-        padding-bottom: 0.5rem;
-
-        code {
-          color: var(--md-sys-color-outline);
-          font-size: 0.875rem;
-        }
-      }
-
-      .divider {
-        height: 1rem;
-      }
-
-      /* Utility classes for typography */
-      .display-large {
-        font: var(--md-sys-typescale-display-large);
-      }
-      .display-medium {
-        font: var(--md-sys-typescale-display-medium);
-      }
-      .display-small {
-        font: var(--md-sys-typescale-display-small);
-      }
-
-      .headline-large {
-        font: var(--md-sys-typescale-headline-large);
-      }
-      .headline-medium {
-        font: var(--md-sys-typescale-headline-medium);
-      }
-      .headline-small {
-        font: var(--md-sys-typescale-headline-small);
-      }
-
-      .title-large {
-        font: var(--md-sys-typescale-title-large);
-      }
-      .title-medium {
-        font: var(--md-sys-typescale-title-medium);
-      }
-      .title-small {
-        font: var(--md-sys-typescale-title-small);
-      }
-
-      .body-large {
-        font: var(--md-sys-typescale-body-large);
-      }
-      .body-medium {
-        font: var(--md-sys-typescale-body-medium);
-      }
-      .body-small {
-        font: var(--md-sys-typescale-body-small);
-      }
-
-      .label-large {
-        font: var(--md-sys-typescale-label-large);
-      }
-      .label-medium {
-        font: var(--md-sys-typescale-label-medium);
-      }
-      .label-small {
-        font: var(--md-sys-typescale-label-small);
-      }
-
-      /* Elevation */
-      .elevation-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 2rem;
-      }
-
-      .elevation-card {
-        height: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--md-sys-color-surface-container-low, #f3f6ea); /* Fallback */
-        color: var(--md-sys-color-on-surface);
-        border-radius: var(--md-sys-shape-corner-medium);
-      }
-
-      .level-0 {
-        box-shadow: var(--md-sys-elevation-0);
-      }
-      .level-1 {
-        box-shadow: var(--md-sys-elevation-1);
-      }
-      .level-2 {
-        box-shadow: var(--md-sys-elevation-2);
-      }
-      .level-3 {
-        box-shadow: var(--md-sys-elevation-3);
-      }
-      .level-4 {
-        box-shadow: var(--md-sys-elevation-4);
-      }
-      .level-5 {
-        box-shadow: var(--md-sys-elevation-5);
-      }
-
-      /* Shapes */
-      .shape-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 2rem;
-      }
-
-      .shape-card {
-        height: 100px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: var(--md-sys-color-primary-container);
-        color: var(--md-sys-color-on-primary-container);
-        border: 1px solid var(--md-sys-color-outline);
-      }
-
-      .xs {
-        border-radius: var(--md-sys-shape-corner-extra-small);
-      }
-      .sm {
-        border-radius: var(--md-sys-shape-corner-small);
-      }
-      .md {
-        border-radius: var(--md-sys-shape-corner-medium);
-      }
-      .lg {
-        border-radius: var(--md-sys-shape-corner-large);
-      }
-      .xl {
-        border-radius: var(--md-sys-shape-corner-extra-large);
-      }
-      .full {
-        border-radius: var(--md-sys-shape-corner-full);
-      }
-    `,
-  ],
 })
 export class StyleGuideComponent {}

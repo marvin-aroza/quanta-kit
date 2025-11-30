@@ -1,11 +1,24 @@
 import { Meta, StoryObj } from '@storybook/angular';
-import { userEvent, within, expect } from 'storybook/test';
+import { expect, userEvent, within } from 'storybook/test';
+
 import { QuantaButtonComponent } from './button.component';
 
 const meta: Meta<QuantaButtonComponent> = {
-  title: 'Atoms/Button',
+  argTypes: {
+    clicked: { action: 'clicked' },
+    color: {
+      control: 'select',
+      options: ['primary', 'secondary', 'tertiary', 'error'],
+    },
+    disabled: {
+      control: 'boolean',
+    },
+    variant: {
+      control: 'select',
+      options: ['filled', 'tonal', 'outlined', 'text', 'elevated'],
+    },
+  },
   component: QuantaButtonComponent,
-  tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
@@ -57,24 +70,12 @@ Use the \`icon-start\` or \`icon-end\` attributes to project icons.
       },
     },
   },
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['filled', 'tonal', 'outlined', 'text', 'elevated'],
-    },
-    color: {
-      control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'error'],
-    },
-    disabled: {
-      control: 'boolean',
-    },
-    clicked: { action: 'clicked' },
-  },
   render: (args) => ({
     props: args,
     template: `<quanta-button [variant]="variant" [color]="color" [disabled]="disabled" (clicked)="clicked($event)">Button</quanta-button>`,
   }),
+  tags: ['autodocs'],
+  title: 'Atoms/Button',
 };
 
 export default meta;
