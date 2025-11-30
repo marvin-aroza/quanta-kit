@@ -1,0 +1,62 @@
+import { Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Quanta Kit/Material Design 3" />
+
+# Material Design 3
+
+**Quanta Kit** fully embraces [Material Design 3 (Material You)](https://m3.material.io/), Google's latest design system. We use it to create personal, adaptive, and expressive experiences.
+
+## Core Principles
+
+### 1. Dynamic Color
+
+We use a color system that adapts to the user's wallpaper (on supported devices) or a seeded theme color.
+
+- **Primary**: The most prominent color, used for key components.
+- **Secondary**: Used for less prominent components.
+- **Tertiary**: Used for contrasting accents.
+- **Error**: Used for error states.
+
+### 2. Typography
+
+We follow the M3 type scale, which provides a range of contrasting styles that support the needs of your product and its content.
+
+- **Display**: Large, expressive text.
+- **Headline**: High-emphasis text for marking sections.
+- **Title**: Medium-emphasis text.
+- **Body**: Long-form writing.
+- **Label**: Smaller, utilitarian text.
+
+### 3. Elevation & Shapes
+
+We use standard M3 elevation levels and corner shapes to convey hierarchy and state.
+
+- **Elevation**: 0dp (Flat) to 5dp (High).
+- **Shapes**: Extra Small (4px) to Extra Large (28px) and Full (Circle).
+
+## Implementation
+
+We implement M3 using CSS Custom Properties (Variables) for maximum flexibility and performance.
+
+### Usage
+
+Use the provided CSS variables in your component styles:
+
+```scss
+.my-card {
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  border-radius: var(--md-sys-shape-corner-medium);
+  padding: 16px;
+}
+```
+
+### Theming
+
+To switch themes (e.g., Dark Mode), simply apply the relevant class or data attribute to the root element. Our system automatically updates all tokens.
+
+```html
+<body data-theme="dark">
+  <!-- All components now use dark mode tokens -->
+</body>
+```

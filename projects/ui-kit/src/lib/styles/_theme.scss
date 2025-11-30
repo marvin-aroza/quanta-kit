@@ -1,0 +1,32 @@
+[data-theme="dark"] {
+  /* Primary */
+  --md-sys-color-primary: #96D782; /* Lighter green for dark mode */
+  --md-sys-color-on-primary: #042100;
+  --md-sys-color-primary-container: #224E12;
+  --md-sys-color-on-primary-container: #B1F49B;
+
+  /* Secondary */
+  --md-sys-color-secondary: #BFCBAD;
+  --md-sys-color-on-secondary: #29341F;
+  --md-sys-color-secondary-container: #3F4A33;
+  --md-sys-color-on-secondary-container: #DCE7C8;
+
+  /* Tertiary */
+  --md-sys-color-tertiary: #A0CF86;
+  --md-sys-color-on-tertiary: #0F1F07;
+  --md-sys-color-tertiary-container: #263518;
+  --md-sys-color-on-tertiary-container: #BCEBB0;
+
+  /* Background & Surface */
+  --md-sys-color-background: #143109; /* Dark Green bg */
+  --md-sys-color-on-background: #E1E4D5;
+  
+  --md-sys-color-surface: #143109;
+  --md-sys-color-on-surface: #E1E4D5;
+  
+  --md-sys-color-surface-variant: #44483D;
+  --md-sys-color-on-surface-variant: #C5C8BA;
+  
+  --md-sys-color-outline: #8F9285;
+  --md-sys-color-outline-variant: #44483D;
+}

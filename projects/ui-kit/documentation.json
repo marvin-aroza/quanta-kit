@@ -1,0 +1,470 @@
+{
+    "pipes": [],
+    "interfaces": [],
+    "injectables": [],
+    "guards": [],
+    "interceptors": [],
+    "classes": [],
+    "directives": [],
+    "components": [],
+    "modules": [],
+    "miscellaneous": {
+        "variables": [
+            {
+                "name": "DarkMode",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-kit/src/lib/pages/style-guide/style-guide.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  parameters: {\r\n    themes: {\r\n      default: 'dark',\r\n    }\r\n  },\r\n  render: () => ({\r\n    template: `\r\n      <div data-theme=\"dark\" style=\"padding: 20px; background: var(--background-color); min-height: 100vh;\">\r\n        <quanta-style-guide></quanta-style-guide>\r\n      </div>\r\n    `,\r\n  }),\r\n}"
+            },
+            {
+                "name": "Default",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-kit/src/lib/pages/style-guide/style-guide.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{}"
+            },
+            {
+                "name": "Elevated",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'elevated',\r\n  },\r\n}"
+            },
+            {
+                "name": "Filled",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'filled',\r\n  },\r\n}"
+            },
+            {
+                "name": "Interactive",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'filled',\r\n  },\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const button = canvas.getByRole('button');\r\n    \r\n    // Verify initial state\r\n    await expect(button).toBeInTheDocument();\r\n    await expect(button).toHaveTextContent('Button');\r\n    \r\n    // Simulate click\r\n    await userEvent.click(button);\r\n    \r\n    // In a real app, we might check for a side effect, but here we just verify it's clickable\r\n    await expect(button).not.toBeDisabled();\r\n  },\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<ButtonComponent>",
+                "defaultValue": "{\r\n  title: 'Atoms/Button',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: `\r\n\r\nThe \\`quanta-button\\` component is a versatile button element that adheres to Material 3 design guidelines. It supports multiple variants, colors, and icon integration.\r\n\r\n## Usage\r\n\r\n\\`\\`\\`html\r\n<quanta-button variant=\"filled\" color=\"primary\" (clicked)=\"handleClick()\">\r\n  Click Me\r\n</quanta-button>\r\n\\`\\`\\`\r\n\r\n### With Icon\r\n\r\nUse the \\`icon-start\\` or \\`icon-end\\` attributes to project icons.\r\n\r\n\\`\\`\\`html\r\n<quanta-button variant=\"outlined\">\r\n  <mat-icon icon-start>add</mat-icon>\r\n  Add Item\r\n</quanta-button>\r\n\\`\\`\\`\r\n\r\n## API\r\n\r\n### Inputs\r\n\r\n| Name | Type | Default | Description |\r\n|---|---|---|---|\r\n| \\`variant\\` | \\`'filled' | 'tonal' | 'outlined' | 'text' | 'elevated'\\` | \\`'filled'\\` | The visual style of the button. |\r\n| \\`color\\` | \\`'primary' | 'secondary' | 'tertiary' | 'error'\\` | \\`'primary'\\` | The color palette to use. |\r\n| \\`type\\` | \\`'button' | 'submit' | 'reset'\\` | \\`'button'\\` | The native button type. |\r\n| \\`disabled\\` | \\`boolean\\` | \\`false\\` | Whether the button is disabled. |\r\n\r\n### Outputs\r\n\r\n| Name | Type | Description |\r\n|---|---|---|\r\n| \\`clicked\\` | \\`EventEmitter<Event>\\` | Emitted when the button is clicked. |\r\n\r\n## Accessibility\r\n\r\n- Uses the native \\`<button>\\` element for built-in keyboard navigation and focus management.\r\n- Supports \\`disabled\\` state with correct ARIA attributes.\r\n        `\r\n      }\r\n    }\r\n  },\r\n  argTypes: {\r\n    variant: {\r\n      control: 'select',\r\n      options: ['filled', 'tonal', 'outlined', 'text', 'elevated'],\r\n    },\r\n    color: {\r\n      control: 'select',\r\n      options: ['primary', 'secondary', 'tertiary', 'error'],\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n    },\r\n    clicked: { action: 'clicked' },\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<quanta-button [variant]=\"variant\" [color]=\"color\" [disabled]=\"disabled\" (clicked)=\"clicked($event)\">Button</quanta-button>`,\r\n  }),\r\n}"
+            },
+            {
+                "name": "meta",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-kit/src/lib/pages/style-guide/style-guide.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Meta<StyleGuideComponent>",
+                "defaultValue": "{\r\n  title: 'Pages/Style Guide',\r\n  component: StyleGuideComponent,\r\n  tags: ['autodocs'],\r\n  parameters: {\r\n    layout: 'fullscreen',\r\n  },\r\n}"
+            },
+            {
+                "name": "Outlined",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'outlined',\r\n  },\r\n}"
+            },
+            {
+                "name": "preview",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-kit/.storybook/preview.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Preview",
+                "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n       color: /(background|color)$/i,\n       date: /Date$/i,\n      },\n    },\n  },\n}"
+            },
+            {
+                "name": "Text",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'text',\r\n  },\r\n}"
+            },
+            {
+                "name": "Tonal",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'tonal',\r\n  },\r\n}"
+            },
+            {
+                "name": "WithIcon",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story",
+                "defaultValue": "{\r\n  args: {\r\n    variant: 'filled',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <quanta-button [variant]=\"variant\" [color]=\"color\" [disabled]=\"disabled\" (clicked)=\"clicked($event)\">\r\n        <span icon-start style=\"font-size: 18px; margin-right: 8px;\">+</span>\r\n        Button\r\n      </quanta-button>\r\n    `,\r\n  }),\r\n}"
+            }
+        ],
+        "functions": [],
+        "typealiases": [
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<ButtonComponent>",
+                "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            },
+            {
+                "name": "Story",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "StoryObj<StyleGuideComponent>",
+                "file": "projects/ui-kit/src/lib/pages/style-guide/style-guide.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 184
+            }
+        ],
+        "enumerations": [],
+        "groupedVariables": {
+            "projects/ui-kit/src/lib/pages/style-guide/style-guide.stories.ts": [
+                {
+                    "name": "DarkMode",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-kit/src/lib/pages/style-guide/style-guide.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  parameters: {\r\n    themes: {\r\n      default: 'dark',\r\n    }\r\n  },\r\n  render: () => ({\r\n    template: `\r\n      <div data-theme=\"dark\" style=\"padding: 20px; background: var(--background-color); min-height: 100vh;\">\r\n        <quanta-style-guide></quanta-style-guide>\r\n      </div>\r\n    `,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "Default",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-kit/src/lib/pages/style-guide/style-guide.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-kit/src/lib/pages/style-guide/style-guide.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<StyleGuideComponent>",
+                    "defaultValue": "{\r\n  title: 'Pages/Style Guide',\r\n  component: StyleGuideComponent,\r\n  tags: ['autodocs'],\r\n  parameters: {\r\n    layout: 'fullscreen',\r\n  },\r\n}"
+                }
+            ],
+            "projects/ui-kit/src/lib/atoms/button/button.stories.ts": [
+                {
+                    "name": "Elevated",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'elevated',\r\n  },\r\n}"
+                },
+                {
+                    "name": "Filled",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'filled',\r\n  },\r\n}"
+                },
+                {
+                    "name": "Interactive",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'filled',\r\n  },\r\n  play: async ({ canvasElement }) => {\r\n    const canvas = within(canvasElement);\r\n    const button = canvas.getByRole('button');\r\n    \r\n    // Verify initial state\r\n    await expect(button).toBeInTheDocument();\r\n    await expect(button).toHaveTextContent('Button');\r\n    \r\n    // Simulate click\r\n    await userEvent.click(button);\r\n    \r\n    // In a real app, we might check for a side effect, but here we just verify it's clickable\r\n    await expect(button).not.toBeDisabled();\r\n  },\r\n}"
+                },
+                {
+                    "name": "meta",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Meta<ButtonComponent>",
+                    "defaultValue": "{\r\n  title: 'Atoms/Button',\r\n  component: ButtonComponent,\r\n  tags: ['autodocs'],\r\n  parameters: {\r\n    docs: {\r\n      description: {\r\n        component: `\r\n\r\nThe \\`quanta-button\\` component is a versatile button element that adheres to Material 3 design guidelines. It supports multiple variants, colors, and icon integration.\r\n\r\n## Usage\r\n\r\n\\`\\`\\`html\r\n<quanta-button variant=\"filled\" color=\"primary\" (clicked)=\"handleClick()\">\r\n  Click Me\r\n</quanta-button>\r\n\\`\\`\\`\r\n\r\n### With Icon\r\n\r\nUse the \\`icon-start\\` or \\`icon-end\\` attributes to project icons.\r\n\r\n\\`\\`\\`html\r\n<quanta-button variant=\"outlined\">\r\n  <mat-icon icon-start>add</mat-icon>\r\n  Add Item\r\n</quanta-button>\r\n\\`\\`\\`\r\n\r\n## API\r\n\r\n### Inputs\r\n\r\n| Name | Type | Default | Description |\r\n|---|---|---|---|\r\n| \\`variant\\` | \\`'filled' | 'tonal' | 'outlined' | 'text' | 'elevated'\\` | \\`'filled'\\` | The visual style of the button. |\r\n| \\`color\\` | \\`'primary' | 'secondary' | 'tertiary' | 'error'\\` | \\`'primary'\\` | The color palette to use. |\r\n| \\`type\\` | \\`'button' | 'submit' | 'reset'\\` | \\`'button'\\` | The native button type. |\r\n| \\`disabled\\` | \\`boolean\\` | \\`false\\` | Whether the button is disabled. |\r\n\r\n### Outputs\r\n\r\n| Name | Type | Description |\r\n|---|---|---|\r\n| \\`clicked\\` | \\`EventEmitter<Event>\\` | Emitted when the button is clicked. |\r\n\r\n## Accessibility\r\n\r\n- Uses the native \\`<button>\\` element for built-in keyboard navigation and focus management.\r\n- Supports \\`disabled\\` state with correct ARIA attributes.\r\n        `\r\n      }\r\n    }\r\n  },\r\n  argTypes: {\r\n    variant: {\r\n      control: 'select',\r\n      options: ['filled', 'tonal', 'outlined', 'text', 'elevated'],\r\n    },\r\n    color: {\r\n      control: 'select',\r\n      options: ['primary', 'secondary', 'tertiary', 'error'],\r\n    },\r\n    disabled: {\r\n      control: 'boolean',\r\n    },\r\n    clicked: { action: 'clicked' },\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `<quanta-button [variant]=\"variant\" [color]=\"color\" [disabled]=\"disabled\" (clicked)=\"clicked($event)\">Button</quanta-button>`,\r\n  }),\r\n}"
+                },
+                {
+                    "name": "Outlined",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'outlined',\r\n  },\r\n}"
+                },
+                {
+                    "name": "Text",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'text',\r\n  },\r\n}"
+                },
+                {
+                    "name": "Tonal",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'tonal',\r\n  },\r\n}"
+                },
+                {
+                    "name": "WithIcon",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story",
+                    "defaultValue": "{\r\n  args: {\r\n    variant: 'filled',\r\n  },\r\n  render: (args) => ({\r\n    props: args,\r\n    template: `\r\n      <quanta-button [variant]=\"variant\" [color]=\"color\" [disabled]=\"disabled\" (clicked)=\"clicked($event)\">\r\n        <span icon-start style=\"font-size: 18px; margin-right: 8px;\">+</span>\r\n        Button\r\n      </quanta-button>\r\n    `,\r\n  }),\r\n}"
+                }
+            ],
+            "projects/ui-kit/.storybook/preview.ts": [
+                {
+                    "name": "preview",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "projects/ui-kit/.storybook/preview.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Preview",
+                    "defaultValue": "{\n  parameters: {\n    controls: {\n      matchers: {\n       color: /(background|color)$/i,\n       date: /Date$/i,\n      },\n    },\n  },\n}"
+                }
+            ]
+        },
+        "groupedFunctions": {},
+        "groupedEnumerations": {},
+        "groupedTypeAliases": {
+            "projects/ui-kit/src/lib/atoms/button/button.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<ButtonComponent>",
+                    "file": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ],
+            "projects/ui-kit/src/lib/pages/style-guide/style-guide.stories.ts": [
+                {
+                    "name": "Story",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "StoryObj<StyleGuideComponent>",
+                    "file": "projects/ui-kit/src/lib/pages/style-guide/style-guide.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 184
+                }
+            ]
+        }
+    },
+    "routes": {
+        "name": "<root>",
+        "kind": "module",
+        "children": []
+    },
+    "coverage": {
+        "count": 0,
+        "status": "low",
+        "files": [
+            {
+                "filePath": "projects/ui-kit/.storybook/preview.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "preview",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Elevated",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Filled",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Interactive",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Outlined",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Text",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Tonal",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "WithIcon",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-kit/src/lib/atoms/button/button.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-kit/src/lib/pages/style-guide/style-guide.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "DarkMode",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-kit/src/lib/pages/style-guide/style-guide.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Default",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-kit/src/lib/pages/style-guide/style-guide.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "meta",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "projects/ui-kit/src/lib/pages/style-guide/style-guide.stories.ts",
+                "type": "type alias",
+                "linktype": "miscellaneous",
+                "linksubtype": "typealias",
+                "name": "Story",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            }
+        ]
+    }
+}

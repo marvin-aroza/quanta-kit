@@ -1,0 +1,59 @@
+import { Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Quanta Kit/Atomic Design" />
+
+# Atomic Design
+
+**Quanta Kit** follows the [Atomic Design](https://bradfrost.com/blog/post/atomic-web-design/) methodology by Brad Frost. This approach helps us build a consistent, modular, and scalable design system.
+
+## The Hierarchy
+
+We structure our components into five distinct levels:
+
+### 1. Atoms
+
+Atoms are the basic building blocks of our user interface. They cannot be broken down any further without ceasing to be functional.
+
+- **Examples**: Buttons, Inputs, Icons, Labels, Color Tokens.
+- **Characteristics**: Abstract, not useful on their own, highly reusable.
+
+### 2. Molecules
+
+Molecules are groups of atoms bonded together to be the smallest fundamental units of a compound. They take on their own properties and serve a single function.
+
+- **Examples**: Search Form (Input + Button), User Card (Avatar + Label), Menu Item.
+- **Characteristics**: Simple, built for reuse, do one thing well.
+
+### 3. Organisms
+
+Organisms are groups of molecules joined together to form a relatively complex, distinct section of an interface.
+
+- **Examples**: Header (Logo + Nav + Search), Product Grid, Footer.
+- **Characteristics**: Complex, distinct section of UI, context-specific.
+
+### 4. Templates
+
+Templates consist of groups of organisms stitched together to form pages. They are mostly concrete but still abstract (wireframes).
+
+- **Examples**: Dashboard Layout, Blog Post Template, Checkout Flow.
+- **Characteristics**: Page-level structure, no real content.
+
+### 5. Pages
+
+Pages are specific instances of templates. They show what a UI looks like with real representative content in place.
+
+- **Examples**: "User Dashboard", "Homepage", "About Us".
+- **Characteristics**: High fidelity, real content, specific instance.
+
+## Directory Structure
+
+Our project structure mirrors this hierarchy:
+
+```
+projects/ui-kit/src/lib/
+├── atoms/       # Basic components
+├── molecules/   # Compound components
+├── organisms/   # Complex sections
+├── templates/   # Layouts
+└── pages/       # Full page examples
+```

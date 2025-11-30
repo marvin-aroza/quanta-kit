@@ -2,9 +2,90 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "cli": {
-    "packageManager": "npm"
+    "packageManager": "npm",
+    "analytics": "83fc8ea3-6cda-48b7-95e3-d9f78b0c5e81",
+    "schematicCollections": [
+      "angular-eslint"
+    ]
   },
   "newProjectRoot": "projects",
   "projects": {
+    "ui-kit": {
+      "projectType": "library",
+      "root": "projects/ui-kit",
+      "sourceRoot": "projects/ui-kit/src",
+      "prefix": "quanta",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular/build:ng-packagr",
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ui-kit/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ui-kit/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular/build:unit-test",
+          "options": {
+            "tsConfig": "projects/ui-kit/tsconfig.spec.json"
+          }
+        },
+        "storybook": {
+          "builder": "@storybook/angular:start-storybook",
+          "options": {
+            "configDir": "projects/ui-kit/.storybook",
+            "browserTarget": "ui-kit:build",
+            "compodoc": false,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/ui-kit"
+            ],
+            "port": 6006,
+            "styles": [
+              "projects/ui-kit/src/lib/styles/main.scss"
+            ]
+          }
+        },
+        "build-storybook": {
+          "builder": "@storybook/angular:build-storybook",
+          "options": {
+            "configDir": "projects/ui-kit/.storybook",
+            "browserTarget": "ui-kit:build",
+            "compodoc": false,
+            "compodocArgs": [
+              "-e",
+              "json",
+              "-d",
+              "projects/ui-kit"
+            ],
+            "outputDir": "storybook-static",
+            "styles": [
+              "projects/ui-kit/src/lib/styles/main.scss"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/ui-kit/**/*.ts",
+              "projects/ui-kit/**/*.html"
+            ],
+            "eslintConfig": "projects/ui-kit/eslint.config.js"
+          }
+        }
+      }
+    }
   }
 }

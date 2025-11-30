@@ -1,0 +1,59 @@
+import { Canvas, Story, Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Quanta Kit/Configure" />
+
+# Quanta Kit
+
+**Quanta Kit** is a modern, scalable Angular component library built with **Material Design 3** principles and organized using **Atomic Design** methodology.
+
+## Key Features
+
+- **Angular 18+**: Built with the latest Angular features, including **Signals** and **Standalone Components**.
+- **Material Design 3**: Fully compliant with M3 tokens for colors, typography, elevation, and shapes.
+- **Atomic Design**: Components are structured logically into Atoms, Molecules, and Organisms for maximum reusability.
+- **Theming**: robust light and dark mode support using CSS Custom Properties.
+- **Accessibility**: Built-in a11y support following WCAG AA standards.
+
+## Strategies
+
+### Atomic Design
+
+We organize our components to promote modularity and scalability.
+
+- **Atoms**: Basic building blocks (Buttons, Inputs, Icons).
+- **Molecules**: Groups of atoms (Search Bar, Form Field).
+- **Organisms**: Complex UI sections (Header, Product Card).
+- **Templates**: Page layouts without content.
+- **Pages**: Full instances of templates with real content.
+
+[Read more about our Atomic Design strategy](./?path=/docs/documentation-atomic-design--docs)
+
+### Material Design 3
+
+We utilize the complete M3 token system for a cohesive visual language.
+
+- **Design Tokens**: Comprehensive set of CSS variables for system-wide consistency.
+- **Dynamic Color**: Support for color roles (Primary, Secondary, Tertiary, Error).
+- **Elevation & Shape**: Standardized depth and corner radii.
+
+[Read more about our Material Design strategy](./?path=/docs/documentation-material-design-3--docs)
+
+## Installation
+
+```bash
+npm install quanta-kit
+```
+
+## Usage
+
+Import the component you need:
+
+```typescript
+import { QuantaButtonComponent } from 'quanta-kit';
+
+@Component({
+  imports: [QuantaButtonComponent],
+  template: `<quanta-button>Click Me</quanta-button>`,
+})
+export class MyComponent {}
+```

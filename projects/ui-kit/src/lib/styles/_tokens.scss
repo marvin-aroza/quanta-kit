@@ -1,0 +1,89 @@
+:root {
+  /* 
+   * Material 3 Color System 
+   * Seed Colors:
+   * Primary: #143109 (Dark Green)
+   * Secondary: #AAAE7F (Sage Green)
+   * Tertiary: #D0D6B3 (Light Sage)
+   */
+
+  /* Primary */
+  --md-sys-color-primary: #143109;
+  --md-sys-color-on-primary: #FFFFFF;
+  --md-sys-color-primary-container: #96D782; /* Lighter derivative */
+  --md-sys-color-on-primary-container: #042100;
+
+  /* Secondary */
+  --md-sys-color-secondary: #586249; /* Darker version of AAAE7F for contrast */
+  --md-sys-color-on-secondary: #FFFFFF;
+  --md-sys-color-secondary-container: #DCE7C8; /* Lighter version of AAAE7F */
+  --md-sys-color-on-secondary-container: #161E0B;
+
+  /* Tertiary */
+  --md-sys-color-tertiary: #3A4C2A; /* Darker version of D0D6B3 */
+  --md-sys-color-on-tertiary: #FFFFFF;
+  --md-sys-color-tertiary-container: #D0D6B3;
+  --md-sys-color-on-tertiary-container: #0F1F07;
+
+  /* Error */
+  --md-sys-color-error: #BA1A1A;
+  --md-sys-color-on-error: #FFFFFF;
+  --md-sys-color-error-container: #FFDAD6;
+  --md-sys-color-on-error-container: #410002;
+
+  /* Background & Surface */
+  --md-sys-color-background: #F7F7F7; /* User provided light bg */
+  --md-sys-color-on-background: #143109;
+  
+  --md-sys-color-surface: #F7F7F7;
+  --md-sys-color-on-surface: #143109;
+  
+  --md-sys-color-surface-variant: #E1E4D5;
+  --md-sys-color-on-surface-variant: #44483D;
+  
+  --md-sys-color-outline: #75796C;
+  --md-sys-color-outline-variant: #C5C8BA;
+
+  /* Typography - Material 3 Typescale (Roboto/Inter) */
+  --md-sys-typescale-display-large: 400 57px/64px 'Inter', sans-serif;
+  --md-sys-typescale-display-medium: 400 45px/52px 'Inter', sans-serif;
+  --md-sys-typescale-display-small: 400 36px/44px 'Inter', sans-serif;
+
+  --md-sys-typescale-headline-large: 400 32px/40px 'Inter', sans-serif;
+  --md-sys-typescale-headline-medium: 400 28px/36px 'Inter', sans-serif;
+  --md-sys-typescale-headline-small: 400 24px/32px 'Inter', sans-serif;
+
+  --md-sys-typescale-title-large: 400 22px/28px 'Inter', sans-serif;
+  --md-sys-typescale-title-medium: 500 16px/24px 'Inter', sans-serif;
+  --md-sys-typescale-title-small: 500 14px/20px 'Inter', sans-serif;
+
+  --md-sys-typescale-label-large: 500 14px/20px 'Inter', sans-serif;
+  --md-sys-typescale-label-medium: 500 12px/16px 'Inter', sans-serif;
+  --md-sys-typescale-label-small: 500 11px/16px 'Inter', sans-serif;
+
+  --md-sys-typescale-body-large: 400 16px/24px 'Inter', sans-serif;
+  --md-sys-typescale-body-medium: 400 14px/20px 'Inter', sans-serif;
+  --md-sys-typescale-body-small: 400 12px/16px 'Inter', sans-serif;
+
+  /* Elevation */
+  --md-sys-elevation-0: none;
+  --md-sys-elevation-1: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-2: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-3: 0px 1px 3px 0px rgba(0, 0, 0, 0.3), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-4: 0px 2px 3px 0px rgba(0, 0, 0, 0.3), 0px 6px 10px 4px rgba(0, 0, 0, 0.15);
+  --md-sys-elevation-5: 0px 4px 4px 0px rgba(0, 0, 0, 0.3), 0px 8px 12px 6px rgba(0, 0, 0, 0.15);
+
+  /* Shape */
+  --md-sys-shape-corner-extra-small: 4px;
+  --md-sys-shape-corner-small: 8px;
+  --md-sys-shape-corner-medium: 12px;
+  --md-sys-shape-corner-large: 16px;
+  --md-sys-shape-corner-extra-large: 28px;
+  --md-sys-shape-corner-full: 9999px;
+
+  /* State Layers (Opacity) */
+  --md-sys-state-hover-state-layer-opacity: 0.08;
+  --md-sys-state-focus-state-layer-opacity: 0.12;
+  --md-sys-state-pressed-state-layer-opacity: 0.12;
+  --md-sys-state-dragged-state-layer-opacity: 0.16;
+}
