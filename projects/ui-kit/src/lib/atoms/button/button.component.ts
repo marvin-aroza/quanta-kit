@@ -1,10 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, input, output, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+  output,
+  ViewEncapsulation,
+} from '@angular/core';
 
 export type ButtonColor = 'error' | 'primary' | 'secondary' | 'tertiary';
 export type ButtonVariant = 'elevated' | 'filled' | 'outlined' | 'text' | 'tonal';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   // Disable encapsulation to allow styling of projected content (icons) without ::ng-deep.
   // Styles are manually scoped to the .quanta-button class to prevent bleeding.
   encapsulation: ViewEncapsulation.None,
