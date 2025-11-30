@@ -1,12 +1,12 @@
-import type { Preview } from '@storybook/angular'
+import type { Preview } from '@storybook/angular';
 // import '../src/lib/styles/main.scss';
 
 const preview: Preview = {
   parameters: {
     controls: {
       matchers: {
-       color: /(background|color)$/i,
-       date: /Date$/i,
+        color: /(background|color)$/i,
+        date: /Date$/i,
       },
     },
   },

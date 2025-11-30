@@ -1,11 +1,24 @@
 import { Meta, StoryObj } from '@storybook/angular';
-import { userEvent, within, expect } from 'storybook/test';
-import { ButtonComponent } from './button.component';
+import { expect, userEvent, within } from 'storybook/test';
 
-const meta: Meta<ButtonComponent> = {
-  title: 'Atoms/Button',
-  component: ButtonComponent,
-  tags: ['autodocs'],
+import { QuantaButtonComponent } from './button.component';
+
+const meta: Meta<QuantaButtonComponent> = {
+  argTypes: {
+    clicked: { action: 'clicked' },
+    color: {
+      control: 'select',
+      options: ['primary', 'secondary', 'tertiary', 'error'],
+    },
+    disabled: {
+      control: 'boolean',
+    },
+    variant: {
+      control: 'select',
+      options: ['filled', 'tonal', 'outlined', 'text', 'elevated'],
+    },
+  },
+  component: QuantaButtonComponent,
   parameters: {
     docs: {
       description: {
@@ -53,32 +66,20 @@ Use the \`icon-start\` or \`icon-end\` attributes to project icons.
 
 - Uses the native \`<button>\` element for built-in keyboard navigation and focus management.
 - Supports \`disabled\` state with correct ARIA attributes.
-        `
-      }
-    }
-  },
-  argTypes: {
-    variant: {
-      control: 'select',
-      options: ['filled', 'tonal', 'outlined', 'text', 'elevated'],
+        `,
+      },
     },
-    color: {
-      control: 'select',
-      options: ['primary', 'secondary', 'tertiary', 'error'],
-    },
-    disabled: {
-      control: 'boolean',
-    },
-    clicked: { action: 'clicked' },
   },
   render: (args) => ({
     props: args,
     template: `<quanta-button [variant]="variant" [color]="color" [disabled]="disabled" (clicked)="clicked($event)">Button</quanta-button>`,
   }),
+  tags: ['autodocs'],
+  title: 'Atoms/Button',
 };
 
 export default meta;
-type Story = StoryObj<ButtonComponent>;
+type Story = StoryObj<QuantaButtonComponent>;
 
 export const Filled: Story = {
   args: {
@@ -132,14 +133,14 @@ export const Interactive: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const button = canvas.getByRole('button');
-    
+
     // Verify initial state
     await expect(button).toBeInTheDocument();
     await expect(button).toHaveTextContent('Button');
-    
+
     // Simulate click
     await userEvent.click(button);
-    
+
     // In a real app, we might check for a side effect, but here we just verify it's clickable
     await expect(button).not.toBeDisabled();
   },

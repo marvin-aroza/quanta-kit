@@ -1,13 +1,14 @@
 import { Meta, StoryObj } from '@storybook/angular';
+
 import { StyleGuideComponent } from './style-guide.component';
 
 const meta: Meta<StyleGuideComponent> = {
-  title: 'Pages/Style Guide',
   component: StyleGuideComponent,
-  tags: ['autodocs'],
   parameters: {
     layout: 'fullscreen',
   },
+  tags: ['autodocs'],
+  title: 'Pages/Style Guide',
 };
 
 export default meta;
@@ -19,7 +20,7 @@ export const DarkMode: Story = {
   parameters: {
     themes: {
       default: 'dark',
-    }
+    },
   },
   render: () => ({
     template: `

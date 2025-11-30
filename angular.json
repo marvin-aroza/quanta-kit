@@ -4,9 +4,7 @@
   "cli": {
     "packageManager": "npm",
     "analytics": "83fc8ea3-6cda-48b7-95e3-d9f78b0c5e81",
-    "schematicCollections": [
-      "angular-eslint"
-    ]
+    "schematicCollections": ["angular-eslint"]
   },
   "newProjectRoot": "projects",
   "projects": {
@@ -45,16 +43,9 @@
             "configDir": "projects/ui-kit/.storybook",
             "browserTarget": "ui-kit:build",
             "compodoc": false,
-            "compodocArgs": [
-              "-e",
-              "json",
-              "-d",
-              "projects/ui-kit"
-            ],
+            "compodocArgs": ["-e", "json", "-d", "projects/ui-kit"],
             "port": 6006,
-            "styles": [
-              "projects/ui-kit/src/lib/styles/main.scss"
-            ]
+            "styles": ["projects/ui-kit/src/lib/styles/main.scss"]
           }
         },
         "build-storybook": {
@@ -63,25 +54,15 @@
             "configDir": "projects/ui-kit/.storybook",
             "browserTarget": "ui-kit:build",
             "compodoc": false,
-            "compodocArgs": [
-              "-e",
-              "json",
-              "-d",
-              "projects/ui-kit"
-            ],
+            "compodocArgs": ["-e", "json", "-d", "projects/ui-kit"],
             "outputDir": "storybook-static",
-            "styles": [
-              "projects/ui-kit/src/lib/styles/main.scss"
-            ]
+            "styles": ["projects/ui-kit/src/lib/styles/main.scss"]
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
-            "lintFilePatterns": [
-              "projects/ui-kit/**/*.ts",
-              "projects/ui-kit/**/*.html"
-            ],
+            "lintFilePatterns": ["projects/ui-kit/**/*.ts", "projects/ui-kit/**/*.html"],
             "eslintConfig": "projects/ui-kit/eslint.config.js"
           }
         }

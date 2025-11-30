@@ -51,3 +51,7 @@ To enable dark mode, add the `data-theme="dark"` attribute to your `<body>` tag:
 ## 📚 Documentation
 
 For full documentation and component examples, visit our [Storybook](https://your-storybook-url.com).
+
+## 🤝 Contributing
+
+This library is part of the `quanta-kit` monorepo. If you want to contribute, please check the [main repository](https://github.com/marvin-aroza/quanta-kit) for development guidelines.
