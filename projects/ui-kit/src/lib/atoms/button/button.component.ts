@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, EventEmitter, input, Output, ViewEncapsulation } from '@angular/core';
+import { Component, computed, input, output, ViewEncapsulation } from '@angular/core';
 
 export type ButtonColor = 'error' | 'primary' | 'secondary' | 'tertiary';
 export type ButtonVariant = 'elevated' | 'filled' | 'outlined' | 'text' | 'tonal';
@@ -31,7 +31,7 @@ export class QuantaButtonComponent {
   buttonClasses = computed(() => {
     return `quanta-button ${this.variant()} ${this.color()}`;
   });
-  @Output() clicked = new EventEmitter<Event>();
+  clicked = output<Event>();
 
   disabled = input<boolean>(false);
 

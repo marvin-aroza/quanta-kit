@@ -51,6 +51,8 @@ module.exports = defineConfig([
           argsIgnorePattern: '^_',
         },
       ],
+      // Disable perfectionist sort-imports to avoid conflict with prettier-plugin-organize-imports
+      'perfectionist/sort-imports': 'off',
     },
   },
   {
