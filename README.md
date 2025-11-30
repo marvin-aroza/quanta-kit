@@ -1,59 +1,98 @@
-# QuantaKit
+# 🎨 Quanta Kit
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.1.
+**Quanta Kit** is a modern, scalable Angular component library built with **Material Design 3** principles and organized using **Atomic Design** methodology.
 
-## Development server
+It is designed to provide a premium, consistent, and accessible user experience across all applications.
 
-To start a local development server, run:
+## 🚀 Features
 
-```bash
-ng serve
-```
+- **Angular 18+**: Built with the latest Angular features, including **Signals** and **Standalone Components**.
+- **Material Design 3**: Fully compliant with M3 tokens for colors, typography, elevation, and shapes.
+- **Atomic Design**: Components are structured logically into Atoms, Molecules, and Organisms.
+- **Theming**: Robust light and dark mode support using CSS Custom Properties.
+- **Accessibility**: Built-in a11y support following WCAG AA standards.
+- **Storybook**: Comprehensive documentation and interactive playground.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## 📦 Installation
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+To install the library in your Angular project:
 
 ```bash
-ng generate --help
+npm install quanta-kit
 ```
 
-## Building
+_(Note: If this is a private library, ensure you have the correct registry configured)_
 
-To build the project run:
+## 🛠️ Usage
+
+Import the component you need in your Angular application:
+
+```typescript
+import { Component } from '@angular/core';
+import { QuantaButtonComponent } from 'quanta-kit';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [QuantaButtonComponent],
+  template: `
+    <quanta-button variant="primary" (clicked)="handleClick()"> Click Me </quanta-button>
+  `,
+})
+export class AppComponent {
+  handleClick() {
+    console.log('Button clicked!');
+  }
+}
+```
+
+## 📚 Documentation
+
+We use **Storybook** for documentation and component development.
+
+To start Storybook locally:
 
 ```bash
-ng build
+npm run storybook
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+This will open the documentation at `http://localhost:6006`.
 
-## Running unit tests
+## 🏗️ Development
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+### Build
+
+To build the library:
 
 ```bash
-ng test
+ng build ui-kit
 ```
 
-## Running end-to-end tests
+### Lint
 
-For end-to-end (e2e) testing, run:
+To run linting:
 
 ```bash
-ng e2e
+ng lint ui-kit
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+### Test
 
-## Additional Resources
+To run unit tests:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+ng test ui-kit
+```
+
+## 🤝 Contributing
+
+1.  Clone the repository.
+2.  Install dependencies: `npm install`.
+3.  Start Storybook: `npm run storybook`.
+4.  Create your component in `projects/ui-kit/src/lib/`.
+5.  Ensure it follows the Atomic Design structure (atoms, molecules, organisms).
+6.  Add a Storybook story (`.stories.ts`) and documentation.
+
+## 📄 License
+
+MIT
