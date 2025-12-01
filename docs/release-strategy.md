@@ -99,3 +99,24 @@ Start with **Option A (Prerelease Mode)**. It is safer and more controlled.
 1.  Run `npx changeset pre enter alpha` locally.
 2.  Commit the created file.
 3.  Continue your workflow. Your next release will automatically be an alpha!
+
+---
+
+## 4. CI/CD Configuration (Critical)
+
+To publish to NPM from GitHub Actions, you must use an **Automation Token**. Standard tokens will fail if you have 2FA enabled (Error: `EOTP`).
+
+1.  **Generate Token**:
+    - Log in to [npmjs.com](https://www.npmjs.com/).
+    - Go to **Access Tokens** > **Generate New Token** > **Granular Access Token**.
+    - **Token Name**: `quanta-kit-ci` (or similar).
+    - **Expiration**: Set as desired (e.g., 90 days).
+    - **CRITICAL**: Check the box **"Bypass two-factor authentication (2FA)"**. (This is required for CI/CD).
+      - _Note: You will see a warning about security risks/Trusted Publishing. This is expected for token-based auth. You can safely ignore it for now._
+    - **Packages and scopes**:
+      - Select **"Read and write"** permissions for your package/scope.
+    - Click **Generate token** and copy the string (starts with `npm_`).
+
+2.  **Configure GitHub**:
+    - Go to your GitHub Repo > **Settings** > **Secrets and variables** > **Actions**.
+    - Update (or create) the secret named `NPM_TOKEN` with the new Automation Token.
