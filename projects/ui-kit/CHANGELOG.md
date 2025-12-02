@@ -1,5 +1,11 @@
 # quanta-kit
 
+## 0.0.2-alpha.4
+
+### Patch Changes
+
+- 7c9e4e1: Update release process
+
 ## 0.0.2-alpha.3
 
 ### Patch Changes
