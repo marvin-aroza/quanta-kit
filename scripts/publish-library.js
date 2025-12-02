@@ -43,6 +43,12 @@ try {
   // Push tag
   execSync(`git push origin ${tagName}`);
   console.log('Git tag pushed successfully.');
+
+  // Set output for GitHub Actions to trigger Storybook deploy
+  if (process.env.GITHUB_OUTPUT) {
+    fs.appendFileSync(process.env.GITHUB_OUTPUT, 'published=true\n');
+    console.log('Set GitHub Action output: published=true');
+  }
 } catch (error) {
   console.error('Failed to create/push git tag:', error.message);
   // Don't fail the build if tagging fails, as npm publish succeeded
