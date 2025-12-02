@@ -1,5 +1,11 @@
 # quanta-kit
 
+## 0.0.2-alpha.5
+
+### Patch Changes
+
+- f23c38b: Release changes
+
 ## 0.0.2-alpha.4
 
 ### Patch Changes
