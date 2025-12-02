@@ -1,5 +1,11 @@
 # quanta-kit
 
+## 0.0.2-alpha.6
+
+### Patch Changes
+
+- 929aced: Updated docs
+
 ## 0.0.2-alpha.5
 
 ### Patch Changes
