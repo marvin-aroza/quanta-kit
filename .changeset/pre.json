@@ -2,7 +2,7 @@
   "mode": "pre",
   "tag": "alpha",
   "initialVersions": {
-    "quanta-kit": "0.0.0"
+    "quanta-kit": "0.0.1"
   },
   "changesets": ["loud-poets-type"]
 }
