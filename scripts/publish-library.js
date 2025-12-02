@@ -28,6 +28,24 @@ execSync(`npm publish --tag ${tag}`, {
   stdio: 'inherit',
 });
 
-// CRITICAL: This line tells changesets/action that the publish was successful
-// so it can create the GitHub Release and Tag.
-console.log(`New tag: ${sourcePackage.name}@${version}`);
+// 5. Create and Push Git Tag (Manual)
+const tagName = `${sourcePackage.name}@${version}`;
+console.log(`Creating and pushing git tag: ${tagName}`);
+
+try {
+  // Configure git (required for CI)
+  execSync('git config user.name "github-actions[bot]"');
+  execSync('git config user.email "github-actions[bot]@users.noreply.github.com"');
+
+  // Create tag
+  execSync(`git tag -a ${tagName} -m "Release ${tagName}"`);
+
+  // Push tag
+  execSync(`git push origin ${tagName}`);
+  console.log('Git tag pushed successfully.');
+} catch (error) {
+  console.error('Failed to create/push git tag:', error.message);
+  // Don't fail the build if tagging fails, as npm publish succeeded
+}
+
+// Note: We removed the "New tag: ..." log to prevent changesets/action from trying to push the tag again.
