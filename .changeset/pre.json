@@ -4,5 +4,11 @@
   "initialVersions": {
     "quanta-kit": "0.0.1"
   },
-  "changesets": ["khaki-dolls-wash", "loud-poets-type", "tired-chefs-join", "yummy-hornets-repair"]
+  "changesets": [
+    "humble-news-act",
+    "khaki-dolls-wash",
+    "loud-poets-type",
+    "tired-chefs-join",
+    "yummy-hornets-repair"
+  ]
 }
