@@ -1,0 +1,97 @@
+@use '../../styles/tokens' as tokens;
+
+:host {
+  display: block;
+  width: 100%;
+}
+
+.quanta-input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+
+  &.disabled {
+    opacity: 0.38;
+    pointer-events: none;
+  }
+}
+
+.quanta-label {
+  font: var(--md-sys-typescale-label-medium);
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border-radius: var(--md-sys-shape-corner-extra-small) var(--md-sys-shape-corner-extra-small) 0 0;
+  background-color: var(--md-sys-color-surface-variant);
+  border-bottom: 1px solid var(--md-sys-color-on-surface-variant);
+  transition: all 0.2s ease;
+  height: 56px;
+  box-sizing: border-box;
+
+  &:focus-within {
+    border-bottom: 2px solid var(--md-sys-color-primary);
+    background-color: color-mix(
+      in srgb,
+      var(--md-sys-color-on-surface) var(--md-sys-state-focus-state-layer-opacity),
+      var(--md-sys-color-surface-variant)
+    );
+  }
+
+  .quanta-input-field {
+    border: none;
+    background: transparent;
+    outline: none;
+    width: 100%;
+    font: var(--md-sys-typescale-body-large);
+    color: var(--md-sys-color-on-surface);
+    padding: 0;
+    margin: 0;
+    height: 100%;
+
+    &::placeholder {
+      color: var(--md-sys-color-on-surface-variant);
+      opacity: 0.7;
+    }
+  }
+
+  .input-icon {
+    color: var(--md-sys-color-on-surface-variant);
+    font-size: 24px;
+  }
+}
+
+.error {
+  .quanta-label {
+    color: var(--md-sys-color-error);
+  }
+
+  .input-wrapper {
+    border-bottom-color: var(--md-sys-color-error);
+
+    &:focus-within {
+      border-bottom-color: var(--md-sys-color-error);
+    }
+  }
+
+  .input-icon {
+    color: var(--md-sys-color-error);
+  }
+}
+
+.error-text {
+  font: var(--md-sys-typescale-body-small);
+  color: var(--md-sys-color-error);
+  padding-left: 16px;
+}
+
+.helper-text {
+  font: var(--md-sys-typescale-body-small);
+  color: var(--md-sys-color-on-surface-variant);
+  padding-left: 16px;
+}

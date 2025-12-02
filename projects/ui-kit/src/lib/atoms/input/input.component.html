@@ -1,0 +1,28 @@
+<div class="quanta-input-container" [class.disabled]="isDisabled()" [class.error]="isInvalid()">
+  <label [for]="inputId" class="quanta-label">
+    {{ label() }}
+    @if (isInvalid()) {
+      <span class="required-marker">*</span>
+    }
+  </label>
+  <div class="input-wrapper">
+    @if (icon()) {
+      <span class="material-icons input-icon">{{ icon() }}</span>
+    }
+    <input
+      [id]="inputId"
+      [type]="type()"
+      [placeholder]="placeholder()"
+      [value]="value()"
+      [disabled]="isDisabled()"
+      (input)="onInput($event)"
+      (blur)="onBlur()"
+      class="quanta-input-field"
+    />
+  </div>
+  @if (error()) {
+    <span class="error-text">{{ error() }}</span>
+  } @else if (helperText()) {
+    <span class="helper-text">{{ helperText() }}</span>
+  }
+</div>
