@@ -2,8 +2,8 @@
   "name": "quanta-kit",
   "version": "0.0.2-alpha.3",
   "peerDependencies": {
-    "@angular/common": "^21.0.0",
-    "@angular/core": "^21.0.0"
+    "@angular/common": "^21.0.2",
+    "@angular/core": "^21.0.2"
   },
   "dependencies": {
     "tslib": "^2.3.0"
