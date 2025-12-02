@@ -8,7 +8,16 @@ import {
   model,
   signal,
 } from '@angular/core';
-import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
+import {
+  AbstractControl,
+  ControlValueAccessor,
+  FormsModule,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  ValidationErrors,
+  Validator,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,12 +28,17 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => QuantaInputComponent),
     },
+    {
+      multi: true,
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => QuantaInputComponent),
+    },
   ],
   selector: 'quanta-input',
   styleUrl: './input.component.scss',
   templateUrl: './input.component.html',
 })
-export class QuantaInputComponent implements ControlValueAccessor {
+export class QuantaInputComponent implements ControlValueAccessor, Validator {
   disabled = input<boolean>(false);
   error = input<null | string>(null);
   helperText = input<null | string>(null);
@@ -68,6 +82,13 @@ export class QuantaInputComponent implements ControlValueAccessor {
 
   setDisabledState(isDisabled: boolean): void {
     this._formDisabled.set(isDisabled);
+  }
+
+  validate(control: AbstractControl): null | ValidationErrors {
+    if (this.required()) {
+      return Validators.required(control);
+    }
+    return null;
   }
 
   // ControlValueAccessor implementation
