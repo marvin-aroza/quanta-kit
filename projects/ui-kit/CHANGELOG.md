@@ -1,5 +1,11 @@
 # quanta-kit
 
+## 0.0.2-alpha.3
+
+### Patch Changes
+
+- ac4daec: github tagged release
+
 ## 0.0.2-alpha.2
 
 ### Patch Changes
