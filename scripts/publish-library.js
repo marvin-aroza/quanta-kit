@@ -27,3 +27,7 @@ execSync(`npm publish --tag ${tag}`, {
   cwd: path.resolve(__dirname, '../dist/ui-kit'),
   stdio: 'inherit',
 });
+
+// CRITICAL: This line tells changesets/action that the publish was successful
+// so it can create the GitHub Release and Tag.
+console.log(`New tag: ${sourcePackage.name}@${version}`);
