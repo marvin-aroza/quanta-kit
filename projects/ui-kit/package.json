@@ -1,6 +1,6 @@
 {
   "name": "quanta-kit",
-  "version": "0.0.2-alpha.3",
+  "version": "0.0.2-alpha.4",
   "peerDependencies": {
     "@angular/common": "^21.0.2",
     "@angular/core": "^21.0.2"
