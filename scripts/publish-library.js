@@ -21,4 +21,9 @@ console.log(`Updated dist package.json to version ${version}`);
 
 // 4. Publish from dist
 console.log('Publishing to NPM...');
-execSync('npm publish', { cwd: path.resolve(__dirname, '../dist/ui-kit'), stdio: 'inherit' });
+const tag = version.includes('-') ? version.split('-')[1].split('.')[0] : 'latest';
+console.log(`Publishing with tag: ${tag}`);
+execSync(`npm publish --tag ${tag}`, {
+  cwd: path.resolve(__dirname, '../dist/ui-kit'),
+  stdio: 'inherit',
+});
