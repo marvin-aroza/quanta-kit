@@ -74,6 +74,13 @@ export const Password: Story = {
   },
 };
 
+export const Required: Story = {
+  args: {
+    label: 'Required Input',
+    required: true,
+  },
+};
+
 export const Interactive: Story = {
   args: {
     label: 'Interactive Input',

@@ -1,7 +1,7 @@
 <div class="quanta-input-container" [class.disabled]="isDisabled()" [class.error]="isInvalid()">
   <label [for]="inputId" class="quanta-label">
     {{ label() }}
-    @if (isInvalid()) {
+    @if (required()) {
       <span class="required-marker">*</span>
     }
   </label>

@@ -21,7 +21,6 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
     },
   ],
   selector: 'quanta-input',
-  standalone: true,
   styleUrl: './input.component.scss',
   templateUrl: './input.component.html',
 })
@@ -31,12 +30,14 @@ export class QuantaInputComponent implements ControlValueAccessor {
   helperText = input<null | string>(null);
   icon = input<null | string>(null);
   inputId = `quanta-input-${Math.random().toString(36).substr(2, 9)}`;
-  isDisabled = signal<boolean>(false);
+  private _formDisabled = signal<boolean>(false);
+  isDisabled = computed(() => this.disabled() || this._formDisabled());
   // Derived state
   isInvalid = computed(() => !!this.error());
 
   label = input.required<string>();
   placeholder = input<string>('');
+  required = input<boolean>(false);
   type = input<string>('text');
 
   // Use model for two-way binding and easy value setting
@@ -66,7 +67,7 @@ export class QuantaInputComponent implements ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
-    this.isDisabled.set(isDisabled);
+    this._formDisabled.set(isDisabled);
   }
 
   // ControlValueAccessor implementation
