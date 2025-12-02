@@ -1,5 +1,11 @@
 # quanta-kit
 
+## 0.0.2-alpha.2
+
+### Patch Changes
+
+- 3847a26: release test
+
 ## 0.0.2-alpha.1
 
 ### Patch Changes
