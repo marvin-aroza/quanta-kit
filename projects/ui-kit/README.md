@@ -17,7 +17,17 @@ npm install quanta-kit
     @import 'quanta-kit/styles/main';
     ```
 
-2.  **Add Assets**: If the library uses assets (icons, fonts), ensure they are configured in your `angular.json`.
+2.  **Load Material Icons**: Add the Material Icons CDN link to your `index.html`:
+
+    ```html
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    ```
+
+    Or install the npm package:
+
+    ```bash
+    npm install @fontsource/material-icons
+    ```
 
 ## 🚀 Usage
 
