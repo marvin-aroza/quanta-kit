@@ -17,6 +17,11 @@
     "release": "node scripts/publish-library.js",
     "release:alpha:enter": "changeset pre enter alpha",
     "release:alpha:exit": "changeset pre exit",
+    "release:beta:enter": "changeset pre enter beta",
+    "release:beta:exit": "changeset pre exit",
+    "release:rc:enter": "changeset pre enter rc",
+    "release:rc:exit": "changeset pre exit",
+    "release:exit": "changeset pre exit",
     "release:snapshot": "changeset version --snapshot && changeset publish --tag canary",
     "generate": "plop"
   },
