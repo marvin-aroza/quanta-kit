@@ -10,7 +10,6 @@ import {
 import {
   AbstractControl,
   ControlValueAccessor,
-  FormsModule,
   NG_VALIDATORS,
   NG_VALUE_ACCESSOR,
   ValidationErrors,
@@ -22,7 +21,7 @@ let nextId = 0;
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule],
+  imports: [],
   providers: [
     {
       multi: true,
