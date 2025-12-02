@@ -120,3 +120,25 @@ To publish to NPM from GitHub Actions, you must use an **Automation Token**. Sta
 2.  **Configure GitHub**:
     - Go to your GitHub Repo > **Settings** > **Secrets and variables** > **Actions**.
     - Update (or create) the secret named `NPM_TOKEN` with the new Automation Token.
+
+---
+
+## 5. Understanding NPM Tags
+
+You might see tags like `latest`, `canary`, or `rc-v8` on NPM. Here is what they mean:
+
+- **`latest`**: The default tag. When users run `npm install package`, they get this version. It should always point to your most stable, production-ready release.
+- **`canary`**: A "bleeding edge" version, often updated on every commit. Useful for testing features immediately without waiting for a formal release.
+- **`rc-v8` / `next` / `beta`**: Prerelease tags. `rc` stands for "Release Candidate". `v8` might indicate it's a release candidate specifically for version 8 of a framework (like Angular).
+
+### How to use them:
+
+- **To install a specific tag:**
+  ```bash
+  npm install quanta-kit@canary
+  ```
+- **To publish to a specific tag:**
+  Our `scripts/publish-library.js` automatically handles `alpha` tags. For other tags (like `beta`), you can use the snapshot command:
+  ```bash
+  npx changeset publish --tag beta
+  ```
