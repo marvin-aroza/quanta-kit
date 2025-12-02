@@ -4,5 +4,5 @@
   "initialVersions": {
     "quanta-kit": "0.0.1"
   },
-  "changesets": ["loud-poets-type"]
+  "changesets": ["loud-poets-type", "tired-chefs-join"]
 }
