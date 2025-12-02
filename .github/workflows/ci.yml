@@ -11,8 +11,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: Build
+  audit:
+    name: Audit (Lint & Security)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,7 +20,23 @@ jobs:
         with:
           node-version: 24
           cache: 'npm'
-      - run: npm ci --legacy-peer-deps
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run format -- --check
+      - name: Security Audit
+        run: npx better-npm-audit audit --level high
+
+  build:
+    name: Build
+    needs: audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+      - run: npm ci
       - run: npx ng build ui-kit
       - run: npm run build-storybook
 
@@ -33,6 +49,7 @@ jobs:
 
   test:
     name: Test
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -40,26 +57,12 @@ jobs:
         with:
           node-version: 24
           cache: 'npm'
-      - run: npm ci --legacy-peer-deps
+      - run: npm ci
       - run: npm run test -- --no-watch --no-progress
-
-  audit:
-    name: Audit (Lint & Security)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: 'npm'
-      - run: npm ci --legacy-peer-deps
-      - run: npm run lint
-      - run: npm run format -- --check
-      # - run: npm audit --audit-level=high # Uncomment to enforce security audit
 
   release:
     name: Release
-    needs: [build, test, audit]
+    needs: test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:
