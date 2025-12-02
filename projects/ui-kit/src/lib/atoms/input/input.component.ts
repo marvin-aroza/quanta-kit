@@ -1,4 +1,3 @@
-import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -19,9 +18,11 @@ import {
   Validators,
 } from '@angular/forms';
 
+let nextId = 0;
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule, FormsModule],
+  imports: [FormsModule],
   providers: [
     {
       multi: true,
@@ -43,7 +44,7 @@ export class QuantaInputComponent implements ControlValueAccessor, Validator {
   error = input<null | string>(null);
   helperText = input<null | string>(null);
   icon = input<null | string>(null);
-  inputId = `quanta-input-${Math.random().toString(36).substr(2, 9)}`;
+  inputId = `quanta-input-${nextId++}`;
   private _formDisabled = signal<boolean>(false);
   isDisabled = computed(() => this.disabled() || this._formDisabled());
   // Derived state
