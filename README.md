@@ -1,5 +1,9 @@
 # 🎨 Quanta Kit
 
+[![CI/CD](https://github.com/marvin-aroza/quanta-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/marvin-aroza/quanta-kit/actions/workflows/ci.yml)
+[![NPM Version](https://img.shields.io/npm/v/quanta-kit?color=red)](https://www.npmjs.com/package/quanta-kit)
+[![License](https://img.shields.io/npm/l/quanta-kit)](https://github.com/marvin-aroza/quanta-kit/blob/main/LICENSE)
+
 **Quanta Kit** is a modern, scalable Angular component library built with **Material Design 3** principles and organized using **Atomic Design** methodology.
 
 It is designed to provide a premium, consistent, and accessible user experience across all applications.
