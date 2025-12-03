@@ -53,8 +53,6 @@ export class QuantaCheckboxComponent implements ControlValueAccessor, Validator 
   label = input<string>();
   required = input<boolean>(false);
 
-  value = input<unknown>(true); // Value to emit when checked
-
   onBlur() {
     this.onTouched();
   }
