@@ -45,13 +45,14 @@ export class QuantaCheckboxComponent implements ControlValueAccessor, Validator 
   checkboxId = `quanta-checkbox-${nextId++}`;
   checked = model<boolean>(false);
   disabled = input<boolean>(false);
+
   indeterminate = input<boolean>(false);
-
   private _formDisabled = signal<boolean>(false);
-  isDisabled = computed(() => this.disabled() || this._formDisabled());
 
+  isDisabled = computed(() => this.disabled() || this._formDisabled());
   label = input<string>();
   required = input<boolean>(false);
+
   value = input<unknown>(true); // Value to emit when checked
 
   onBlur() {
