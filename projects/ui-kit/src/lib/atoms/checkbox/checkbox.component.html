@@ -1,0 +1,37 @@
+<label
+  class="quanta-checkbox-container"
+  [class.disabled]="isDisabled()"
+  [class.checked]="checked()"
+  [class.indeterminate]="indeterminate()"
+  [for]="checkboxId"
+>
+  <input
+    type="checkbox"
+    [id]="checkboxId"
+    [checked]="checked()"
+    [disabled]="isDisabled()"
+    [required]="required()"
+    [indeterminate]="indeterminate()"
+    [attr.aria-label]="ariaLabel() || label()"
+    (change)="toggle($event)"
+    class="native-input"
+  />
+  <div class="checkbox-visual">
+    <div class="state-layer"></div>
+    @if (indeterminate()) {
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 11h16v2H4z" fill="currentColor" />
+      </svg>
+    } @else if (checked()) {
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor" />
+      </svg>
+    }
+  </div>
+  @if (label()) {
+    <span class="label-text">{{ label() }}</span>
+    @if (required()) {
+      <span class="required-marker">*</span>
+    }
+  }
+</label>
