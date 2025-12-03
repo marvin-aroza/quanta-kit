@@ -25,7 +25,7 @@ describe('QuantaCheckboxComponent', () => {
     const inputElement = fixture.debugElement.query(By.css('input')).nativeElement;
     inputElement.click();
     fixture.detectChanges();
-    expect(component.checked()).toBeTrue();
+    expect(component.checked()).toBe(true);
   });
 
   it('should not toggle when disabled', () => {
@@ -36,7 +36,7 @@ describe('QuantaCheckboxComponent', () => {
     inputElement.click();
     fixture.detectChanges();
 
-    expect(component.checked()).toBeFalse();
+    expect(component.checked()).toBe(false);
   });
 
   it('should display label when provided', () => {
