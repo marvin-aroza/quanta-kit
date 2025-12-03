@@ -41,6 +41,7 @@ let nextId = 0;
   templateUrl: './checkbox.component.html',
 })
 export class QuantaCheckboxComponent implements ControlValueAccessor, Validator {
+  ariaLabel = input<string>('', { alias: 'aria-label' });
   changed = output<boolean>();
   checkboxId = `quanta-checkbox-${nextId++}`;
   checked = model<boolean>(false);
