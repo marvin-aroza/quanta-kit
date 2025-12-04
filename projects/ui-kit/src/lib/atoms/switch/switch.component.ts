@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, Component, forwardRef, input, model } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  forwardRef,
+  input,
+  model,
+  signal,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -17,7 +25,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     <label
       class="quanta-switch"
       [class.checked]="checked()"
-      [class.disabled]="disabled()"
+      [class.disabled]="isDisabled()"
       [class.with-icons]="showIcons()"
     >
       <input
@@ -28,7 +36,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         [name]="name()"
         [value]="value()"
         [checked]="checked()"
-        [disabled]="disabled()"
+        [disabled]="isDisabled()"
         [attr.aria-checked]="checked()"
         (change)="onChange($event)"
         (blur)="onTouched()"
@@ -64,8 +72,11 @@ export class QuantaSwitchComponent implements ControlValueAccessor {
   showIcons = input<boolean>(false);
   value = input<string>('');
 
+  private _disabledState = signal<boolean>(false);
+  protected isDisabled = computed(() => this.disabled() || this._disabledState());
+
   onChange(event: Event): void {
-    if (this.disabled()) {
+    if (this.isDisabled()) {
       return;
     }
     const isChecked = (event.target as HTMLInputElement).checked;
@@ -90,12 +101,8 @@ export class QuantaSwitchComponent implements ControlValueAccessor {
     this.onTouchedFn = fn;
   }
 
-  setDisabledState(_isDisabled: boolean): void {
-    // We can't easily update the signal input from here without a separate signal or effect,
-    // but usually CVA disabled state matches the input.
-    // For now, we rely on the input binding.
-    // To strictly support CVA setDisabledState, we might need a separate signal combined with the input.
-    // But let's keep it simple for now as 'disabled' input is primary.
+  setDisabledState(isDisabled: boolean): void {
+    this._disabledState.set(isDisabled);
   }
 
   writeValue(value: boolean): void {
