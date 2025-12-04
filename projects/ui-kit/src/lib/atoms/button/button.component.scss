@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 :host {
   display: inline-block;
 }
@@ -90,50 +92,44 @@ $colors: (
 @each $name, $palette in $colors {
   /* Filled Button */
   .quanta-button.filled.#{$name} {
-    background-color: map-get($palette, 'base');
-    color: map-get($palette, 'on');
+    background-color: map.get($palette, 'base');
+    color: map.get($palette, 'on');
   }
 
   /* Tonal Button */
   .quanta-button.tonal.#{$name} {
-    background-color: map-get($palette, 'container');
-    color: map-get($palette, 'on-container');
+    background-color: map.get($palette, 'container');
+    color: map.get($palette, 'on-container');
   }
 
   /* Outlined Button */
   .quanta-button.outlined.#{$name} {
     background-color: transparent;
-    color: map-get($palette, 'base');
+    color: map.get($palette, 'base');
     border: 1px solid var(--md-sys-color-outline);
 
     &:focus-visible {
-      border-color: map-get($palette, 'base');
+      border-color: map.get($palette, 'base');
     }
   }
 
   /* Text Button */
   .quanta-button.text.#{$name} {
     background-color: transparent;
-    color: map-get($palette, 'base');
+    color: map.get($palette, 'base');
     padding: 0 12px;
   }
 
   /* Elevated Button */
   .quanta-button.elevated.#{$name} {
     background-color: var(--md-sys-color-surface-container-low, #f3f6ea);
-    color: map-get($palette, 'base');
+    color: map.get($palette, 'base');
     box-shadow: var(--md-sys-elevation-1);
 
     &:hover {
       box-shadow: var(--md-sys-elevation-2);
     }
   }
-}
-
-/* Disabled States (Generic) */
-.quanta-button:disabled {
-  cursor: not-allowed;
-  pointer-events: none;
 }
 
 .quanta-button.filled:disabled,

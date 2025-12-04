@@ -2,4 +2,4 @@
 'quanta-kit': patch
 ---
 
-color and sotry enhancement
+color and story enhancement

@@ -91,7 +91,7 @@ export const WithRadioGroup: Story = {
 };
 
 export const RegistrationForm: Story = {
-  render: (args) => ({
+  render: (_args) => ({
     props: {
       form: new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
