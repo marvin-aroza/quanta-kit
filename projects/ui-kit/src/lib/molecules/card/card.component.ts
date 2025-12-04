@@ -6,10 +6,9 @@ export type CardVariant = 'elevated' | 'filled' | 'outlined';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [],
   selector: 'quanta-card',
-  standalone: true,
   styleUrls: ['./card.component.scss'],
   template: `
-    <div class="quanta-card" [class]="variant()">
+    <div [class]="'quanta-card ' + variant()">
       <!-- Header Slot -->
       <div class="card-header">
         <ng-content select="[header]"></ng-content>
