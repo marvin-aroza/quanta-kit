@@ -5,7 +5,6 @@ import {
   computed,
   forwardRef,
   input,
-  model,
   signal,
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -26,7 +25,6 @@ export interface SelectOption {
     },
   ],
   selector: 'quanta-select',
-  standalone: true,
   styleUrls: ['./select.component.scss'],
   template: `
     <div
@@ -42,6 +40,8 @@ export interface SelectOption {
           [id]="id()"
           [disabled]="isDisabled()"
           [value]="value()"
+          [attr.aria-invalid]="!!errorMessage() || null"
+          [attr.aria-describedby]="errorMessage() || helperText() ? id() + '-description' : null"
           (change)="onSelectChange($event)"
           (blur)="onTouched()"
           class="native-select"
@@ -60,9 +60,9 @@ export interface SelectOption {
         </div>
       </div>
       @if (errorMessage()) {
-        <span class="error-message">{{ errorMessage() }}</span>
+        <span [id]="id() + '-description'" class="error-message">{{ errorMessage() }}</span>
       } @else if (helperText()) {
-        <span class="helper-text">{{ helperText() }}</span>
+        <span [id]="id() + '-description'" class="helper-text">{{ helperText() }}</span>
       }
     </div>
   `,
@@ -75,17 +75,19 @@ export class QuantaSelectComponent implements ControlValueAccessor {
   label = input<string>('');
   options = input<SelectOption[]>([]);
   placeholder = input<string>('');
-  value = model<number | string>('');
 
   private _disabledState = signal<boolean>(false);
   protected isDisabled = computed(() => this.disabled() || this._disabledState());
+
+  private _value = signal<number | string>('');
+  protected value = computed(() => this._value());
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onChangeFn: (value: number | string) => void = () => {};
   onSelectChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const newValue = selectElement.value;
-    this.value.set(newValue);
+    this._value.set(newValue);
     this.onChangeFn(newValue);
   }
 
@@ -109,6 +111,6 @@ export class QuantaSelectComponent implements ControlValueAccessor {
   }
 
   writeValue(value: number | string): void {
-    this.value.set(value);
+    this._value.set(value);
   }
 }

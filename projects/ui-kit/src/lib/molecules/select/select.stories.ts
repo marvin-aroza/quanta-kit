@@ -3,6 +3,8 @@ import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { expect, userEvent, within } from 'storybook/test';
 import { QuantaSelectComponent } from './select.component';
 
+import { QuantaButtonComponent } from '../../atoms/button/button.component';
+
 const meta: Meta<QuantaSelectComponent> = {
   argTypes: {
     disabled: { control: 'boolean' },
@@ -11,7 +13,7 @@ const meta: Meta<QuantaSelectComponent> = {
   component: QuantaSelectComponent,
   decorators: [
     moduleMetadata({
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, QuantaButtonComponent],
     }),
   ],
   tags: ['autodocs'],
@@ -48,11 +50,22 @@ export const WithPlaceholder: Story = {
 
 export const Disabled: Story = {
   args: {
-    disabled: true,
     label: 'Disabled Select',
     options: defaultOptions,
-    value: '1',
   },
+  render: (args) => ({
+    props: {
+      ...args,
+      formControl: new FormControl({ disabled: true, value: '1' }),
+    },
+    template: `
+      <quanta-select
+        [label]="label"
+        [options]="options"
+        [formControl]="formControl"
+      ></quanta-select>
+    `,
+  }),
 };
 
 export const WithError: Story = {
@@ -89,9 +102,11 @@ export const ReactiveForm: Story = {
           Selected: {{ form.value.fruit }}
         </div>
         
-        <button type="button" (click)="form.get('fruit')?.markAsTouched()">Touch Control</button>
-        <button type="button" (click)="form.get('fruit')?.disable()">Disable</button>
-        <button type="button" (click)="form.get('fruit')?.enable()">Enable</button>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <quanta-button variant="outlined" (clicked)="form.get('fruit')?.markAsTouched()">Touch Control</quanta-button>
+          <quanta-button variant="outlined" (clicked)="form.get('fruit')?.disable()">Disable</quanta-button>
+          <quanta-button variant="outlined" (clicked)="form.get('fruit')?.enable()">Enable</quanta-button>
+        </div>
       </form>
     `,
   }),
@@ -124,7 +139,10 @@ export const Interactive: Story = {
 
 export const DarkTheme: Story = {
   render: (args) => ({
-    props: args,
+    props: {
+      ...args,
+      control: new FormControl('dark'),
+    },
     template: `
       <div data-theme="dark" style="padding: 2rem; background: var(--md-sys-color-background); color: var(--md-sys-color-on-background);">
         <h3 style="margin-top: 0;">Dark Theme Select</h3>
@@ -135,7 +153,7 @@ export const DarkTheme: Story = {
             { label: 'Light', value: 'light' },
             { label: 'System', value: 'system' }
           ]"
-          value="dark"
+          [formControl]="control"
         ></quanta-select>
       </div>
     `,
