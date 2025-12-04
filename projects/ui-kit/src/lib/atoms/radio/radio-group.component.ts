@@ -8,6 +8,7 @@ import {
   forwardRef,
   input,
   model,
+  OnDestroy,
   output,
   QueryList,
   signal,
@@ -20,6 +21,7 @@ import {
   ValidationErrors,
   Validator,
 } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { QuantaRadioButtonComponent } from './radio-button.component';
 import { QUANTA_RADIO_GROUP, QuantaRadioGroup } from './radio.token';
 
@@ -56,7 +58,7 @@ let nextId = 0;
   template: `<ng-content />`,
 })
 export class QuantaRadioGroupComponent
-  implements AfterContentInit, ControlValueAccessor, QuantaRadioGroup, Validator
+  implements AfterContentInit, ControlValueAccessor, OnDestroy, QuantaRadioGroup, Validator
 {
   ariaLabel = input<string>('', { alias: 'aria-label' });
   ariaLabelledby = input<string>('', { alias: 'aria-labelledby' });
@@ -82,12 +84,14 @@ export class QuantaRadioGroupComponent
   private _generatedId: null | string = null;
   private _generatedName: null | string = null;
 
+  private buttonsSubscription?: Subscription;
   private get generatedId() {
     if (!this._generatedId) {
       this._generatedId = `quanta-radio-group-${nextId++}`;
     }
     return this._generatedId;
   }
+
   private get generatedName() {
     if (!this._generatedName) {
       this._generatedName = `quanta-radio-group-${nextId++}`;
@@ -124,13 +128,17 @@ export class QuantaRadioGroupComponent
   ngAfterContentInit() {
     // Initial sync
     this.updateButtonSelection(this.value());
-    this.updateButtonState(this.name(), this.disabled() || this._formDisabled());
+    this.updateButtonState(this.finalName(), this.disabled() || this._formDisabled());
 
     // Listen for dynamic button changes
-    this.buttons.changes.subscribe(() => {
+    this.buttonsSubscription = this.buttons.changes.subscribe(() => {
       this.updateButtonSelection(this.value());
-      this.updateButtonState(this.name(), this.disabled() || this._formDisabled());
+      this.updateButtonState(this.finalName(), this.disabled() || this._formDisabled());
     });
+  }
+
+  ngOnDestroy() {
+    this.buttonsSubscription?.unsubscribe();
   }
 
   // ControlValueAccessor
