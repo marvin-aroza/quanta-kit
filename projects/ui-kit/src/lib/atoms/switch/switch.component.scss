@@ -1,0 +1,163 @@
+@use 'sass:map';
+
+:host {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.quanta-switch {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  gap: 12px;
+  -webkit-tap-highlight-color: transparent;
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.38;
+  }
+}
+
+/* Visually hidden input */
+.switch-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Track */
+.switch-track {
+  width: 52px;
+  height: 32px;
+  background-color: var(--md-sys-color-surface-variant);
+  border-radius: 100px;
+  border: 2px solid var(--md-sys-color-outline);
+  position: relative;
+  transition:
+    background-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+
+  /* State Layer (Hover/Focus) */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--md-sys-color-on-surface);
+    opacity: 0;
+    transition: opacity 200ms linear;
+    pointer-events: none;
+  }
+}
+
+/* Thumb */
+.switch-thumb {
+  position: absolute;
+  top: 50%;
+  left: 6px; /* Initial position (off) */
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background-color: var(--md-sys-color-outline);
+  border-radius: 50%;
+  transition:
+    transform 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    width 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    height 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 200ms cubic-bezier(0.4, 0, 0.2, 1),
+    left 200ms cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Icon inside thumb */
+  .switch-icon {
+    width: 12px;
+    height: 12px;
+    opacity: 0;
+    transition: opacity 200ms linear;
+    fill: var(--md-sys-color-surface-container-highest);
+  }
+}
+
+/* Hover State */
+.quanta-switch:not(.disabled):hover .switch-track::before {
+  opacity: 0.08;
+}
+
+.quanta-switch:not(.disabled):hover .switch-thumb {
+  background-color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Focus State */
+.switch-input:focus-visible + .switch-track {
+  outline: 2px solid var(--md-sys-color-secondary);
+  outline-offset: 2px;
+}
+
+/* Checked State */
+.quanta-switch.checked {
+  .switch-track {
+    background-color: var(--md-sys-color-primary);
+    border-color: var(--md-sys-color-primary);
+
+    &::before {
+      background-color: var(--md-sys-color-primary);
+    }
+  }
+
+  .switch-thumb {
+    background-color: var(--md-sys-color-on-primary);
+    width: 24px;
+    height: 24px;
+    left: calc(100% - 28px); /* Position when on */
+  }
+
+  .switch-icon {
+    opacity: 1;
+    fill: var(--md-sys-color-on-primary-container);
+  }
+
+  /* Hover Checked */
+  &:not(.disabled):hover .switch-track {
+    background-color: var(
+      --md-sys-color-primary-container
+    ); /* Slightly lighter/darker depending on theme */
+    /* Note: M3 spec usually keeps primary but adds state layer. 
+       Here we simplify to avoid complex color mixing in CSS variables without Sass functions. 
+       Let's stick to state layer opacity. */
+  }
+
+  &:not(.disabled):hover .switch-thumb {
+    background-color: var(--md-sys-color-primary-container);
+  }
+}
+
+/* With Icons (Optional) */
+.quanta-switch.with-icons {
+  .switch-thumb {
+    width: 24px;
+    height: 24px;
+    left: 2px; /* Adjusted for larger thumb */
+  }
+
+  &.checked .switch-thumb {
+    left: calc(100% - 26px);
+  }
+
+  .switch-icon {
+    opacity: 1;
+  }
+}

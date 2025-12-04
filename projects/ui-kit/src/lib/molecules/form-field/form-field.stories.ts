@@ -5,6 +5,7 @@ import { QuantaCheckboxComponent } from '../../atoms/checkbox/checkbox.component
 import { QuantaInputComponent } from '../../atoms/input/input.component';
 import { QuantaRadioButtonComponent } from '../../atoms/radio/radio-button.component';
 import { QuantaRadioGroupComponent } from '../../atoms/radio/radio-group.component';
+import { QuantaSwitchComponent } from '../../atoms/switch/switch.component';
 import { QuantaFormFieldComponent } from './form-field.component';
 
 const meta: Meta<QuantaFormFieldComponent> = {
@@ -16,6 +17,7 @@ const meta: Meta<QuantaFormFieldComponent> = {
         QuantaCheckboxComponent,
         QuantaRadioGroupComponent,
         QuantaRadioButtonComponent,
+        QuantaSwitchComponent,
         QuantaButtonComponent,
         ReactiveFormsModule,
       ],
@@ -75,6 +77,17 @@ export const WithCheckbox: Story = {
   }),
 };
 
+export const WithSwitch: Story = {
+  render: (args) => ({
+    props: args,
+    template: `
+      <quanta-form-field>
+        <quanta-switch>Enable Notifications</quanta-switch>
+      </quanta-form-field>
+    `,
+  }),
+};
+
 export const WithRadioGroup: Story = {
   render: (args) => ({
     props: args,
@@ -96,6 +109,7 @@ export const RegistrationForm: Story = {
       form: new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
         gender: new FormControl('male', Validators.required),
+        newsletter: new FormControl(true),
         terms: new FormControl(false, Validators.requiredTrue),
         username: new FormControl('', Validators.required),
       }),
@@ -122,6 +136,10 @@ export const RegistrationForm: Story = {
           </quanta-radio-group>
         </quanta-form-field>
 
+        <quanta-form-field>
+          <quanta-switch formControlName="newsletter">Subscribe to newsletter</quanta-switch>
+        </quanta-form-field>
+
         <quanta-form-field [errorMessage]="form.get('terms')?.touched && form.get('terms')?.invalid ? 'You must accept terms' : ''">
           <quanta-checkbox formControlName="terms" label="I accept the terms and conditions"></quanta-checkbox>
         </quanta-form-field>
@@ -143,6 +161,9 @@ export const DarkTheme: Story = {
         </quanta-form-field>
         <quanta-form-field>
           <quanta-checkbox label="Dark Checkbox"></quanta-checkbox>
+        </quanta-form-field>
+        <quanta-form-field>
+          <quanta-switch [checked]="true">Dark Switch</quanta-switch>
         </quanta-form-field>
       </div>
     `,
