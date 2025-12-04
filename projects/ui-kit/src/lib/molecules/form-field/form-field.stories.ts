@@ -6,6 +6,7 @@ import { QuantaInputComponent } from '../../atoms/input/input.component';
 import { QuantaRadioButtonComponent } from '../../atoms/radio/radio-button.component';
 import { QuantaRadioGroupComponent } from '../../atoms/radio/radio-group.component';
 import { QuantaSwitchComponent } from '../../atoms/switch/switch.component';
+import { QuantaSelectComponent } from '../select/select.component';
 import { QuantaFormFieldComponent } from './form-field.component';
 
 const meta: Meta<QuantaFormFieldComponent> = {
@@ -19,6 +20,7 @@ const meta: Meta<QuantaFormFieldComponent> = {
         QuantaRadioButtonComponent,
         QuantaSwitchComponent,
         QuantaButtonComponent,
+        QuantaSelectComponent,
         ReactiveFormsModule,
       ],
     }),
@@ -107,6 +109,7 @@ export const RegistrationForm: Story = {
   render: (_args) => ({
     props: {
       form: new FormGroup({
+        country: new FormControl('', Validators.required),
         email: new FormControl('', [Validators.required, Validators.email]),
         gender: new FormControl('male', Validators.required),
         newsletter: new FormControl(true),
@@ -127,8 +130,21 @@ export const RegistrationForm: Story = {
           <quanta-input formControlName="email" label="Email" type="email" placeholder="john@example.com"></quanta-input>
         </quanta-form-field>
 
-        <quanta-form-field>
-          <label style="display: block; margin-bottom: 8px; font-weight: 500; font-family: var(--md-sys-typescale-body-medium-font);">Gender</label>
+        <quanta-form-field [errorMessage]="form.get('country')?.touched && form.get('country')?.invalid ? 'Country is required' : ''">
+          <quanta-select 
+            formControlName="country" 
+            label="Country" 
+            placeholder="Select Country"
+            [options]="[
+              { label: 'United States', value: 'us' },
+              { label: 'Canada', value: 'ca' },
+              { label: 'United Kingdom', value: 'uk' },
+              { label: 'Germany', value: 'de' }
+            ]"
+          ></quanta-select>
+        </quanta-form-field>
+
+        <quanta-form-field label="Gender">
           <quanta-radio-group formControlName="gender">
             <quanta-radio-button value="male" label="Male"></quanta-radio-button>
             <quanta-radio-button value="female" label="Female"></quanta-radio-button>

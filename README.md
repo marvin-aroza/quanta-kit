@@ -62,6 +62,8 @@ npm run storybook
 
 This will open the documentation at `http://localhost:6006`.
 
+[**View Live Documentation**](https://marvin-aroza.github.io/quanta-kit/?path=/docs/quanta-kit-atomic-design--docs)
+
 ## 🏗️ Development
 
 ### Build

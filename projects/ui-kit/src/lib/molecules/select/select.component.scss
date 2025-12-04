@@ -1,0 +1,121 @@
+@use 'sass:map';
+
+:host {
+  display: block;
+  font-family: var(--md-sys-typescale-body-large-font);
+}
+
+.quanta-select-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  position: relative;
+
+  &.disabled {
+    opacity: 0.38;
+    pointer-events: none;
+  }
+}
+
+.select-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--md-sys-color-on-surface-variant);
+  margin-left: 16px;
+}
+
+.select-wrapper {
+  position: relative;
+  height: 56px;
+  background-color: var(--md-sys-color-surface-container-highest);
+  border-radius: 4px 4px 0 0;
+  border-bottom: 1px solid var(--md-sys-color-on-surface-variant);
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--md-sys-color-surface-variant); // Slightly darker on hover
+  }
+
+  &::after {
+    // Active indicator (bottom line)
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: var(--md-sys-color-primary);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+
+  &:focus-within::after {
+    transform: scaleX(1);
+  }
+}
+
+.native-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+  padding: 0 16px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--md-sys-color-on-surface);
+  cursor: pointer;
+  outline: none;
+
+  // Ensure text doesn't overlap arrow
+  padding-right: 48px;
+
+  option {
+    background-color: var(--md-sys-color-surface-container);
+    color: var(--md-sys-color-on-surface);
+  }
+}
+
+.select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--md-sys-color-on-surface-variant);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    fill: currentColor;
+  }
+}
+
+// Error State
+.quanta-select-container.has-error {
+  .select-label {
+    color: var(--md-sys-color-error);
+  }
+
+  .select-wrapper {
+    border-bottom-color: var(--md-sys-color-error);
+
+    &::after {
+      background-color: var(--md-sys-color-error);
+    }
+  }
+
+  .error-message {
+    color: var(--md-sys-color-error);
+    font-size: 12px;
+    margin-left: 16px;
+  }
+}
+
+.helper-text {
+  color: var(--md-sys-color-on-surface-variant);
+  font-size: 12px;
+  margin-left: 16px;
+}
