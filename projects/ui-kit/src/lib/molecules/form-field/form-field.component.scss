@@ -1,7 +1,7 @@
 .quanta-form-field {
   display: block;
   margin-bottom: 1rem;
-  font-family: var(--mat-sys-typescale-body-medium-font);
+  font-family: var(--md-sys-typescale-body-medium-font);
 
   &__wrapper {
     display: flex;
@@ -12,7 +12,7 @@
   &__label {
     font-size: 0.875rem;
     font-weight: 500;
-    color: var(--mat-sys-color-on-surface-variant);
+    color: var(--md-sys-color-on-surface-variant);
   }
 
   &__control {
@@ -28,16 +28,16 @@
   }
 
   &__error {
-    color: var(--mat-sys-color-error);
+    color: var(--md-sys-color-error);
   }
 
   &__hint {
-    color: var(--mat-sys-color-on-surface-variant);
+    color: var(--md-sys-color-on-surface-variant);
   }
 
   &.has-error {
     .quanta-form-field__label {
-      color: var(--mat-sys-color-error);
+      color: var(--md-sys-color-error);
     }
   }
 }

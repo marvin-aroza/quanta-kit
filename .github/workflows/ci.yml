@@ -60,9 +60,34 @@ jobs:
       - run: npm ci
       - run: npm run test -- --no-watch --no-progress
 
+  test-storybook:
+    name: Test Storybook (A11y & Interaction)
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: 'npm'
+      - run: npm ci
+      - run: npx playwright install --with-deps
+
+      - name: Download Storybook Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: storybook-static
+          path: storybook-static
+
+      - name: Run Storybook Tests
+        run: |
+          npx concurrently -k -s first -n "SB,TEST" -c "magenta,blue" \
+            "npx http-server storybook-static --port 6006 --silent" \
+            "npx wait-on tcp:6006 && npm run test-storybook -- --url http://127.0.0.1:6006"
+
   release:
     name: Release
-    needs: test
+    needs: [test, test-storybook]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     permissions:

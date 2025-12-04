@@ -145,3 +145,44 @@ export const Interactive: Story = {
     await expect(button).not.toBeDisabled();
   },
 };
+
+export const AllColors: Story = {
+  render: (args) => ({
+    props: args,
+    template: `
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <div *ngFor="let variant of ['filled', 'tonal', 'outlined', 'text', 'elevated']">
+          <h4 style="margin: 0 0 0.5rem; text-transform: capitalize; font-family: sans-serif;">{{ variant }}</h4>
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <quanta-button [variant]="variant" color="primary">Primary</quanta-button>
+            <quanta-button [variant]="variant" color="secondary">Secondary</quanta-button>
+            <quanta-button [variant]="variant" color="tertiary">Tertiary</quanta-button>
+            <quanta-button [variant]="variant" color="error">Error</quanta-button>
+          </div>
+        </div>
+      </div>
+    `,
+  }),
+};
+
+export const DarkTheme: Story = {
+  render: (args) => ({
+    props: args,
+    template: `
+      <div data-theme="dark" style="padding: 2rem; background: var(--md-sys-color-background); color: var(--md-sys-color-on-background);">
+        <h3 style="margin-top: 0;">Dark Theme</h3>
+        <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+          <div *ngFor="let variant of ['filled', 'tonal', 'outlined', 'text', 'elevated']">
+            <h4 style="margin: 0 0 0.5rem; text-transform: capitalize; font-family: sans-serif; color: var(--md-sys-color-on-surface);">{{ variant }}</h4>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <quanta-button [variant]="variant" color="primary">Primary</quanta-button>
+              <quanta-button [variant]="variant" color="secondary">Secondary</quanta-button>
+              <quanta-button [variant]="variant" color="tertiary">Tertiary</quanta-button>
+              <quanta-button [variant]="variant" color="error">Error</quanta-button>
+            </div>
+          </div>
+        </div>
+      </div>
+    `,
+  }),
+};

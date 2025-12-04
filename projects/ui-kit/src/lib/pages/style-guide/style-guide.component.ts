@@ -57,7 +57,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 
         code {
           font-size: 0.75rem;
-          opacity: 0.8;
+          /* opacity: 0.8; Removed to fix contrast issues in dark mode */
         }
       }
 

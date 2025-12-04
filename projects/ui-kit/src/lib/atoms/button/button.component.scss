@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 :host {
   display: inline-block;
 }
@@ -59,63 +61,92 @@
   pointer-events: none;
 }
 
-/* Filled Button */
-.quanta-button.filled {
-  background-color: var(--md-sys-color-primary);
-  color: var(--md-sys-color-on-primary);
-}
-.quanta-button.filled:disabled {
-  background-color: rgba(28, 27, 31, 0.12);
-  color: rgba(28, 27, 31, 0.38);
+/* Color Maps */
+$colors: (
+  'primary': (
+    'base': var(--md-sys-color-primary),
+    'on': var(--md-sys-color-on-primary),
+    'container': var(--md-sys-color-primary-container),
+    'on-container': var(--md-sys-color-on-primary-container),
+  ),
+  'secondary': (
+    'base': var(--md-sys-color-secondary),
+    'on': var(--md-sys-color-on-secondary),
+    'container': var(--md-sys-color-secondary-container),
+    'on-container': var(--md-sys-color-on-secondary-container),
+  ),
+  'tertiary': (
+    'base': var(--md-sys-color-tertiary),
+    'on': var(--md-sys-color-on-tertiary),
+    'container': var(--md-sys-color-tertiary-container),
+    'on-container': var(--md-sys-color-on-tertiary-container),
+  ),
+  'error': (
+    'base': var(--md-sys-color-error),
+    'on': var(--md-sys-color-on-error),
+    'container': var(--md-sys-color-error-container),
+    'on-container': var(--md-sys-color-on-error-container),
+  ),
+);
+
+@each $name, $palette in $colors {
+  /* Filled Button */
+  .quanta-button.filled.#{$name} {
+    background-color: map.get($palette, 'base');
+    color: map.get($palette, 'on');
+  }
+
+  /* Tonal Button */
+  .quanta-button.tonal.#{$name} {
+    background-color: map.get($palette, 'container');
+    color: map.get($palette, 'on-container');
+  }
+
+  /* Outlined Button */
+  .quanta-button.outlined.#{$name} {
+    background-color: transparent;
+    color: map.get($palette, 'base');
+    border: 1px solid var(--md-sys-color-outline);
+
+    &:focus-visible {
+      border-color: map.get($palette, 'base');
+    }
+  }
+
+  /* Text Button */
+  .quanta-button.text.#{$name} {
+    background-color: transparent;
+    color: map.get($palette, 'base');
+    padding: 0 12px;
+  }
+
+  /* Elevated Button */
+  .quanta-button.elevated.#{$name} {
+    background-color: var(--md-sys-color-surface-container-low, #f3f6ea);
+    color: map.get($palette, 'base');
+    box-shadow: var(--md-sys-elevation-1);
+
+    &:hover {
+      box-shadow: var(--md-sys-elevation-2);
+    }
+  }
 }
 
-/* Tonal Button */
-.quanta-button.tonal {
-  background-color: var(--md-sys-color-secondary-container);
-  color: var(--md-sys-color-on-secondary-container);
-}
-.quanta-button.tonal:disabled {
-  background-color: rgba(28, 27, 31, 0.12);
-  color: rgba(28, 27, 31, 0.38);
-}
-
-/* Outlined Button */
-.quanta-button.outlined {
-  background-color: transparent;
-  color: var(--md-sys-color-primary);
-  border: 1px solid var(--md-sys-color-outline);
-}
-.quanta-button.outlined:disabled {
-  border-color: rgba(28, 27, 31, 0.12);
-  color: rgba(28, 27, 31, 0.38);
-}
-.quanta-button.outlined:focus-visible {
-  border-color: var(--md-sys-color-primary);
-}
-
-/* Text Button */
-.quanta-button.text {
-  background-color: transparent;
-  color: var(--md-sys-color-primary);
-  padding: 0 12px;
-}
-.quanta-button.text:disabled {
-  color: rgba(28, 27, 31, 0.38);
-}
-
-/* Elevated Button */
-.quanta-button.elevated {
-  background-color: var(--md-sys-color-surface-container-low, #f3f6ea); /* Fallback */
-  color: var(--md-sys-color-primary);
-  box-shadow: var(--md-sys-elevation-1);
-}
-.quanta-button.elevated:hover {
-  box-shadow: var(--md-sys-elevation-2);
-}
+.quanta-button.filled:disabled,
+.quanta-button.tonal:disabled,
 .quanta-button.elevated:disabled {
   background-color: rgba(28, 27, 31, 0.12);
   color: rgba(28, 27, 31, 0.38);
   box-shadow: none;
+}
+
+.quanta-button.outlined:disabled {
+  border-color: rgba(28, 27, 31, 0.12);
+  color: rgba(28, 27, 31, 0.38);
+}
+
+.quanta-button.text:disabled {
+  color: rgba(28, 27, 31, 0.38);
 }
 
 /* Label */
