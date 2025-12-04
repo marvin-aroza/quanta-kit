@@ -1,5 +1,19 @@
 # quanta-kit
 
+## 0.1.0-alpha.7
+
+### Minor Changes
+
+- 0c3be27: Added switch component
+- b7a6698: Added card component
+- 5f89160: Added select component
+
+### Patch Changes
+
+- 02ed039: color and story enhancement
+- ed2463c: Add radio button, radio group and form fields
+- 100090f: Added input component
+
 ## 0.0.2-alpha.6
 
 ### Patch Changes
