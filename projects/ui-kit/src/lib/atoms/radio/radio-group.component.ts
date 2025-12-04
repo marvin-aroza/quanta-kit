@@ -2,6 +2,7 @@ import {
   AfterContentInit,
   ChangeDetectionStrategy,
   Component,
+  computed,
   ContentChildren,
   effect,
   forwardRef,
@@ -30,7 +31,7 @@ let nextId = 0;
     '[attr.aria-label]': 'ariaLabel()',
     '[attr.aria-labelledby]': 'ariaLabelledby()',
     '[class.disabled]': 'disabled()',
-    '[id]': 'id()',
+    '[id]': 'finalId()',
     role: 'radiogroup',
   },
   providers: [
@@ -65,14 +66,34 @@ export class QuantaRadioGroupComponent
   // eslint-disable-next-line @angular-eslint/no-output-native
   change = output<unknown>();
   disabled = input<boolean>(false);
-  id = input<string>(`quanta-radio-group-${nextId++}`);
-  name = input<string>(`quanta-radio-group-${nextId++}`);
+  id = input<string>('');
+  finalId = computed(() => this.id() || this.generatedId);
+
+  name = input<string>('');
+
+  finalName = computed(() => this.name() || this.generatedName);
 
   required = input<boolean>(false);
 
   value = model<unknown>(null);
-
   private _formDisabled = signal<boolean>(false);
+
+  // Lazy generation of ID and Name to avoid side effects (incrementing nextId) when not needed
+  private _generatedId: null | string = null;
+  private _generatedName: null | string = null;
+
+  private get generatedId() {
+    if (!this._generatedId) {
+      this._generatedId = `quanta-radio-group-${nextId++}`;
+    }
+    return this._generatedId;
+  }
+  private get generatedName() {
+    if (!this._generatedName) {
+      this._generatedName = `quanta-radio-group-${nextId++}`;
+    }
+    return this._generatedName;
+  }
 
   constructor() {
     // Effect to sync value changes to buttons
@@ -85,7 +106,7 @@ export class QuantaRadioGroupComponent
 
     // Effect to sync name and disabled state
     effect(() => {
-      const name = this.name();
+      const name = this.finalName();
       const disabled = this.disabled() || this._formDisabled();
       if (this.buttons) {
         this.updateButtonState(name, disabled);
