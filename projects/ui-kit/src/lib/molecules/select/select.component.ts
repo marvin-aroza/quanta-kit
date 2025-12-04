@@ -11,7 +11,7 @@ import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/f
 
 export interface SelectOption {
   label: string;
-  value: number | string;
+  value: string;
 }
 
 @Component({
@@ -79,11 +79,11 @@ export class QuantaSelectComponent implements ControlValueAccessor {
   private _disabledState = signal<boolean>(false);
   protected isDisabled = computed(() => this.disabled() || this._disabledState());
 
-  private _value = signal<number | string>('');
+  private _value = signal<string>('');
   protected value = computed(() => this._value());
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
-  onChangeFn: (value: number | string) => void = () => {};
+  onChangeFn: (value: string) => void = () => {};
   onSelectChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const newValue = selectElement.value;
@@ -98,7 +98,7 @@ export class QuantaSelectComponent implements ControlValueAccessor {
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   onTouchedFn: () => void = () => {};
 
-  registerOnChange(fn: (value: number | string) => void): void {
+  registerOnChange(fn: (value: string) => void): void {
     this.onChangeFn = fn;
   }
 
@@ -110,7 +110,7 @@ export class QuantaSelectComponent implements ControlValueAccessor {
     this._disabledState.set(isDisabled);
   }
 
-  writeValue(value: number | string): void {
+  writeValue(value: string): void {
     this._value.set(value);
   }
 }
