@@ -80,3 +80,21 @@ export const Interactive: Story = {
     expect(checkbox).not.toBeChecked();
   },
 };
+
+export const DarkTheme: Story = {
+  render: (args) => ({
+    props: args,
+    template: `
+      <div data-theme="dark" style="padding: 2rem; background: var(--md-sys-color-background); color: var(--md-sys-color-on-background);">
+        <h3 style="margin-top: 0;">Dark Theme</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <quanta-checkbox label="Unchecked"></quanta-checkbox>
+          <quanta-checkbox label="Checked" [checked]="true"></quanta-checkbox>
+          <quanta-checkbox label="Indeterminate" [indeterminate]="true"></quanta-checkbox>
+          <quanta-checkbox label="Disabled" [disabled]="true"></quanta-checkbox>
+          <quanta-checkbox label="Disabled Checked" [disabled]="true" [checked]="true"></quanta-checkbox>
+        </div>
+      </div>
+    `,
+  }),
+};

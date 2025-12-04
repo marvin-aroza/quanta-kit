@@ -101,3 +101,21 @@ export const Interactive: Story = {
     await expect(input).toHaveValue('Hello World');
   },
 };
+
+export const DarkTheme: Story = {
+  render: (args) => ({
+    props: args,
+    template: `
+      <div data-theme="dark" style="padding: 2rem; background: var(--md-sys-color-background); color: var(--md-sys-color-on-background);">
+        <h3 style="margin-top: 0;">Dark Theme</h3>
+        <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 300px;">
+          <quanta-input label="Default Input" placeholder="Type here..."></quanta-input>
+          <quanta-input label="With Icon" icon="search" placeholder="Search..."></quanta-input>
+          <quanta-input label="With Value" value="Pre-filled value"></quanta-input>
+          <quanta-input label="Error State" error="Invalid input" value="Wrong value"></quanta-input>
+          <quanta-input label="Disabled" [disabled]="true" value="Disabled input"></quanta-input>
+        </div>
+      </div>
+    `,
+  }),
+};

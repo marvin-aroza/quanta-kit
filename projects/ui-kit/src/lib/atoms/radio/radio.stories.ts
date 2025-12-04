@@ -89,3 +89,19 @@ export const Interactive: Story = {
     expect(option2).not.toBeChecked();
   },
 };
+
+export const DarkTheme: Story = {
+  render: (args) => ({
+    props: args,
+    template: `
+      <div data-theme="dark" style="padding: 2rem; background: var(--md-sys-color-background); color: var(--md-sys-color-on-background);">
+        <h3 style="margin-top: 0;">Dark Theme</h3>
+        <quanta-radio-group name="dark-theme-group" value="option2">
+          <quanta-radio-button value="option1" label="Option 1"></quanta-radio-button>
+          <quanta-radio-button value="option2" label="Option 2 (Selected)"></quanta-radio-button>
+          <quanta-radio-button value="option3" label="Option 3 (Disabled)" [disabled]="true"></quanta-radio-button>
+        </quanta-radio-group>
+      </div>
+    `,
+  }),
+};
