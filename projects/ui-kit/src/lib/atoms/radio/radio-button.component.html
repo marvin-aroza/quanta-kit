@@ -1,0 +1,27 @@
+<label
+  class="quanta-radio-container"
+  [class.disabled]="isDisabled()"
+  [class.checked]="checked()"
+  [for]="id()"
+>
+  <input
+    type="radio"
+    [id]="id()"
+    [name]="name()"
+    [value]="value()"
+    [checked]="checked()"
+    [disabled]="isDisabled()"
+    [attr.aria-label]="ariaLabel() || label()"
+    (change)="onInputPayload($event)"
+    class="native-input"
+  />
+  <div class="radio-visual">
+    <div class="state-layer"></div>
+    <div class="outer-circle"></div>
+    <div class="inner-circle"></div>
+  </div>
+  @if (label()) {
+    <span class="label-text">{{ label() }}</span>
+  }
+  <ng-content></ng-content>
+</label>
