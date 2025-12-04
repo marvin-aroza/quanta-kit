@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 @Component({
   imports: [CommonModule],
   selector: 'quanta-style-guide',
-  standalone: true,
+
   styles: [
     `
       .style-guide {

@@ -13,7 +13,7 @@ let nextId = 0;
   },
   imports: [CommonModule],
   selector: 'quanta-radio-button',
-  standalone: true,
+
   styleUrl: './radio-button.component.scss',
   templateUrl: './radio-button.component.html',
 })

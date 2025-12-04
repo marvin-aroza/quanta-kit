@@ -50,7 +50,7 @@ let nextId = 0;
     },
   ],
   selector: 'quanta-radio-group',
-  standalone: true,
+
   styleUrls: ['./radio-group.component.scss'],
   template: `<ng-content />`,
 })

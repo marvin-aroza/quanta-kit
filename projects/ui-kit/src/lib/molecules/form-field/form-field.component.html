@@ -1,9 +1,8 @@
 <div class="quanta-form-field__wrapper">
-  @if (label) {
-    <!-- eslint-disable-next-line @angular-eslint/template/label-has-associated-control -->
-    <label class="quanta-form-field__label">
-      {{ label }}
-    </label>
+  @if (label()) {
+    <span class="quanta-form-field__label">
+      {{ label() }}
+    </span>
   }
 
   <div class="quanta-form-field__control">
@@ -11,9 +10,9 @@
   </div>
 
   <div class="quanta-form-field__bottom-wrapper">
-    @if (errorMessage || (control?.invalid && control?.touched)) {
+    @if (errorMessage() || (control?.invalid && control?.touched)) {
       <div class="quanta-form-field__error">
-        {{ errorMessage || 'Invalid input' }}
+        {{ errorMessage() || 'Invalid input' }}
       </div>
     }
   </div>

@@ -7,7 +7,7 @@ import { QuantaRadioGroupComponent } from './radio-group.component';
 
 @Component({
   imports: [QuantaRadioGroupComponent, QuantaRadioButtonComponent, ReactiveFormsModule],
-  standalone: true,
+
   template: `
     <quanta-radio-group [formControl]="control" [name]="name" [required]="required">
       <quanta-radio-button value="1" label="Option 1"></quanta-radio-button>

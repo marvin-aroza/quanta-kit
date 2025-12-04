@@ -7,7 +7,7 @@ import { QuantaFormFieldComponent } from './form-field.component';
 
 @Component({
   imports: [QuantaFormFieldComponent, QuantaInputComponent, ReactiveFormsModule],
-  standalone: true,
+
   template: `
     <div class="host-label">{{ label }}</div>
     <div class="host-error">{{ hostErrorMessage }}</div>
