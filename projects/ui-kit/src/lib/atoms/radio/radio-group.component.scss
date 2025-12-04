@@ -1,0 +1,10 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  &[aria-orientation='horizontal'] {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

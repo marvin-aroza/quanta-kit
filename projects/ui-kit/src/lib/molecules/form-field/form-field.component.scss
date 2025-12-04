@@ -1,0 +1,43 @@
+.quanta-form-field {
+  display: block;
+  margin-bottom: 1rem;
+  font-family: var(--mat-sys-typescale-body-medium-font);
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  &__label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--mat-sys-color-on-surface-variant);
+  }
+
+  &__control {
+    // Ensure the control takes full width if needed, or depends on the child
+    display: flex;
+    align-items: center;
+  }
+
+  &__subscript {
+    min-height: 1.25rem; // Reserve space for error/hint
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+  }
+
+  &__error {
+    color: var(--mat-sys-color-error);
+  }
+
+  &__hint {
+    color: var(--mat-sys-color-on-surface-variant);
+  }
+
+  &.has-error {
+    .quanta-form-field__label {
+      color: var(--mat-sys-color-error);
+    }
+  }
+}

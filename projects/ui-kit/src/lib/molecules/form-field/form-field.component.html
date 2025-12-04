@@ -1,0 +1,19 @@
+<div class="quanta-form-field__wrapper">
+  @if (label()) {
+    <span class="quanta-form-field__label">
+      {{ label() }}
+    </span>
+  }
+
+  <div class="quanta-form-field__control">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="quanta-form-field__bottom-wrapper">
+    @if (errorMessage() || (control?.invalid && control?.touched)) {
+      <div class="quanta-form-field__error">
+        {{ errorMessage() || 'Invalid input' }}
+      </div>
+    }
+  </div>
+</div>

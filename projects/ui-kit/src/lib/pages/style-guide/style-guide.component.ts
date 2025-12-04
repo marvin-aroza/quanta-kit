@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CommonModule],
   selector: 'quanta-style-guide',
-  standalone: true,
+
   styles: [
     `
       .style-guide {
