@@ -13,5 +13,6 @@ export default defineConfig({
         statements: 80,
       },
     },
+    globals: true,
   },
 });
