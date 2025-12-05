@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -17,6 +17,4 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   ],
   template: `<ng-content></ng-content>`,
 })
-export class QuantaChipSetComponent {
-  singleSelection = input<boolean>(false);
-}
+export class QuantaChipSetComponent {}

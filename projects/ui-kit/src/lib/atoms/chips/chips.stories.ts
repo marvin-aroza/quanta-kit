@@ -46,7 +46,7 @@ export const Assist: StoryObj<ChipArgs> = {
   render: (args) => ({
     props: args,
     template: `
-      <quanta-chip-set [singleSelection]="singleSelection">
+      <quanta-chip-set>
         <quanta-chip [variant]="variant" [label]="label" [disabled]="disabled">
           <span start>★</span> <!-- Projected icon -->
         </quanta-chip>
@@ -64,7 +64,7 @@ export const Filter: StoryObj<ChipArgs> = {
   render: (args) => ({
     props: args,
     template: `
-      <quanta-chip-set [singleSelection]="singleSelection">
+      <quanta-chip-set>
         <quanta-chip variant="filter" label="Filter 1" [selected]="true"></quanta-chip>
         <quanta-chip variant="filter" label="Filter 2" [selected]="false"></quanta-chip>
         <quanta-chip variant="filter" label="Filter 3" [selected]="false" [disabled]="true"></quanta-chip>
@@ -81,7 +81,7 @@ export const Input: StoryObj<ChipArgs> = {
   render: (args) => ({
     props: args,
     template: `
-      <quanta-chip-set [singleSelection]="singleSelection">
+      <quanta-chip-set>
         <quanta-chip variant="input" label="Apple" [removable]="true"></quanta-chip>
         <quanta-chip variant="input" label="Banana" [removable]="true"></quanta-chip>
         <quanta-chip variant="input" label="Cherry (Disabled)" [removable]="true" [disabled]="true"></quanta-chip>
@@ -97,7 +97,7 @@ export const Suggestion: StoryObj<ChipArgs> = {
   render: (args) => ({
     props: args,
     template: `
-      <quanta-chip-set [singleSelection]="singleSelection">
+      <quanta-chip-set>
         <quanta-chip variant="suggestion" label="Suggestion 1"></quanta-chip>
         <quanta-chip variant="suggestion" label="Suggestion 2"></quanta-chip>
       </quanta-chip-set>

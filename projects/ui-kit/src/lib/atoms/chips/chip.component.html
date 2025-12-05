@@ -15,27 +15,11 @@
         <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor" />
       </svg>
     </span>
-  } @else if (icon()) {
-    <!-- Placeholder for an icon library or passed SVG content, using simple text for now or content projection if complex -->
+  } @else {
     <span class="chip-icon leading-icon">
-      <ng-content select="[icon-start]"></ng-content>
-      <!-- If icon name string logic is needed later, add here, otherwise generic content projection is safer for generic icons -->
+      <ng-content select="[start]"></ng-content>
     </span>
-    <!-- Actually, let's support the string name if the system has an icon setup, but user didn't specify one. 
-         Let's stick to content projection for flexibility as per other components, but wait, the input says 'icon: string'.
-         Assuming for now we might map it or just use content projection for custom icons. 
-         Let's follow the established pattern. If button used content projection, chip likely should too for icons.
-         But the plan said "icon: string". Let's stick to input but maybe just render a placeholder class or assume simple text for now?
-         Actually, let's use ng-content for icons mainly, ensuring maximum flexibility.
-         The input 'icon' might be for a simple material icon font class if we had that set up.
-         Let's just use ng-content for 'start' slot. 
-    -->
   }
-
-  <!-- Just generic start slot -->
-  <span class="chip-icon leading-icon">
-    <ng-content select="[start]"></ng-content>
-  </span>
 
   <span class="chip-label">{{ label() }}</span>
 
