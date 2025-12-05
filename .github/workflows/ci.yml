@@ -103,6 +103,7 @@ jobs:
         uses: davelosert/vitest-coverage-report-action@v2
         with:
           json-final-path: coverage/ui-kit/coverage-final.json
+          json-summary-path: coverage/ui-kit/coverage-summary.json
 
       - name: Upload Coverage Report
         if: always() && github.event_name == 'pull_request' && !startsWith(github.head_ref, 'changeset-release/')
