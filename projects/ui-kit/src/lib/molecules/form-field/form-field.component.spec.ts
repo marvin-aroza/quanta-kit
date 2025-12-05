@@ -37,6 +37,14 @@ describe('QuantaFormFieldComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should handle missing control', () => {
+    // Create a fixture with empty form field
+    const emptyFixture = TestBed.createComponent(QuantaFormFieldComponent);
+    emptyFixture.detectChanges();
+    expect(emptyFixture.componentInstance).toBeTruthy();
+    // This covers the branch where control is null in ngAfterContentInit
+  });
+
   it('should render label', () => {
     const label = fixture.debugElement.query(By.css('.quanta-form-field__label'));
     expect(label.nativeElement.textContent.trim()).toBe('Test Label');
@@ -69,5 +77,19 @@ describe('QuantaFormFieldComponent', () => {
     const error = fixture.debugElement.query(By.css('.quanta-form-field__error'));
     expect(error).toBeTruthy();
     expect(error.nativeElement.textContent.trim()).toBe('Invalid input');
+  });
+
+  it('should update view when control status changes', async () => {
+    // Wait for ContentChild to be resolved
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const formField = fixture.debugElement.query(By.css('quanta-form-field')).componentInstance;
+    const cdrSpy = vi.spyOn(formField._cdr, 'markForCheck');
+
+    component.control.setErrors({ custom: true });
+    fixture.detectChanges();
+
+    expect(cdrSpy).toHaveBeenCalled();
   });
 });

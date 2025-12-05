@@ -40,6 +40,25 @@ describe('QuantaRadioButtonComponent', () => {
     expect(component.value()).toBe('test-value');
   });
 
+  it('should support aria-label', () => {
+    fixture.componentRef.setInput('aria-label', 'Custom Label');
+    fixture.detectChanges();
+    expect(component.ariaLabel()).toBe('Custom Label');
+    const inputEl = fixture.debugElement.query(By.css('input'));
+    expect(inputEl.nativeElement.getAttribute('aria-label')).toBe('Custom Label');
+  });
+
+  it('should use label as aria-label fallback', () => {
+    fixture.componentRef.setInput('label', 'Fallback Label');
+    fixture.detectChanges();
+    const inputEl = fixture.debugElement.query(By.css('input'));
+    expect(inputEl.nativeElement.getAttribute('aria-label')).toBe('Fallback Label');
+  });
+
+  it('should have default id', () => {
+    expect(component.id()).toMatch(/quanta-radio-button-\d+/);
+  });
+
   it('should call group.selectValue on click', () => {
     const inputEl = fixture.debugElement.query(By.css('input'));
     inputEl.triggerEventHandler('change', { stopPropagation: vi.fn() });
@@ -66,5 +85,42 @@ describe('QuantaRadioButtonComponent', () => {
     fixture.detectChanges();
     expect(component.isDisabled()).toBe(true);
     expect(fixture.nativeElement.classList).toContain('disabled');
+  });
+});
+
+describe('QuantaRadioButtonComponent without Group', () => {
+  let component: QuantaRadioButtonComponent;
+  let fixture: ComponentFixture<QuantaRadioButtonComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [QuantaRadioButtonComponent],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(QuantaRadioButtonComponent);
+    component = fixture.componentInstance;
+    fixture.componentRef.setInput('value', 'test-value');
+    fixture.detectChanges();
+  });
+
+  it('should create without group and warn', () => {
+    const consoleSpy = vi.spyOn(console, 'warn');
+    // Re-create component to trigger constructor
+    fixture = TestBed.createComponent(QuantaRadioButtonComponent);
+    component = fixture.componentInstance;
+    fixture.componentRef.setInput('value', 'test-value');
+    fixture.detectChanges();
+    expect(component).toBeTruthy();
+    expect(consoleSpy).toHaveBeenCalledWith(
+      'QuantaRadioButtonComponent must be used within a QuantaRadioGroupComponent',
+    );
+  });
+
+  it('should not throw when clicked without group', () => {
+    const inputEl = fixture.debugElement.query(By.css('input'));
+    // Should not throw error
+    expect(() => {
+      inputEl.triggerEventHandler('change', { stopPropagation: vi.fn() });
+    }).not.toThrow();
   });
 });

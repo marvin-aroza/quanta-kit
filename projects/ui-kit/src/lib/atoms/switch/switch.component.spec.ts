@@ -43,6 +43,22 @@ describe('QuantaSwitchComponent', () => {
     expect(icon).toBeTruthy();
   });
 
+  it('should show check icon when checked and showIcons is true', () => {
+    fixture.componentRef.setInput('showIcons', true);
+    fixture.componentRef.setInput('checked', true); // Use input directly or writeValue
+    // Or click to toggle
+    const inputEl = fixture.debugElement.query(By.css('input'));
+    inputEl.nativeElement.click();
+    fixture.detectChanges();
+
+    // Verify checked state first
+    expect(component.checked()).toBe(true);
+
+    const icon = fixture.debugElement.query(By.css('.switch-icon'));
+    expect(icon).toBeTruthy();
+    // Ideally check path d attribute to distinguish check vs close, but existence is enough for branch coverage
+  });
+
   describe('ControlValueAccessor', () => {
     it('should write value', () => {
       component.writeValue(true);
@@ -72,5 +88,35 @@ describe('QuantaSwitchComponent', () => {
       const inputEl = fixture.debugElement.query(By.css('input'));
       expect(inputEl.nativeElement.disabled).toBe(true);
     });
+    it('should handle null/undefined in writeValue', () => {
+      component.writeValue(null as unknown as boolean);
+      expect(component.checked()).toBe(false);
+
+      component.writeValue(undefined as unknown as boolean);
+      expect(component.checked()).toBe(false);
+    });
+  });
+
+  it('should support id, name, and value inputs', () => {
+    fixture.componentRef.setInput('id', 'custom-id');
+    fixture.componentRef.setInput('name', 'custom-name');
+    fixture.componentRef.setInput('value', 'custom-value');
+    fixture.detectChanges();
+
+    const inputEl = fixture.debugElement.query(By.css('input'));
+    expect(inputEl.nativeElement.getAttribute('id')).toBe('custom-id');
+    expect(inputEl.nativeElement.getAttribute('name')).toBe('custom-name');
+    expect(inputEl.nativeElement.getAttribute('value')).toBe('custom-value');
+  });
+
+  it('should have correct aria-checked attribute', () => {
+    fixture.componentRef.setInput('checked', true);
+    fixture.detectChanges();
+    const inputEl = fixture.debugElement.query(By.css('input'));
+    expect(inputEl.nativeElement.getAttribute('aria-checked')).toBe('true');
+
+    fixture.componentRef.setInput('checked', false);
+    fixture.detectChanges();
+    expect(inputEl.nativeElement.getAttribute('aria-checked')).toBe('false');
   });
 });

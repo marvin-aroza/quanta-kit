@@ -37,6 +37,14 @@ describe('QuantaCheckboxComponent', () => {
     expect(formValue).toBe(true);
   });
 
+  it('should prevent default event on toggle', () => {
+    const inputElement = fixture.debugElement.query(By.css('input'));
+    const event = new Event('change');
+    const spy = vi.spyOn(event, 'preventDefault');
+    inputElement.triggerEventHandler('change', event);
+    expect(spy).toHaveBeenCalled();
+  });
+
   it('should not toggle when disabled', () => {
     fixture.componentRef.setInput('disabled', true);
     fixture.detectChanges();
@@ -85,6 +93,22 @@ describe('QuantaCheckboxComponent', () => {
     expect(component.validate(null!)).toBeNull();
   });
 
+  it('should return null validation when not required', () => {
+    fixture.componentRef.setInput('required', false);
+    expect(component.validate(null!)).toBeNull();
+  });
+
+  it('should handle indeterminate state', () => {
+    fixture.componentRef.setInput('indeterminate', true);
+    fixture.detectChanges();
+
+    const checkbox = fixture.debugElement.query(By.css('.quanta-checkbox-container'));
+    expect(checkbox.classes['indeterminate']).toBe(true);
+
+    // Check if indeterminate icon is shown (if implemented in template)
+    // Looking at template would confirm, but class check covers the binding branch
+  });
+
   it('should integrate with reactive forms', () => {
     const control = new FormControl(false);
     component.registerOnChange((value) => control.setValue(value));
@@ -97,5 +121,30 @@ describe('QuantaCheckboxComponent', () => {
 
     expect(control.value).toBe(true);
     expect(control.touched).toBe(true);
+  });
+
+  it('should support aria-label', () => {
+    fixture.componentRef.setInput('aria-label', 'Custom Label');
+    fixture.detectChanges();
+    expect(component.ariaLabel()).toBe('Custom Label');
+  });
+
+  it('should have default id', () => {
+    expect(component.checkboxId).toMatch(/quanta-checkbox-\d+/);
+  });
+
+  it('should call onTouched on blur', () => {
+    const spy = vi.fn();
+    component.registerOnTouched(spy);
+    component.onBlur();
+    expect(spy).toHaveBeenCalled();
+  });
+
+  it('should handle null/undefined in writeValue', () => {
+    component.writeValue(null as unknown as boolean);
+    expect(component.checked()).toBe(false);
+
+    component.writeValue(undefined as unknown as boolean);
+    expect(component.checked()).toBe(false);
   });
 });

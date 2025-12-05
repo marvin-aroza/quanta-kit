@@ -90,5 +90,52 @@ describe('QuantaSelectComponent', () => {
     expect(fixture.nativeElement.querySelector('.quanta-select-container').classList).toContain(
       'has-error',
     );
+    const selectEl = fixture.debugElement.query(By.css('select'));
+    expect(selectEl.nativeElement.getAttribute('aria-describedby')).toContain('-description');
+  });
+
+  it('should display helper text', () => {
+    fixture.componentRef.setInput('helperText', 'Helper info');
+    fixture.detectChanges();
+    const helperEl = fixture.debugElement.query(By.css('.helper-text'));
+    expect(helperEl.nativeElement.textContent).toBe('Helper info');
+    const selectEl = fixture.debugElement.query(By.css('select'));
+    expect(selectEl.nativeElement.getAttribute('aria-describedby')).toContain('-description');
+  });
+
+  it('should prioritize error message over helper text', () => {
+    fixture.componentRef.setInput('errorMessage', 'Error!');
+    fixture.componentRef.setInput('helperText', 'Helper info');
+    fixture.detectChanges();
+    const errorEl = fixture.debugElement.query(By.css('.error-message'));
+    const helperEl = fixture.debugElement.query(By.css('.helper-text'));
+    expect(errorEl).toBeTruthy();
+    expect(helperEl).toBeFalsy();
+  });
+
+  it('should be disabled via input', () => {
+    fixture.componentRef.setInput('disabled', true);
+    fixture.detectChanges();
+    const selectEl = fixture.debugElement.query(By.css('select'));
+    expect(selectEl.nativeElement.disabled).toBe(true);
+  });
+
+  it('should have default id', () => {
+    expect(component.id()).toMatch(/quanta-select-.*/);
+  });
+
+  it('should support custom id', () => {
+    fixture.componentRef.setInput('id', 'custom-select-id');
+    fixture.detectChanges();
+    const selectEl = fixture.debugElement.query(By.css('select'));
+    expect(selectEl.nativeElement.getAttribute('id')).toBe('custom-select-id');
+  });
+
+  it('should handle null/undefined in writeValue', () => {
+    component.writeValue(null as unknown as string);
+    expect(component['value']()).toBe('');
+
+    component.writeValue(undefined as unknown as string);
+    expect(component['value']()).toBe('');
   });
 });

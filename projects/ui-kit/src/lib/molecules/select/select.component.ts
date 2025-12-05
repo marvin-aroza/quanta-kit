@@ -111,6 +111,6 @@ export class QuantaSelectComponent implements ControlValueAccessor {
   }
 
   writeValue(value: string): void {
-    this._value.set(value);
+    this._value.set(value || '');
   }
 }
