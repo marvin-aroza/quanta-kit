@@ -107,6 +107,22 @@ describe('QuantaCheckboxComponent', () => {
 
     // Check if indeterminate icon is shown (if implemented in template)
     // Looking at template would confirm, but class check covers the binding branch
+
+    // Verify aria-checked is mixed
+    const input = fixture.debugElement.query(By.css('input'));
+    expect(input.attributes['aria-checked']).toBe('mixed');
+  });
+
+  it('should have correct aria-checked attribute', () => {
+    const input = fixture.debugElement.query(By.css('input'));
+
+    // Default unchecked
+    expect(input.attributes['aria-checked']).toBe('false');
+
+    // Checked
+    component.checked.set(true);
+    fixture.detectChanges();
+    expect(input.attributes['aria-checked']).toBe('true');
   });
 
   it('should integrate with reactive forms', () => {

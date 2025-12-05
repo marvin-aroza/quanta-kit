@@ -41,15 +41,16 @@ let nextId = 0;
   templateUrl: './checkbox.component.html',
 })
 export class QuantaCheckboxComponent implements ControlValueAccessor, Validator {
+  checked = model<boolean>(false);
+  indeterminate = input<boolean>(false);
+  ariaChecked = computed(() => (this.indeterminate() ? 'mixed' : this.checked()));
   ariaLabel = input<string>('', { alias: 'aria-label' });
   changed = output<boolean>();
+
   checkboxId = `quanta-checkbox-${nextId++}`;
-  checked = model<boolean>(false);
   disabled = input<boolean>(false);
 
-  indeterminate = input<boolean>(false);
   private _formDisabled = signal<boolean>(false);
-
   isDisabled = computed(() => this.disabled() || this._formDisabled());
   label = input<string>();
   required = input<boolean>(false);

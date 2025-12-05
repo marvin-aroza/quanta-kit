@@ -132,10 +132,10 @@ describe('QuantaSelectComponent', () => {
   });
 
   it('should handle null/undefined in writeValue', () => {
-    component.writeValue(null as unknown as string);
+    component.writeValue(null);
     expect(component['value']()).toBe('');
 
-    component.writeValue(undefined as unknown as string);
+    component.writeValue(undefined);
     expect(component['value']()).toBe('');
   });
 });

@@ -110,7 +110,7 @@ export class QuantaSelectComponent implements ControlValueAccessor {
     this._disabledState.set(isDisabled);
   }
 
-  writeValue(value: string): void {
+  writeValue(value: null | string | undefined): void {
     this._value.set(value || '');
   }
 }

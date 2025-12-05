@@ -12,6 +12,7 @@
     [disabled]="isDisabled()"
     [required]="required()"
     [indeterminate]="indeterminate()"
+    [attr.aria-checked]="ariaChecked()"
     [attr.aria-label]="ariaLabel() || label()"
     (change)="toggle($event)"
     class="native-input"
