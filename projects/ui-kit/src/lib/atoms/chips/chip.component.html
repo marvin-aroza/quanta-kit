@@ -1,29 +1,37 @@
-<span
-  [class]="computedClass()"
-  [class.disabled]="disabled()"
-  [attr.tabindex]="disabled() ? -1 : 0"
-  (click)="toggle()"
-  (keydown.enter)="toggle()"
-  (keydown.space)="$event.preventDefault(); toggle()"
-  role="button"
-  [attr.aria-pressed]="variant() === 'filter' ? selected() : null"
-  [attr.aria-disabled]="disabled()"
->
-  @if (variant() === 'filter' && selected()) {
-    <span class="chip-icon leading-icon">
-      <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18">
-        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor" />
-      </svg>
+@if (removable()) {
+  <!-- Input Chip: Split interactive zones to avoid nested buttons -->
+  <span
+    [class]="computedClass()"
+    [class.disabled]="disabled()"
+    [attr.aria-disabled]="disabled()"
+    role="none"
+  >
+    <!-- Primary Action: Icon + Label -->
+    <span
+      class="chip-action-content"
+      role="button"
+      [attr.tabindex]="disabled() ? -1 : 0"
+      (click)="toggle()"
+      (keydown.enter)="toggle()"
+      (keydown.space)="$event.preventDefault(); toggle()"
+      [attr.aria-pressed]="variant() === 'filter' ? selected() : null"
+      style="display: flex; align-items: center; justify-content: center; height: 100%"
+    >
+      @if (variant() === 'filter' && selected()) {
+        <span class="chip-icon leading-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18">
+            <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor" />
+          </svg>
+        </span>
+      } @else {
+        <span class="chip-icon leading-icon">
+          <ng-content select="[start]"></ng-content>
+        </span>
+      }
+      <span class="chip-label">{{ label() }}</span>
     </span>
-  } @else {
-    <span class="chip-icon leading-icon">
-      <ng-content select="[start]"></ng-content>
-    </span>
-  }
 
-  <span class="chip-label">{{ label() }}</span>
-
-  @if (removable()) {
+    <!-- Remove Action -->
     <span
       class="chip-icon trailing-icon remove-icon"
       (click)="remove($event)"
@@ -40,5 +48,32 @@
         />
       </svg>
     </span>
-  }
-</span>
+  </span>
+} @else {
+  <!-- Standard Chip: Root is the button -->
+  <span
+    [class]="computedClass()"
+    [class.disabled]="disabled()"
+    [attr.tabindex]="disabled() ? -1 : 0"
+    (click)="toggle()"
+    (keydown.enter)="toggle()"
+    (keydown.space)="$event.preventDefault(); toggle()"
+    role="button"
+    [attr.aria-pressed]="variant() === 'filter' ? selected() : null"
+    [attr.aria-disabled]="disabled()"
+  >
+    @if (variant() === 'filter' && selected()) {
+      <span class="chip-icon leading-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true" width="18" height="18">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" fill="currentColor" />
+        </svg>
+      </span>
+    } @else {
+      <span class="chip-icon leading-icon">
+        <ng-content select="[start]"></ng-content>
+      </span>
+    }
+
+    <span class="chip-label">{{ label() }}</span>
+  </span>
+}
