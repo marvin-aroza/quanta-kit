@@ -1,0 +1,104 @@
+@use '../../styles/tokens' as *;
+
+:host {
+  display: inline-block;
+}
+
+.quanta-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 32px;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+
+  // Typography shorthand
+  font: var(--md-sys-typescale-label-large);
+
+  background-color: transparent;
+  color: var(--md-sys-color-on-surface);
+  transition:
+    background-color 0.2s,
+    color 0.2s,
+    border-color 0.2s,
+    box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+
+  // Variant: Assist
+  &.assist {
+    border-color: var(--md-sys-color-outline);
+    background-color: var(--md-sys-color-surface);
+    &:hover {
+      background-color: color-mix(
+        in srgb,
+        var(--md-sys-color-on-surface) 8%,
+        var(--md-sys-color-surface)
+      );
+    }
+  }
+
+  // Variant: Filter
+  &.filter {
+    border-color: var(--md-sys-color-outline);
+    background-color: var(--md-sys-color-surface);
+
+    &.selected {
+      background-color: var(--md-sys-color-secondary-container);
+      color: var(--md-sys-color-on-secondary-container);
+      border-color: transparent;
+
+      &:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--md-sys-color-on-secondary-container) 8%,
+          var(--md-sys-color-secondary-container)
+        );
+      }
+    }
+  }
+
+  // Variant: Input
+  &.input {
+    border-color: var(--md-sys-color-outline);
+    background-color: var(--md-sys-color-surface);
+  }
+
+  // Variant: Suggestion
+  &.suggestion {
+    border-color: var(--md-sys-color-outline);
+    background-color: var(--md-sys-color-surface);
+    &.selected {
+      background-color: var(--md-sys-color-secondary-container);
+    }
+  }
+
+  &.disabled {
+    opacity: 0.38;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  .chip-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &.leading-icon {
+      margin-inline-end: 8px;
+      margin-inline-start: -8px;
+    }
+
+    &.trailing-icon {
+      margin-inline-start: 8px;
+      margin-inline-end: -8px;
+      border-radius: 50%;
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+}
