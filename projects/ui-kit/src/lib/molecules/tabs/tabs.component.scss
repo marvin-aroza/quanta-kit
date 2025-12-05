@@ -1,0 +1,123 @@
+@use '../../styles/tokens' as *;
+
+:host {
+  display: block;
+}
+
+.quanta-tab-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  // Primary Variant
+  &.primary {
+    .quanta-tab-header {
+      background-color: var(--md-sys-color-surface);
+      border-bottom: 1px solid var(--md-sys-color-surface-variant);
+    }
+
+    .quanta-tab-label {
+      color: var(--md-sys-color-on-surface-variant);
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+        color: var(--md-sys-color-on-surface);
+      }
+
+      &.active {
+        color: var(--md-sys-color-primary);
+        .quanta-tab-icon {
+          color: var(--md-sys-color-primary);
+        }
+      }
+
+      .quanta-active-indicator {
+        background-color: var(--md-sys-color-primary);
+        height: 3px;
+        border-radius: 3px 3px 0 0;
+      }
+    }
+  }
+
+  // Secondary Variant
+  &.secondary {
+    .quanta-tab-header {
+      background-color: transparent; // Often used on surfaced cards
+    }
+
+    .quanta-tab-label {
+      color: var(--md-sys-color-on-surface-variant);
+      min-width: 90px;
+
+      &.active {
+        color: var(--md-sys-color-on-surface);
+      }
+
+      .quanta-active-indicator {
+        background-color: var(--md-sys-color-secondary); // Or distinct color
+        height: 2px;
+      }
+    }
+  }
+}
+
+.quanta-tab-header {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  scrollbar-width: none; // Hide scrollbar
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.quanta-tab-label {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 48px;
+  min-width: 90px; // Standard min width
+  padding: 0 16px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+  // Typography
+  font: var(--md-sys-typescale-title-small);
+  white-space: nowrap;
+
+  transition:
+    color 0.2s,
+    background-color 0.2s;
+
+  &[disabled] {
+    pointer-events: none;
+    opacity: 0.38;
+  }
+
+  .quanta-tab-icon {
+    margin-bottom: 4px;
+    font-size: 24px;
+    // If label present, maybe smaller or stacked
+  }
+
+  .quanta-tab-text-label {
+    // Ensure text alignment if needed, standard styling handled by parent
+    text-align: center;
+  }
+
+  .quanta-active-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+.quanta-tab-body {
+  padding: 16px;
+  // User can override padding if needed via global styles or content wrapper
+}
