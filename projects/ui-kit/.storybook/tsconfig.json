@@ -5,13 +5,7 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
   },
-  "exclude": ["../src/test.ts", "../src/**/*.spec.ts"],
-  "include": [
-    "../src/**/*.stories.*",
-    "../src/**/*.mdx",
-    "./preview.ts",
-    "../documentation.json",
-    "../src/**/*.ts"
-  ],
+  "exclude": ["../src/test.ts", "../src/**/*.spec.ts", "../src/public-api.ts"],
+  "include": ["../src/**/*.stories.*", "../src/**/*.mdx", "./preview.ts", "../src/**/*.ts"],
   "files": ["./typings.d.ts"]
 }
