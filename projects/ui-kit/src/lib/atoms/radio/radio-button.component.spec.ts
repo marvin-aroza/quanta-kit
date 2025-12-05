@@ -1,13 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { QuantaRadioButtonComponent } from './radio-button.component';
-import { QUANTA_RADIO_GROUP } from './radio.token';
+import { QUANTA_RADIO_GROUP, QuantaRadioGroup } from './radio.token';
 
 describe('QuantaRadioButtonComponent', () => {
   let component: QuantaRadioButtonComponent;
   let fixture: ComponentFixture<QuantaRadioButtonComponent>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let mockRadioGroup: any;
+  let mockRadioGroup: Pick<QuantaRadioGroup, 'selectValue'>;
 
   beforeEach(async () => {
     mockRadioGroup = {
