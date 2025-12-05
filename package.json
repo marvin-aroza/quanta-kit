@@ -84,6 +84,7 @@
     "@storybook/angular": "^10.1.2",
     "@storybook/test-runner": "^0.24.2",
     "@vitest/browser-playwright": "^4.0.15",
+    "@vitest/coverage-v8": "^4.0.15",
     "angular-eslint": "21.0.1",
     "axe-playwright": "^2.2.2",
     "concurrently": "^9.2.1",

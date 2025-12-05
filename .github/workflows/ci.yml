@@ -11,8 +11,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  audit:
-    name: Audit (Lint & Security)
+  install:
+    name: Install Dependencies
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,7 +20,30 @@ jobs:
         with:
           node-version: 24
           cache: 'npm'
-      - run: npm ci
+      - name: Cache node_modules
+        id: cache-node-modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+      - name: Install Dependencies
+        if: steps.cache-node-modules.outputs.cache-hit != 'true'
+        run: npm ci
+
+  audit:
+    name: Audit (Lint & Security)
+    needs: install
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Restore node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
       - run: npm run lint
       - run: npm run format -- --check
       - name: Security Audit
@@ -28,15 +51,18 @@ jobs:
 
   build:
     name: Build
-    needs: audit
+    needs: [install, audit]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'npm'
-      - run: npm ci
+      - name: Restore node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
       - run: npx ng build ui-kit
       - run: npm run build-storybook
 
@@ -49,28 +75,58 @@ jobs:
 
   test:
     name: Test
-    needs: build
+    needs: [install, build]
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run test -- --no-watch --no-progress
+      - name: Restore node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
+      - name: Run Tests (With Coverage)
+        if: github.event_name == 'pull_request' && !startsWith(github.head_ref, 'changeset-release/')
+        run: npx ng test --no-watch --no-progress --coverage
+
+      - name: Run Tests (No Coverage)
+        if: github.event_name == 'push' || (github.event_name == 'pull_request' && startsWith(github.head_ref, 'changeset-release/'))
+        run: npx ng test --no-watch --no-progress
+
+      - name: Report Coverage
+        if: always() && github.event_name == 'pull_request' && !startsWith(github.head_ref, 'changeset-release/')
+        uses: davelosert/vitest-coverage-report-action@v2
+        with:
+          json-final-path: coverage/ui-kit/coverage-final.json
+          json-summary-path: coverage/ui-kit/coverage-summary.json
+
+      - name: Upload Coverage Report
+        if: always() && github.event_name == 'pull_request' && !startsWith(github.head_ref, 'changeset-release/')
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage
+          retention-days: 1
 
   test-storybook:
     name: Test Storybook (A11y & Interaction)
-    needs: build
+    needs: [install, build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'npm'
-      - run: npm ci
+      - name: Restore node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
       - run: npx playwright install --with-deps
 
       - name: Download Storybook Artifact
@@ -101,10 +157,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: 'npm'
 
-      - name: Install Dependencies
-        run: npm ci
+      - name: Restore node_modules
+        uses: actions/cache@v4
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node_modules-${{ hashFiles('package-lock.json') }}
 
       - name: Create Release Pull Request or Publish to npm
         id: changesets

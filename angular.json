@@ -34,7 +34,9 @@
         "test": {
           "builder": "@angular/build:unit-test",
           "options": {
-            "tsConfig": "projects/ui-kit/tsconfig.spec.json"
+            "tsConfig": "projects/ui-kit/tsconfig.spec.json",
+            "runner": "vitest",
+            "runnerConfig": "./vitest.config.ts"
           }
         },
         "storybook": {
