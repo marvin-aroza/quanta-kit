@@ -10,6 +10,7 @@ export * from './lib/atoms/radio/radio-button.component';
 export * from './lib/atoms/radio/radio-group.component';
 export * from './lib/atoms/switch/switch.component';
 export * from './lib/molecules/card/card.component';
+export * from './lib/molecules/dialog/dialog.component';
 export * from './lib/molecules/form-field/form-field.component';
 export * from './lib/molecules/select/select.component';
 export * from './lib/molecules/tabs/tab.component';

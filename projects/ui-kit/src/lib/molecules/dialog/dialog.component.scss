@@ -1,0 +1,103 @@
+@use '../../styles/tokens' as *;
+
+.quanta-dialog {
+  // Reset native dialog styles
+  border: none;
+  padding: 0;
+  margin: auto; // Center vertically and horizontally
+  background: transparent;
+  color: inherit;
+
+  // Elevation & Shape
+  border-radius: 28px; // M3 Dialog default
+  box-shadow: var(--md-sys-elevation-level3);
+
+  // Size constraints
+  max-width: 560px;
+  min-width: 280px;
+  width: fit-content;
+
+  // Backdrop
+  &::backdrop {
+    background-color: var(--md-sys-color-scrim);
+    opacity: 0.32; // Standard M3 opacity
+    animation: fadeIn 0.15s ease-out;
+  }
+
+  // Animation
+  &[open] {
+    animation: popIn 0.2s cubic-bezier(0.05, 0.7, 0.1, 1);
+  }
+}
+
+.quanta-dialog-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--md-sys-color-surface-container-high);
+  color: var(--md-sys-color-on-surface);
+  border-radius: 28px;
+  padding: 24px; // Basic padding, specific areas override
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.quanta-dialog-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 16px;
+  text-align: center;
+
+  // If icon is present
+  .quanta-dialog-icon {
+    margin-bottom: 16px;
+    font-size: 24px;
+    color: var(--md-sys-color-secondary);
+  }
+
+  .quanta-dialog-headline {
+    margin: 0;
+    font: var(--md-sys-typescale-headline-small);
+    color: var(--md-sys-color-on-surface);
+  }
+}
+
+.quanta-dialog-content {
+  font: var(--md-sys-typescale-body-medium);
+  color: var(--md-sys-color-on-surface-variant);
+  margin-bottom: 24px;
+
+  // Scrollable if needed
+  overflow-y: auto;
+  max-height: 60vh;
+}
+
+.quanta-dialog-actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 8px;
+
+  // Ensure actions are visible
+  padding-top: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.32;
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
