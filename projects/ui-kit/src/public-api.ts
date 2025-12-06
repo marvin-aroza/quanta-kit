@@ -12,6 +12,8 @@ export * from './lib/atoms/switch/switch.component';
 export * from './lib/molecules/card/card.component';
 export * from './lib/molecules/dialog/dialog.component';
 export * from './lib/molecules/form-field/form-field.component';
+export * from './lib/molecules/list/list-item.component';
+export * from './lib/molecules/list/list.component';
 export * from './lib/molecules/select/select.component';
 export * from './lib/molecules/tabs/tab.component';
 export * from './lib/molecules/tabs/tabs.component';

@@ -1,0 +1,93 @@
+@use '../../styles/tokens' as *;
+
+.quanta-list-item {
+  display: block;
+  text-decoration: none;
+  cursor: default;
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.38;
+  }
+}
+
+.quanta-list-item-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-height: 56px; // One-line height
+  padding: 8px 16px; // 16px horizontal padding standard
+  box-sizing: border-box;
+  color: var(--md-sys-color-on-surface);
+
+  // Interactive states managed via state layer
+  &.interactive {
+    cursor: pointer;
+    user-select: none;
+    outline: none; // Managed by state layer usually, or add focus ring
+  }
+}
+
+// State Layer
+.quanta-state-layer {
+  position: absolute;
+  inset: 0;
+  background-color: var(--md-sys-color-on-surface);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s linear;
+}
+
+.quanta-list-item-content.interactive:hover .quanta-state-layer {
+  opacity: var(--md-sys-state-hover-state-layer-opacity);
+}
+
+.quanta-list-item-content.interactive:focus-visible .quanta-state-layer {
+  opacity: var(--md-sys-state-focus-state-layer-opacity);
+}
+
+.quanta-list-item-content.interactive:active .quanta-state-layer {
+  opacity: var(--md-sys-state-pressed-state-layer-opacity);
+}
+
+// Slots
+.quanta-list-item-start,
+.quanta-list-item-end {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+// Body
+.quanta-list-item-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0; // Allow text truncation
+}
+
+.quanta-list-item-headline {
+  font: var(--md-sys-typescale-body-large);
+  color: var(--md-sys-color-on-surface);
+  // Truncate
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.quanta-list-item-supporting-text {
+  font: var(--md-sys-typescale-body-medium);
+  color: var(--md-sys-color-on-surface-variant);
+  // Truncate
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 4px; /* Optional spacing */
+}
+
+// Multi-line adjustments
+// If supporting text exists, min-height typically grows to 72px for 2-line
+// But flex layout handles content naturally. We might enforce min-heights via host classes if strict M3 is needed.
