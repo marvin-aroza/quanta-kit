@@ -9,7 +9,6 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
   },
   imports: [CommonModule],
   selector: 'quanta-tooltip',
-  standalone: true,
   styleUrl: './tooltip.component.scss',
   template: `{{ text() }}`,
 })

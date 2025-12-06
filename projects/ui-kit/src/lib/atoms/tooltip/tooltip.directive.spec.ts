@@ -6,7 +6,6 @@ import { QuantaTooltipDirective, TooltipPosition } from './tooltip.directive';
 
 @Component({
   imports: [QuantaTooltipDirective],
-  standalone: true,
   template: ` <button [quantaTooltip]="tooltipText" [position]="position">Test Button</button> `,
 })
 class TestHostComponent {
@@ -17,7 +16,6 @@ class TestHostComponent {
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 describe('QuantaTooltipDirective', () => {
-  let component: TestHostComponent;
   let fixture: ComponentFixture<TestHostComponent>;
 
   beforeEach(async () => {
@@ -26,7 +24,6 @@ describe('QuantaTooltipDirective', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestHostComponent);
-    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 

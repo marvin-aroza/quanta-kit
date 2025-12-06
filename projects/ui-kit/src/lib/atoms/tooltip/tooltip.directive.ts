@@ -4,19 +4,22 @@ import {
   Directive,
   ElementRef,
   EnvironmentInjector,
-  HostListener,
   inject,
   input,
   OnDestroy,
-  ViewContainerRef,
 } from '@angular/core';
 import { QuantaTooltipComponent } from './tooltip.component';
 
 export type TooltipPosition = 'above' | 'below' | 'left' | 'right';
 
 @Directive({
+  host: {
+    '(blur)': 'hide()',
+    '(focus)': 'show()',
+    '(mouseenter)': 'show()',
+    '(mouseleave)': 'hide()',
+  },
   selector: '[quantaTooltip]',
-  standalone: true,
 })
 export class QuantaTooltipDirective implements OnDestroy {
   position = input<TooltipPosition>('below');
@@ -28,10 +31,7 @@ export class QuantaTooltipDirective implements OnDestroy {
   private injector = inject(EnvironmentInjector);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private timer: any;
-  private viewContainerRef = inject(ViewContainerRef);
 
-  @HostListener('mouseleave')
-  @HostListener('blur')
   hide() {
     if (!this.componentRef) return;
 
@@ -50,8 +50,6 @@ export class QuantaTooltipDirective implements OnDestroy {
     this.destroy();
   }
 
-  @HostListener('mouseenter')
-  @HostListener('focus')
   show() {
     // If we are pending destruction (mouse left but came back), cancel it.
     if (this.timer) {
@@ -91,7 +89,7 @@ export class QuantaTooltipDirective implements OnDestroy {
     }
 
     // Accessibility: Link tooltip to host
-    const id = `quanta-tooltip-${Math.random().toString(36).substr(2, 9)}`;
+    const id = `quanta-tooltip-${Math.random().toString(36).substring(2, 11)}`;
     domElem.setAttribute('id', id);
     this.elementRef.nativeElement.setAttribute('aria-describedby', id);
 
