@@ -18,6 +18,7 @@ import {
       #dialogElement
       class="quanta-dialog"
       [attr.aria-labelledby]="headline() ? 'dialog-headline' : null"
+      [attr.aria-label]="!headline() && ariaLabel() ? ariaLabel() : null"
       (click)="handleBackdropClick($event)"
       (close)="handleClose()"
       tabindex="-1"
@@ -49,6 +50,7 @@ import {
   `,
 })
 export class QuantaDialogComponent {
+  ariaLabel = input<string>();
   closeOnScrimClick = input<boolean>(true);
   // View Child
   dialogElement = viewChild.required<ElementRef<HTMLDialogElement>>('dialogElement');
