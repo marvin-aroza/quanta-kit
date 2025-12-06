@@ -2,4 +2,4 @@
 'quanta-kit': minor
 ---
 
-Added the dailog component
+Added the dialog component

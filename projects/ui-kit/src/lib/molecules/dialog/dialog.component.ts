@@ -13,12 +13,13 @@ import {
   selector: 'quanta-dialog',
   styleUrl: './dialog.component.scss',
   template: `
+    <!-- eslint-disable-next-line @angular-eslint/template/click-events-have-key-events -->
     <dialog
       #dialogElement
       class="quanta-dialog"
+      [attr.aria-labelledby]="headline() ? 'dialog-headline' : null"
       (click)="handleBackdropClick($event)"
       (close)="handleClose()"
-      (keydown.escape)="handleClose()"
       tabindex="-1"
     >
       <div class="quanta-dialog-container">
@@ -29,7 +30,7 @@ import {
               <span class="quanta-dialog-icon material-icons">{{ icon() }}</span>
             }
             @if (headline()) {
-              <h2 class="quanta-dialog-headline">{{ headline() }}</h2>
+              <h2 id="dialog-headline" class="quanta-dialog-headline">{{ headline() }}</h2>
             }
           </div>
         }
