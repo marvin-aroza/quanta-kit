@@ -1,0 +1,31 @@
+@use '../../styles/tokens' as *;
+
+.quanta-tooltip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 8px;
+  min-height: 24px;
+  background-color: var(--md-sys-color-inverse-surface);
+  color: var(--md-sys-color-inverse-on-surface);
+  border-radius: var(--md-sys-shape-corner-extra-small);
+  font-family: var(--md-sys-typescale-body-small-font-family-name), Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  pointer-events: none; // Tooltips shouldn't interfere with clicks
+  z-index: 1000;
+  max-width: 200px;
+  text-align: center;
+  white-space: normal; // Allow wrapping
+  word-wrap: break-word;
+  opacity: 0;
+  transition: opacity 0.2s linear; // Simple fade in
+  position: absolute; // Positioned by logic
+  top: 0;
+  left: 0;
+
+  &.visible {
+    opacity: 1;
+  }
+}
