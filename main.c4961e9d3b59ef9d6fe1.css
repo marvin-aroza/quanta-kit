@@ -34,8 +34,16 @@
   --md-sys-color-surface-variant: #e1e4d5;
   --md-sys-color-on-surface-variant: #44483d;
   --md-sys-color-surface-container-low: #f3f6ea;
+  --md-sys-color-surface-container: #edefe3;
+  --md-sys-color-surface-container-high: #e7e9de; /* M3 Green-tinted surface for Dialogs */
+  --md-sys-color-surface-container-highest: #e1e4d9;
   --md-sys-color-outline: #606457; /* Darkened further for safe contrast */
   --md-sys-color-outline-variant: #c5c8ba;
+  /* Inverse */
+  --md-sys-color-inverse-surface: #2d3128; /* Approx 20/30 range for dark contrast */
+  --md-sys-color-inverse-on-surface: #eff2e6;
+  --md-sys-color-inverse-primary: #96d782;
+  --md-sys-color-scrim: #000000;
   /* Typography - Material 3 Typescale (Roboto/Inter) */
   --md-sys-typescale-display-large: 400 57px/64px "Inter", sans-serif;
   --md-sys-typescale-display-medium: 400 45px/52px "Inter", sans-serif;
@@ -93,7 +101,8 @@ img {
   display: block;
 }
 
-[data-theme=dark] {
+[data-theme=dark],
+.quanta-dark-theme {
   /* Primary */
   --md-sys-color-primary: #96d782; /* Lighter green for dark mode */
   --md-sys-color-on-primary: #042100;
@@ -122,6 +131,13 @@ img {
   --md-sys-color-surface-variant: #44483d;
   --md-sys-color-on-surface-variant: #c5c8ba;
   --md-sys-color-surface-container-low: #10140e; /* Darker for better contrast */
+  --md-sys-color-surface-container: #1c2815;
+  --md-sys-color-surface-container-high: #26331e;
+  --md-sys-color-surface-container-highest: #313e28;
   --md-sys-color-outline: #9a9d90; /* Lightened from #8f9285 for 4.5:1 contrast */
   --md-sys-color-outline-variant: #44483d;
+  /* Inverse */
+  --md-sys-color-inverse-surface: #e1e4d5;
+  --md-sys-color-inverse-on-surface: #1c2815;
+  --md-sys-color-inverse-primary: #143109;
 }
