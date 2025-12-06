@@ -3,10 +3,12 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  effect,
   ElementRef,
   inject,
   input,
   model,
+  OnDestroy,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
@@ -42,17 +44,14 @@ import {
     </div>
   `,
 })
-export class QuantaSliderComponent {
+export class QuantaSliderComponent implements OnDestroy {
+  // Properties sorted alphabetically to satisfy lint
   disabled = input<boolean>(false);
-
   isActive = signal<boolean>(false); // For visual feedback
-  // Internal state
   isDragging = signal<boolean>(false);
   max = input<number>(100);
   min = input<number>(0);
-  // Inputs
   value = model<number>(0);
-
   // Computed
   percent = computed(() => {
     const minVal = this.min();
@@ -67,9 +66,23 @@ export class QuantaSliderComponent {
   private el = inject(ElementRef);
 
   constructor() {
-    // Add global event listeners for drag
-    // In Angular v20+ zoneless, we might want to attach these carefully.
-    // For now simple document listeners when dragging starts.
+    effect(() => {
+      const val = this.value();
+      const min = this.min();
+      const max = this.max();
+      const clamped = Math.max(min, Math.min(max, val));
+
+      if (clamped !== val) {
+        this.value.set(clamped);
+      }
+    });
+  }
+
+  ngOnDestroy() {
+    // Cleanup in case component is destroyed during drag
+    this.el.nativeElement.removeEventListener('pointermove', this.onPointerMove);
+    this.el.nativeElement.removeEventListener('pointerup', this.onPointerUp);
+    this.el.nativeElement.removeEventListener('pointercancel', this.onPointerUp);
   }
 
   onBlur() {

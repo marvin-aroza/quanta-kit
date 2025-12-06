@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { QuantaSliderComponent } from './slider.component';
 
 describe('QuantaSliderComponent', () => {
@@ -29,17 +28,16 @@ describe('QuantaSliderComponent', () => {
     // Default 0-100
     component.value.set(150);
     fixture.detectChanges();
+
     // Logic updates model only on interaction, but if value is set externally it should probably ideally be clamped?
     // The component TS currently clamps only on updateValue (interaction).
-    // If external value is invalid, the position percent() clamps it.
+    // UPDATE: Now checking if it clamps via effect.
 
-    // Let's check percent behavior
-    const track = fixture.debugElement.query(By.css('.quanta-slider-active-track'));
-    // Since 150 > 100, per percent() it should be 100%.
     // We can't easily check style % without computation, but let's check aria-valuenow.
 
     const host = fixture.nativeElement;
-    expect(host.getAttribute('aria-valuenow')).toBe('150'); // It reflects input directly
+    // Should be clamped to max (100)
+    expect(host.getAttribute('aria-valuenow')).toBe('100');
   });
 
   it('should handle keyboard interaction', () => {
