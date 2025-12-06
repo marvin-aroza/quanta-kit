@@ -45,7 +45,7 @@ export class QuantaButtonComponent {
 
   disabled = input<boolean>(false);
 
-  public elementRef = inject(ElementRef);
+  public elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
   type = input<'button' | 'reset' | 'submit'>('button');
 }

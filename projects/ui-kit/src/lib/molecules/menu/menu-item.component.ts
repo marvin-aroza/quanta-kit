@@ -12,9 +12,9 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   host: {
-    '(click)': 'onClick($event)',
-    '(keydown.enter)': 'handleKeydown($event)',
-    '(keydown.space)': 'handleKeydown($event)',
+    '(click)': 'onClick($any($event))',
+    '(keydown.enter)': 'handleKeydown($any($event))',
+    '(keydown.space)': 'handleKeydown($any($event))',
     '[attr.aria-disabled]': 'disabled()',
     '[attr.tabindex]': 'disabled() ? -1 : 0',
     '[class.disabled]': 'disabled()',
@@ -53,20 +53,19 @@ import {
 })
 export class QuantaMenuItemComponent {
   disabled = input<boolean>(false);
-  public elementRef = inject(ElementRef);
+  public elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   headline = input<string>();
   icon = input<string>();
 
-  handleKeydown(event: Event) {
+  handleKeydown(event: KeyboardEvent) {
     if (this.disabled()) return;
-    const keyEvent = event as KeyboardEvent;
-    if (keyEvent.key === ' ' || keyEvent.key === 'Enter') {
-      keyEvent.preventDefault();
+    if (event.key === ' ' || event.key === 'Enter') {
+      event.preventDefault();
       this.elementRef.nativeElement.click();
     }
   }
 
-  onClick(event: Event) {
+  onClick(event: MouseEvent) {
     if (this.disabled()) {
       event.preventDefault();
       event.stopPropagation();

@@ -26,8 +26,9 @@
   transform-origin: top left;
   animation: menuOpen 0.15s cubic-bezier(0.2, 0, 0, 1);
 
-  &:focus {
-    outline: none;
+  &:focus-visible {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
   }
 }
 

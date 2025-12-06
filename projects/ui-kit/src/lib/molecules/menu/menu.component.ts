@@ -32,7 +32,7 @@ export class QuantaMenuComponent {
   open = model<boolean>(false);
   trigger = input<HTMLElement>();
 
-  private elementRef = inject(ElementRef);
+  private elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
   constructor() {
     effect(() => {
@@ -42,7 +42,9 @@ export class QuantaMenuComponent {
           if (firstItem) {
             (firstItem as HTMLElement).focus();
           } else {
-            this.elementRef.nativeElement.querySelector('.quanta-menu-surface')?.focus();
+            (
+              this.elementRef.nativeElement.querySelector('.quanta-menu-surface') as HTMLElement
+            )?.focus();
           }
         });
       }

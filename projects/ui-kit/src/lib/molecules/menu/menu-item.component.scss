@@ -44,33 +44,20 @@
 }
 
 // Typography & Icons
+// Typography & Icons
 .quanta-menu-item-headline {
   flex: 1;
   font: var(--md-sys-typescale-label-large);
-  margin-left: 12px;
   white-space: nowrap;
 }
-
-// If no icon is present, adjust padding/margin?
-// M3 spec says text starts at 12px if no leading icon.
-// My template puts icon in DOM only if present.
-// So margin-left on headline works if icon is NOT there?
-// Actually, if icon is NOT present, we probably want 12px padding on the left of container.
-// The container has 12px padding.
-// If icon is present, Icon is 24px + 12px gap.
 
 .quanta-menu-item-icon {
   font-size: 24px;
   color: var(--md-sys-color-on-surface-variant);
-  // Reset heading margin if icon exists?
-  // Let's rely on flex gap instead of margins.
 }
 
 .quanta-menu-item-content {
-  gap: 12px; // Consistent gap
-}
-.quanta-menu-item-headline {
-  margin-left: 0; // Reset
+  gap: 12px;
 }
 
 .quanta-menu-item-end {
