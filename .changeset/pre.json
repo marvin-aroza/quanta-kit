@@ -5,18 +5,25 @@
     "quanta-kit": "0.0.1"
   },
   "changesets": [
+    "bumpy-mails-pick",
+    "eight-webs-add",
     "fair-groups-cough",
     "five-chairs-report",
     "free-buses-sit",
+    "happy-states-count",
     "humble-news-act",
     "hungry-needles-greet",
     "khaki-dolls-wash",
     "loud-poets-type",
     "loud-socks-pump",
     "new-turtles-battle",
+    "old-parts-make",
+    "salty-flowers-decide",
     "silly-poems-relate",
     "some-moons-bathe",
+    "tiny-times-refuse",
     "tired-chefs-join",
+    "wise-tools-scream",
     "young-otters-wonder",
     "yummy-hornets-repair"
   ]
