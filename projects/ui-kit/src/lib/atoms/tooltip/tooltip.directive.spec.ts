@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { QuantaTooltipComponent } from './tooltip.component';
 import { QuantaTooltipDirective, TooltipPosition } from './tooltip.directive';
 
 @Component({
   imports: [QuantaTooltipDirective],
-  standalone: true, // Assuming host component should be standalone for test simplicity
+  standalone: true,
   template: ` <button [quantaTooltip]="tooltipText" [position]="position">Test Button</button> `,
 })
 class TestHostComponent {
   position: TooltipPosition = 'below';
   tooltipText = 'Test Tooltip';
 }
+
+const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
 describe('QuantaTooltipDirective', () => {
   let component: TestHostComponent;
@@ -29,7 +31,6 @@ describe('QuantaTooltipDirective', () => {
   });
 
   afterEach(() => {
-    // Cleanup any stray tooltips
     const tooltips = document.querySelectorAll('.quanta-tooltip');
     tooltips.forEach((t) => t.remove());
   });
@@ -39,29 +40,32 @@ describe('QuantaTooltipDirective', () => {
     expect(directive).toBeTruthy();
   });
 
-  it('should show tooltip on mouseenter', fakeAsync(() => {
+  it('should show tooltip on mouseenter', async () => {
     const button = fixture.debugElement.query(By.css('button'));
     button.triggerEventHandler('mouseenter', {});
     fixture.detectChanges();
-    tick(100); // Wait for requestAnimationFrame
+
+    await delay(100); // Wait for RAF and dynamic creation
 
     const tooltip = document.querySelector('.quanta-tooltip');
     expect(tooltip).toBeTruthy();
     expect(tooltip?.textContent).toContain('Test Tooltip');
 
-    // Test Cleanup
+    // Cleanup
     button.triggerEventHandler('mouseleave', {});
     fixture.detectChanges();
-    tick(300); // Wait for transition timeout
+
+    await delay(300); // Wait for transition
 
     expect(document.querySelector('.quanta-tooltip')).toBeFalsy();
-  }));
+  });
 
-  it('should set aria-describedby on host', fakeAsync(() => {
+  it('should set aria-describedby on host', async () => {
     const button = fixture.debugElement.query(By.css('button'));
     button.triggerEventHandler('mouseenter', {});
     fixture.detectChanges();
-    tick(100);
+
+    await delay(100);
 
     const tooltip = document.querySelector('.quanta-tooltip');
     const tooltipId = tooltip?.getAttribute('id');
@@ -73,6 +77,7 @@ describe('QuantaTooltipDirective', () => {
     // Cleanup
     button.triggerEventHandler('mouseleave', {});
     fixture.detectChanges();
-    tick(300);
-  }));
+
+    await delay(300);
+  });
 });
