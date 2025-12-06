@@ -17,8 +17,9 @@ import {
     <dialog
       #dialogElement
       class="quanta-dialog"
-      [attr.aria-labelledby]="headline() ? 'dialog-headline' : null"
+      [attr.aria-labelledby]="headline() ? headlineId : null"
       [attr.aria-label]="!headline() && ariaLabel() ? ariaLabel() : null"
+      [attr.aria-modal]="true"
       (click)="handleBackdropClick($event)"
       (close)="handleClose()"
       tabindex="-1"
@@ -31,7 +32,7 @@ import {
               <span class="quanta-dialog-icon material-icons">{{ icon() }}</span>
             }
             @if (headline()) {
-              <h2 id="dialog-headline" class="quanta-dialog-headline">{{ headline() }}</h2>
+              <h2 [id]="headlineId" class="quanta-dialog-headline">{{ headline() }}</h2>
             }
           </div>
         }
@@ -50,11 +51,14 @@ import {
   `,
 })
 export class QuantaDialogComponent {
+  private static nextId = 0;
   ariaLabel = input<string>();
+
   closeOnScrimClick = input<boolean>(true);
   // View Child
-  dialogElement = viewChild.required<ElementRef<HTMLDialogElement>>('dialogElement');
+  dialogElement = viewChild<ElementRef<HTMLDialogElement>>('dialogElement');
   headline = input<string>();
+  readonly headlineId = `quanta-dialog-headline-${QuantaDialogComponent.nextId++}`;
   icon = input<string>();
 
   // Inputs
@@ -63,8 +67,9 @@ export class QuantaDialogComponent {
   constructor() {
     // Sync open state with native dialog
     effect(() => {
-      const dialog = this.dialogElement()?.nativeElement;
-      if (!dialog) return;
+      const dialogRef = this.dialogElement();
+      if (!dialogRef) return;
+      const dialog = dialogRef.nativeElement;
 
       if (this.open()) {
         if (!dialog.open) {
@@ -88,7 +93,8 @@ export class QuantaDialogComponent {
     // Check if click is on the backdrop (dialog element itself, not container)
     // The dialog element covers the viewport when modal, but its content box is centered.
     // Clicks outside the content box target the dialog element.
-    if (event.target === this.dialogElement().nativeElement) {
+    const dialogRef = this.dialogElement();
+    if (dialogRef && event.target === dialogRef.nativeElement) {
       this.close();
     }
   }
