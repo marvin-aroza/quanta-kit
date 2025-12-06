@@ -9,6 +9,8 @@ export * from './lib/atoms/divider/divider.component';
 export * from './lib/atoms/icon-button/icon-button.component';
 export * from './lib/atoms/icon/icon.component';
 export * from './lib/atoms/input/input.component';
+export * from './lib/atoms/progress/circular-progress.component';
+export * from './lib/atoms/progress/linear-progress.component';
 export * from './lib/atoms/radio/radio-button.component';
 export * from './lib/atoms/radio/radio-group.component';
 export * from './lib/atoms/switch/switch.component';
