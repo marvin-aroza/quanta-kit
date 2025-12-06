@@ -13,6 +13,7 @@ export * from './lib/atoms/progress/circular-progress.component';
 export * from './lib/atoms/progress/linear-progress.component';
 export * from './lib/atoms/radio/radio-button.component';
 export * from './lib/atoms/radio/radio-group.component';
+export * from './lib/atoms/slider/slider.component';
 export * from './lib/atoms/switch/switch.component';
 export * from './lib/atoms/tooltip/tooltip.component';
 export * from './lib/atoms/tooltip/tooltip.directive';
