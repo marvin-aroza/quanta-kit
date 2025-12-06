@@ -2,8 +2,9 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   input,
-  output,
+  Output,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -26,7 +27,7 @@ import {
     </div>
     @if (action()) {
       <div class="quanta-snackbar-action">
-        <button (click)="actionClicked.emit()">{{ action() }}</button>
+        <button type="button" (click)="actionClicked.emit()">{{ action() }}</button>
       </div>
     }
   `,
@@ -35,7 +36,7 @@ export class QuantaSnackbarComponent {
   /** Optional action button text. */
   action = input<string | undefined>(undefined);
   /** Emits when action button is clicked. */
-  actionClicked = output<void>();
+  @Output() actionClicked = new EventEmitter<void>();
   /** Controls visibility animation state. */
   isOpen = input<boolean>(false);
   /** The message text to display. */

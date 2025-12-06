@@ -7,6 +7,7 @@ import {
   inject,
   Injectable,
 } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { QuantaSnackbarComponent } from './snackbar.component';
 
 export interface SnackbarConfig {
@@ -20,6 +21,7 @@ export interface SnackbarConfig {
   providedIn: 'root',
 })
 export class QuantaSnackbarService {
+  private actionSubscription: null | Subscription = null;
   private appRef = inject(ApplicationRef);
   private componentRef: ComponentRef<QuantaSnackbarComponent> | null = null;
   private environmentInjector = inject(EnvironmentInjector);
@@ -33,6 +35,11 @@ export class QuantaSnackbarService {
     if (this.timeoutId) {
       clearTimeout(this.timeoutId);
       this.timeoutId = null;
+    }
+
+    if (this.actionSubscription) {
+      this.actionSubscription.unsubscribe();
+      this.actionSubscription = null;
     }
 
     if (this.componentRef) {
@@ -58,9 +65,19 @@ export class QuantaSnackbarService {
    * @param config Configuration object (e.g. duration).
    */
   open(message: string, action?: string, config: SnackbarConfig = { duration: 3000 }) {
-    // Dismiss existing
+    // Dismiss existing immediately to avoid overlap
     if (this.componentRef) {
-      this.dismiss();
+      if (this.timeoutId) {
+        clearTimeout(this.timeoutId);
+        this.timeoutId = null;
+      }
+      if (this.actionSubscription) {
+        this.actionSubscription.unsubscribe();
+        this.actionSubscription = null;
+      }
+      this.appRef.detachView(this.componentRef.hostView);
+      this.componentRef.destroy();
+      this.componentRef = null;
     }
 
     // Create component (attached to environment injector)
@@ -74,9 +91,8 @@ export class QuantaSnackbarService {
       this.componentRef.setInput('action', action);
 
       // Subscribe to action output
-      const sub = this.componentRef.instance.actionClicked.subscribe(() => {
+      this.actionSubscription = this.componentRef.instance.actionClicked.subscribe(() => {
         this.dismiss();
-        sub.unsubscribe();
       });
     }
 
