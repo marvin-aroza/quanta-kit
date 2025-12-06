@@ -23,7 +23,6 @@ import {
   },
   imports: [CommonModule],
   selector: 'quanta-menu-item',
-  standalone: true,
   styleUrl: './menu-item.component.scss',
   template: `
     <div class="quanta-menu-item-content" [class.disabled]="disabled()">
