@@ -7,6 +7,7 @@ import {
   input,
   ViewEncapsulation,
 } from '@angular/core';
+import { QuantaIconComponent } from '../../atoms/icon/icon.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -21,7 +22,7 @@ import {
     class: 'quanta-menu-item',
     role: 'menuitem',
   },
-  imports: [CommonModule],
+  imports: [CommonModule, QuantaIconComponent],
   selector: 'quanta-menu-item',
   styleUrl: './menu-item.component.scss',
   template: `
@@ -31,7 +32,7 @@ import {
 
       <!-- Icon Slot -->
       @if (icon()) {
-        <span class="quanta-menu-item-icon material-icons">{{ icon() }}</span>
+        <quanta-icon class="quanta-menu-item-icon" [name]="icon()"></quanta-icon>
       }
 
       <!-- Headline -->

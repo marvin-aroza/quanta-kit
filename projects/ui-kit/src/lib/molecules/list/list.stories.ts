@@ -1,4 +1,5 @@
 import { Meta, StoryObj } from '@storybook/angular';
+import { QuantaIconComponent } from '../../atoms/icon/icon.component';
 import { QuantaListItemComponent } from './list-item.component';
 import { QuantaListComponent } from './list.component';
 
@@ -20,7 +21,7 @@ type Story = StoryObj<QuantaListComponent>;
 export const Basic: Story = {
   render: () => ({
     moduleMetadata: {
-      imports: [QuantaListComponent, QuantaListItemComponent],
+      imports: [QuantaListComponent, QuantaListItemComponent, QuantaIconComponent],
     },
     template: `
       <quanta-list>
@@ -35,7 +36,7 @@ export const Basic: Story = {
 export const TwoLine: Story = {
   render: () => ({
     moduleMetadata: {
-      imports: [QuantaListComponent, QuantaListItemComponent],
+      imports: [QuantaListComponent, QuantaListItemComponent, QuantaIconComponent],
     },
     template: `
       <quanta-list>
@@ -49,21 +50,21 @@ export const TwoLine: Story = {
 export const WithIcons: Story = {
   render: () => ({
     moduleMetadata: {
-      imports: [QuantaListComponent, QuantaListItemComponent],
+      imports: [QuantaListComponent, QuantaListItemComponent, QuantaIconComponent],
     },
     template: `
       <quanta-list>
         <quanta-list-item headline="Wi-Fi">
-          <span start class="material-icons">wifi</span>
-          <span end class="material-icons">chevron_right</span>
+          <quanta-icon start name="wifi"></quanta-icon>
+          <quanta-icon end name="chevron_right"></quanta-icon>
         </quanta-list-item>
         <quanta-list-item headline="Bluetooth">
-          <span start class="material-icons">bluetooth</span>
-          <span end class="material-icons">chevron_right</span>
+          <quanta-icon start name="bluetooth"></quanta-icon>
+          <quanta-icon end name="chevron_right"></quanta-icon>
         </quanta-list-item>
         <quanta-list-item headline="Data usage">
-          <span start class="material-icons">data_usage</span>
-           <span end class="material-icons">chevron_right</span>
+          <quanta-icon start name="data_usage"></quanta-icon>
+           <quanta-icon end name="chevron_right"></quanta-icon>
         </quanta-list-item>
       </quanta-list>
     `,
@@ -73,18 +74,18 @@ export const WithIcons: Story = {
 export const Interactive: Story = {
   render: () => ({
     moduleMetadata: {
-      imports: [QuantaListComponent, QuantaListItemComponent],
+      imports: [QuantaListComponent, QuantaListItemComponent, QuantaIconComponent],
     },
     template: `
       <quanta-list>
         <quanta-list-item interactive="true" headline="Clickable Item 1" supportingText="Hover to see state layer">
-           <span start class="material-icons">touch_app</span>
+           <quanta-icon start name="touch_app"></quanta-icon>
         </quanta-list-item>
         <quanta-list-item interactive="true" headline="Clickable Item 2" supportingText="Hover to see state layer">
-           <span start class="material-icons">touch_app</span>
+           <quanta-icon start name="touch_app"></quanta-icon>
         </quanta-list-item>
          <quanta-list-item interactive="true" disabled="true" headline="Disabled Item" supportingText="Cannot click me">
-           <span start class="material-icons">block</span>
+           <quanta-icon start name="block"></quanta-icon>
         </quanta-list-item>
       </quanta-list>
     `,
@@ -94,14 +95,14 @@ export const Interactive: Story = {
 export const DarkTheme: Story = {
   render: () => ({
     moduleMetadata: {
-      imports: [QuantaListComponent, QuantaListItemComponent],
+      imports: [QuantaListComponent, QuantaListItemComponent, QuantaIconComponent],
     },
     template: `
       <div data-theme="dark" style="background: #121212; padding: 16px; color: #fff;">
         <quanta-list>
           <quanta-list-item headline="Dark Mode Item" supportingText="Secondary text"></quanta-list-item>
           <quanta-list-item headline="Dark Mode Item" interactive="true" supportingText="Interactive">
-             <span start class="material-icons">dark_mode</span>
+             <quanta-icon start name="dark_mode"></quanta-icon>
           </quanta-list-item>
         </quanta-list>
       </div>

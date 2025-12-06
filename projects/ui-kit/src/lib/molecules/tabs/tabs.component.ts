@@ -11,12 +11,14 @@ import {
   QueryList,
   ViewChildren,
 } from '@angular/core';
+import { QuantaIconComponent } from '../../atoms/icon/icon.component';
 import { QuantaTabComponent } from './tab.component';
 
 export type TabVariant = 'primary' | 'secondary';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [QuantaIconComponent],
   selector: 'quanta-tabs',
   styleUrl: './tabs.component.scss',
   template: `
@@ -39,7 +41,7 @@ export type TabVariant = 'primary' | 'secondary';
             type="button"
           >
             @if (tab.icon()) {
-              <span class="quanta-tab-icon material-icons">{{ tab.icon() }}</span>
+              <quanta-icon class="quanta-tab-icon" [name]="tab.icon()"></quanta-icon>
             }
             <span class="quanta-tab-text-label">{{ tab.label() }}</span>
 
