@@ -1,0 +1,70 @@
+:host {
+  display: block;
+  position: relative;
+  height: 4px;
+  overflow: hidden;
+  border-radius: 2px; // Rounded track
+  background-color: var(--md-sys-color-surface-container-highest);
+  width: 100%;
+
+  // Indeterminate Animation Keyframes
+  @keyframes linear-indeterminate-bar-1 {
+    0% {
+      transform: translateX(-50%) scaleX(0.2);
+    }
+    50% {
+      transform: translateX(25%) scaleX(0.5);
+    }
+    100% {
+      transform: translateX(100%) scaleX(0.2);
+    }
+  }
+
+  @keyframes linear-indeterminate-bar-2 {
+    0% {
+      transform: translateX(-80%) scaleX(0.5);
+    }
+    50% {
+      transform: translateX(-20%) scaleX(0.8);
+    }
+    100% {
+      transform: translateX(100%) scaleX(0.1);
+    }
+  }
+}
+
+.quanta-linear-progress-track {
+  height: 100%;
+  width: 100%;
+}
+
+.quanta-linear-progress-bar {
+  background-color: var(--md-sys-color-primary);
+  height: 100%;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  transform-origin: left center;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Determinate
+:host:not(.quanta-linear-progress-indeterminate) {
+  .quanta-linear-progress-bar {
+    // Transform is set via style binding in TS: scaleX(value/100)
+  }
+}
+
+// Indeterminate
+:host.quanta-linear-progress-indeterminate {
+  .quanta-linear-progress-bar {
+    width: 100%;
+    // Use two bars for the standard material indeterminate feel if possible,
+    // but for simplicity we can use one crawling bar or the standard simple one.
+    // Material Design actually uses two bars for the indeterminate animation.
+    animation: linear-indeterminate-bar-1 2s infinite linear;
+    // Reset transform from determinate state
+    transform: translateX(0) scaleX(1);
+  }
+}

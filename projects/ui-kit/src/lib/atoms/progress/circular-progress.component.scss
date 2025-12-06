@@ -1,0 +1,64 @@
+:host {
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+  rotate: -90deg; // Start from top
+}
+
+.quanta-circular-progress-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.quanta-circular-progress-track {
+  fill: transparent;
+  stroke: transparent; // Material usually doesn't show a full track, but we can add one if requested. Keeping transparent for now.
+}
+
+.quanta-circular-progress-circle {
+  fill: transparent;
+  stroke: var(--md-sys-color-primary);
+  stroke-width: 4px; // 10% of 48px approx
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  // Radius = 20 (cx=24, cy=24, r=20 for 4px padding/stroke width)
+  // Circumference = 2 * pi * 20 ~= 125.66
+  stroke-dasharray: 125.66;
+  stroke-dashoffset: 0;
+}
+
+// Indeterminate Animation
+@keyframes circular-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// The indeterminate expansion/contraction is complex with SVG.
+// Standard simple spin is often sufficient for v1.
+// Applying a rotation to the host or SVG container.
+
+:host.quanta-circular-progress-indeterminate {
+  animation: circular-spin 1.4s linear infinite;
+
+  .quanta-circular-progress-circle {
+    // Animate dasharray for "breathing" effect
+    animation: circular-expand 1.4s ease-in-out infinite;
+  }
+}
+
+@keyframes circular-expand {
+  0% {
+    stroke-dashoffset: 120; // Almost empty
+  }
+  50% {
+    stroke-dashoffset: 30; // Mostly full
+  }
+  100% {
+    stroke-dashoffset: 120; // Back to empty
+  }
+}
