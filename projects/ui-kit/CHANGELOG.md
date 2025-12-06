@@ -1,5 +1,11 @@
 # quanta-kit
 
+## 0.1.0-alpha.9
+
+### Minor Changes
+
+- 521b6ed: Added slider component
+
 ## 0.1.0-alpha.8
 
 ### Minor Changes
