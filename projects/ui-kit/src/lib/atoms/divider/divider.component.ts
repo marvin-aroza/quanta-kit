@@ -12,7 +12,7 @@ export type DividerInset = 'end' | 'none' | 'start';
     '[class.quanta-divider-horizontal]': '!vertical()',
     '[class.quanta-divider-inset-end]': 'inset() === "end"',
     '[class.quanta-divider-inset-start]': 'inset() === "start"',
-    '[class.quanta-divider-inset]': 'inset() === "start" || inset() === "end"', // Material mapping: often just "inset" maps to start, but allowing explicit
+    '[class.quanta-divider-inset]': 'inset() === "start"', // Generic "inset" class reserved for start side
     '[class.quanta-divider-vertical]': 'vertical()',
   },
   imports: [CommonModule],
