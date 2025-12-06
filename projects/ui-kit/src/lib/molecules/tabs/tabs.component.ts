@@ -1,14 +1,14 @@
-import { CommonModule } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
   Component,
+  computed,
   ContentChildren,
-  EventEmitter,
+  ElementRef,
   input,
   model,
-  Output,
   QueryList,
+  ViewChildren,
 } from '@angular/core';
 import { QuantaTabComponent } from './tab.component';
 
@@ -16,23 +16,24 @@ export type TabVariant = 'primary' | 'secondary';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule],
   selector: 'quanta-tabs',
-  standalone: true,
   styleUrl: './tabs.component.scss',
   template: `
-    <div class="quanta-tab-group" [class]="variant()">
+    <div [class]="classes()">
       <div class="quanta-tab-header" role="tablist">
         @for (tab of tabs; track $index) {
           <button
+            #tabBtn
             class="quanta-tab-label"
             [class.active]="selectedIndex() === $index"
             [disabled]="tab.disabled()"
             (click)="selectTab($index)"
+            (keydown)="handleKeyDown($event, $index)"
             role="tab"
             [attr.aria-selected]="selectedIndex() === $index"
             [attr.aria-disabled]="tab.disabled()"
             [attr.aria-controls]="tab.panelId"
+            [attr.tabindex]="selectedIndex() === $index ? 0 : -1"
             [id]="getTabId($index)"
             type="button"
           >
@@ -58,10 +59,11 @@ export type TabVariant = 'primary' | 'secondary';
 export class QuantaTabsComponent implements AfterContentInit {
   autoSelect = input<boolean>(true);
   selectedIndex = model<number>(0);
-  @Output() selectedIndexChange = new EventEmitter<number>();
+  @ViewChildren('tabBtn') tabButtons!: QueryList<ElementRef>;
   @ContentChildren(QuantaTabComponent) tabs!: QueryList<QuantaTabComponent>;
-
   variant = input<TabVariant>('primary');
+
+  protected classes = computed(() => `quanta-tab-group ${this.variant()}`);
 
   private uniqueId = `quanta-tabs-${Math.random().toString(36).substr(2, 9)}`;
 
@@ -74,6 +76,33 @@ export class QuantaTabsComponent implements AfterContentInit {
 
   getTabId(index: number): string {
     return `${this.uniqueId}-tab-${index}`;
+  }
+
+  handleKeyDown(event: KeyboardEvent, index: number) {
+    let nextIndex = index;
+    switch (event.key) {
+      case 'ArrowLeft':
+        nextIndex = index - 1;
+        break;
+      case 'ArrowRight':
+        nextIndex = index + 1;
+        break;
+      case 'End':
+        nextIndex = this.tabs.length - 1;
+        break;
+      case 'Home':
+        nextIndex = 0;
+        break;
+      default:
+        return;
+    }
+
+    // Handle wrapping or clamping
+    if (nextIndex < 0) nextIndex = this.tabs.length - 1;
+    if (nextIndex >= this.tabs.length) nextIndex = 0;
+
+    this.activateTabAndFocus(nextIndex, event.key === 'ArrowLeft' ? -1 : 1);
+    event.preventDefault();
   }
 
   ngAfterContentInit() {
@@ -97,8 +126,31 @@ export class QuantaTabsComponent implements AfterContentInit {
     if (!tab || tab.disabled()) return;
 
     this.selectedIndex.set(index);
-    this.selectedIndexChange.emit(index);
     this.updateActiveState();
+  }
+
+  private activateTabAndFocus(index: number, direction: -1 | 1) {
+    const tabs = this.tabs.toArray();
+
+    // Simple loop to find next enabled tab
+    let i = index;
+    let attempts = 0;
+    while (attempts < tabs.length) {
+      if (!tabs[i].disabled()) {
+        this.selectTab(i);
+        this.focusTab(i);
+        return;
+      }
+      i += direction;
+      if (i < 0) i = tabs.length - 1;
+      if (i >= tabs.length) i = 0;
+      attempts++;
+    }
+  }
+
+  private focusTab(index: number) {
+    const btn = this.tabButtons?.get(index);
+    btn?.nativeElement.focus();
   }
 
   private updateActiveState() {

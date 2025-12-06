@@ -6,7 +6,6 @@ import { QuantaTabsComponent } from './tabs.component';
 
 @Component({
   imports: [QuantaTabsComponent, QuantaTabComponent],
-  standalone: true,
   template: `
     <quanta-tabs>
       <quanta-tab label="Tab 1">Content 1</quanta-tab>
@@ -63,16 +62,23 @@ describe('QuantaTabsComponent', () => {
   });
 
   it('should project content of active tab', () => {
-    // Check body content
-    const body = fixture.debugElement.query(By.css('.quanta-tab-body'));
-    expect(body.nativeElement.textContent).toContain('Content 1');
-    expect(body.nativeElement.textContent).not.toContain('Content 3');
+    // Check body content visibility
+    const panels = fixture.debugElement.queryAll(By.css('.quanta-tab-panel'));
 
-    // Switch
+    // Panel 1 (Index 0) should be visible (hidden=false)
+    expect(panels[0].properties['hidden']).toBe(false);
+    expect(panels[0].nativeElement.textContent).toContain('Content 1');
+
+    // Panel 3 (Index 2) should be hidden (hidden=true)
+    expect(panels[2].properties['hidden']).toBe(true);
+    expect(panels[2].nativeElement.textContent).toContain('Content 3'); // content exists but is hidden
+
+    // Switch to Tab 3
     tabsComponent.selectTab(2);
     fixture.detectChanges();
 
-    expect(body.nativeElement.textContent).toContain('Content 3');
-    expect(body.nativeElement.textContent).not.toContain('Content 1');
+    // Recheck
+    expect(panels[0].properties['hidden']).toBe(true);
+    expect(panels[2].properties['hidden']).toBe(false);
   });
 });

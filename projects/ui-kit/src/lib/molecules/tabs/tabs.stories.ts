@@ -34,13 +34,13 @@ export const Primary: Story = {
     props: args,
     template: `
       <quanta-tabs [variant]="variant" [selectedIndex]="selectedIndex">
-        <quanta-tab label="Tab 1" icon="home">
+        <quanta-tab label="Tab 1" icon="">
           <div style="padding: 24px; background: #eee;">Content for Tab 1</div>
         </quanta-tab>
-        <quanta-tab label="Tab 2" icon="favorite">
+        <quanta-tab label="Tab 2" icon="">
            <div style="padding: 24px; background: #ddd;">Content for Tab 2</div>
         </quanta-tab>
-        <quanta-tab label="Tab 3 (Disabled)" icon="person" [disabled]="true">
+        <quanta-tab label="Tab 3 (Disabled)" icon="" [disabled]="true">
            <div style="padding: 24px;">Content for Tab 3</div>
         </quanta-tab>
         <quanta-tab label="Tab 4">
@@ -105,10 +105,10 @@ export const DarkTheme: Story = {
         
         <h4 style="margin-bottom: 8px;">Primary</h4>
         <quanta-tabs variant="primary" [selectedIndex]="0">
-          <quanta-tab label="Item 1" icon="home">
+          <quanta-tab label="Item 1" icon="">
             <div style="padding: 16px;">Content 1</div>
           </quanta-tab>
-          <quanta-tab label="Item 2" icon="favorite">
+          <quanta-tab label="Item 2" icon="">
             <div style="padding: 16px;">Content 2</div>
           </quanta-tab>
         </quanta-tabs>
@@ -148,10 +148,12 @@ export const Interactive: Story = {
       await expect(canvas.queryByText('Content for First Tab')).not.toBeVisible();
     });
 
-    // Click disabled tab
-    await step('Click Disabled Tab', async () => {
-      await userEvent.click(tabs[2]);
-      // Should remain on second tab
+    // Verify disabled tab
+    await step('Verify Disabled Tab', async () => {
+      // User cannot click disabled tab (pointer-events: none), so we just verify state
+      await expect(tabs[2]).toHaveAttribute('aria-disabled', 'true');
+
+      // Should still be on second tab
       await expect(tabs[1]).toHaveAttribute('aria-selected', 'true');
       await expect(canvas.getByText('Content for Second Tab')).toBeVisible();
     });

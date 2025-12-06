@@ -1,11 +1,8 @@
-import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [CommonModule],
   selector: 'quanta-tab',
-  standalone: true,
   styles: [
     `
       :host {
