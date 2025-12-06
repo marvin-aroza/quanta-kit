@@ -17,8 +17,11 @@ export type IconButtonVariant = 'filled' | 'outlined' | 'standard' | 'tonal';
   encapsulation: ViewEncapsulation.None,
   host: {
     '(click)': 'onClick($event)',
+    '(keydown.enter)': 'onKeydown($event)',
+    '(keydown.space)': 'onKeydown($event)',
     '[attr.aria-disabled]': 'disabled()',
     '[attr.aria-pressed]': 'toggle() ? selected() : null',
+    '[attr.role]': '"button"',
     '[attr.tabindex]': 'disabled() ? -1 : 0',
     '[class.disabled]': 'disabled()',
     '[class.filled]': 'variant() === "filled"',
@@ -59,5 +62,18 @@ export class QuantaIconButtonComponent {
     if (this.toggle()) {
       this.selected.update((v) => !v);
     }
+  }
+
+  onKeydown(event: Event) {
+    if (this.disabled()) {
+      return;
+    }
+    const keyboardEvent = event as KeyboardEvent;
+    // Prevent default scrolling for Space
+    if (keyboardEvent.key === ' ') {
+      event.preventDefault();
+    }
+    // Trigger click logic
+    this.onClick(event);
   }
 }

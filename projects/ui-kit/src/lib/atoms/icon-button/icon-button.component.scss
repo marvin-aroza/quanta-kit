@@ -43,24 +43,11 @@
     color: var(--md-sys-color-on-primary);
 
     &.disabled {
-      background-color: var(--md-sys-color-on-surface);
-      opacity: 0.12;
-      color: var(--md-sys-color-on-surface); // Opacity handled by parent 0.12 + 0.38? No, wait.
-      // M3 Spec for Disabled Filled:
-      // Container: On Surface 0.12
-      // Icon: On Surface 0.38
-    }
-    // We handle disabled opacity on the host generally, overriding specific backgrounds if needed.
-    // simpler to just let the opacity 0.38 handle the text, but background needs to be explicit.
-    &.disabled {
-      background-color: rgba(
-        29,
-        27,
-        32,
-        0.12
-      ); // Hardcoded fallback or use on-surface with opacity var if available
-      opacity: 1; // Reset host opacity to handle parts individually if we want precision
-      color: rgba(29, 27, 32, 0.38);
+      // Container: OnSurface 0.12
+      background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent);
+      // Content: OnSurface 0.38
+      color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent);
+      opacity: 1;
     }
   }
 
@@ -69,8 +56,8 @@
     color: var(--md-sys-color-on-secondary-container);
 
     &.disabled {
-      background-color: rgba(29, 27, 32, 0.12);
-      color: rgba(29, 27, 32, 0.38);
+      background-color: color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent);
+      color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent);
       opacity: 1;
     }
   }
@@ -78,18 +65,16 @@
   &.outlined {
     background-color: transparent;
     border: 1px solid var(--md-sys-color-outline);
-    // Adjust size for border to keep 40px
-    // or box-sizing border-box handles it? Yes.
 
     &.selected {
       background-color: var(--md-sys-color-inverse-surface);
       color: var(--md-sys-color-inverse-on-surface);
-      border: none; // Selected state for outlined fills it
+      border: none;
     }
 
     &.disabled {
-      border-color: rgba(29, 27, 32, 0.12);
-      color: rgba(29, 27, 32, 0.38);
+      border-color: color-mix(in srgb, var(--md-sys-color-on-surface) 12%, transparent);
+      color: color-mix(in srgb, var(--md-sys-color-on-surface) 38%, transparent);
       opacity: 1;
     }
   }
