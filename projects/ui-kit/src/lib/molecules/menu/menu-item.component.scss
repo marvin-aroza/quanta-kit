@@ -1,0 +1,67 @@
+@use '../../styles/tokens' as *;
+
+.quanta-menu-item {
+  display: block;
+}
+
+.quanta-menu-item-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 12px;
+  cursor: pointer;
+  color: var(--md-sys-color-on-surface);
+  user-select: none;
+  outline: none; // Managed by state layer
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.38;
+  }
+}
+
+// State Layer
+.quanta-state-layer {
+  position: absolute;
+  inset: 0;
+  background-color: var(--md-sys-color-on-surface);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s linear;
+}
+
+.quanta-menu-item-content:hover .quanta-state-layer {
+  opacity: var(--md-sys-state-hover-state-layer-opacity);
+}
+
+.quanta-menu-item-content:focus .quanta-state-layer {
+  opacity: var(--md-sys-state-focus-state-layer-opacity);
+}
+
+.quanta-menu-item-content:active .quanta-state-layer {
+  opacity: var(--md-sys-state-pressed-state-layer-opacity);
+}
+
+// Typography & Icons
+// Typography & Icons
+.quanta-menu-item-headline {
+  flex: 1;
+  font: var(--md-sys-typescale-label-large);
+  white-space: nowrap;
+}
+
+.quanta-menu-item-icon {
+  font-size: 24px;
+  color: var(--md-sys-color-on-surface-variant);
+}
+
+.quanta-menu-item-content {
+  gap: 12px;
+}
+
+.quanta-menu-item-end {
+  display: flex;
+  align-items: center;
+  color: var(--md-sys-color-on-surface-variant);
+}

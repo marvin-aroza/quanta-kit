@@ -1,0 +1,44 @@
+@use '../../styles/tokens' as *;
+
+.quanta-menu-wrapper {
+  position: relative; // Anchor for the absolute positioned menu
+  display: inline-block; // Fits around content usually
+}
+
+.quanta-menu-surface {
+  position: absolute;
+  top: 100%; // Below anchor
+  left: 0;
+  z-index: 10; // Simple z-index
+  min-width: 112px;
+  max-width: 280px;
+  background-color: var(--md-sys-color-surface-container);
+  color: var(--md-sys-color-on-surface);
+  border-radius: var(--md-sys-shape-corner-small);
+  box-shadow: var(--md-sys-elevation-2);
+  padding: 8px 0;
+  margin-top: 4px; // Spacing from trigger
+
+  display: flex;
+  flex-direction: column;
+
+  // Animation (Simple fade/scale)
+  transform-origin: top left;
+  animation: menuOpen 0.15s cubic-bezier(0.2, 0, 0, 1);
+
+  &:focus-visible {
+    outline: 2px solid var(--md-sys-color-primary);
+    outline-offset: 2px;
+  }
+}
+
+@keyframes menuOpen {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
