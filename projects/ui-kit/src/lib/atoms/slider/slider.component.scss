@@ -1,0 +1,95 @@
+:host {
+  display: inline-block;
+  width: 200px; // Default width
+  height: 40px; // Touch target height
+  position: relative;
+  cursor: pointer;
+  touch-action: none; // Prevent scrolling while dragging
+  user-select: none;
+  outline: none;
+}
+
+:host([disabled]) {
+  cursor: default;
+  opacity: 0.38;
+  pointer-events: none;
+}
+
+.quanta-slider-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.quanta-slider-track {
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--md-sys-color-surface-container-highest);
+  overflow: hidden; // To clip the active track if needed, but we overlay active track usually
+}
+
+.quanta-slider-active-track {
+  position: absolute;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--md-sys-color-primary);
+  left: 0;
+  // Width set via JS
+}
+
+.quanta-slider-thumb-container {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px; // Hit area
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // Left set via JS (0% to 100%)
+  transition: transform 0.1s ease-out; // Smooth hover effects if we scale
+}
+
+.quanta-slider-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: var(--md-sys-color-primary);
+  box-shadow: var(--md-sys-elevation-1);
+  transition:
+    width 0.2s,
+    height 0.2s;
+
+  &.is-hovered {
+    // Hover state (maybe slight glow or scale?)
+  }
+}
+
+.quanta-slider-focus-ring {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--md-sys-color-primary);
+  opacity: 0;
+  transform: scale(0);
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
+}
+
+:host(:focus-visible) .quanta-slider-focus-ring {
+  opacity: 0.12;
+  transform: scale(1);
+}
+
+:host([active]) .quanta-slider-focus-ring {
+  opacity: 0.12;
+  transform: scale(1);
+}
+
+// Tick marks for discrete slider could be added later
