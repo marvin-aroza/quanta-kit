@@ -16,7 +16,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
   template: `
     <div
       class="quanta-linear-progress-bar"
-      [style.transform]="indeterminate() ? null : 'scaleX(' + value() / max() + ')'"
+      [style.transform]="indeterminate() || max() === 0 ? null : 'scaleX(' + value() / max() + ')'"
     ></div>
   `,
 })

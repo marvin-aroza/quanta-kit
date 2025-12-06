@@ -42,7 +42,6 @@ describe('QuantaCircularProgressComponent', () => {
     // Circumference ~ 125.66
     // 25% progress means 75% offset remaining?
     // DashOffset = 125.66 * (1 - 0.25) = 125.66 * 0.75 = 94.245
-    const circleDebugContext = fixture.debugElement.nativeElement.querySelector('circle');
     // Using native element querySelector still, but maybe cleaner context?
     // Wait, the error was on host.querySelector.
     // Let's use By.css

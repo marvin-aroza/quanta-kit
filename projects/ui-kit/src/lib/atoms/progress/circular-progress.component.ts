@@ -35,6 +35,9 @@ export class QuantaCircularProgressComponent {
     if (this.indeterminate()) {
       return null; // CSS animation handles it
     }
+    if (this.max() === 0) {
+      return this.circumference; // Show empty when max is 0
+    }
     const progress = this.value() / this.max();
     // Offset = Circumference - (Progress * Circumference)
     return this.circumference * (1 - progress);
