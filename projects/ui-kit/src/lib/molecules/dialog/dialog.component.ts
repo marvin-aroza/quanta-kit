@@ -7,9 +7,11 @@ import {
   model,
   viewChild,
 } from '@angular/core';
+import { QuantaIconComponent } from '../../atoms/icon/icon.component';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [QuantaIconComponent],
   selector: 'quanta-dialog',
   styleUrl: './dialog.component.scss',
   template: `
@@ -29,7 +31,7 @@ import {
         @if (headline() || icon()) {
           <div class="quanta-dialog-header">
             @if (icon()) {
-              <span class="quanta-dialog-icon material-icons">{{ icon() }}</span>
+              <quanta-icon class="quanta-dialog-icon" [name]="icon()"></quanta-icon>
             }
             @if (headline()) {
               <h2 [id]="headlineId" class="quanta-dialog-headline">{{ headline() }}</h2>

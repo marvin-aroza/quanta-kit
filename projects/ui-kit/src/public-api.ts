@@ -5,6 +5,8 @@ export * from './lib/atoms/button/button.component';
 export * from './lib/atoms/checkbox/checkbox.component';
 export * from './lib/atoms/chips/chip-set.component';
 export * from './lib/atoms/chips/chip.component';
+export * from './lib/atoms/icon-button/icon-button.component';
+export * from './lib/atoms/icon/icon.component';
 export * from './lib/atoms/input/input.component';
 export * from './lib/atoms/radio/radio-button.component';
 export * from './lib/atoms/radio/radio-group.component';
