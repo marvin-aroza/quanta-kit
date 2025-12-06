@@ -1,0 +1,13 @@
+@use '../../styles/tokens' as *;
+
+.quanta-list {
+  display: block;
+  padding: 8px 0; // standard vertical padding
+  background-color: var(--md-sys-color-surface);
+  color: var(--md-sys-color-on-surface);
+  border-radius: 0; // Lists usually span full width or are inside cards
+
+  // Reset native list styles if user wraps in ul/li (though we use divs usually)
+  list-style: none;
+  margin: 0;
+}
