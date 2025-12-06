@@ -3,6 +3,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   computed,
+  ElementRef,
+  inject,
   input,
   output,
   ViewEncapsulation,
@@ -42,6 +44,8 @@ export class QuantaButtonComponent {
   clicked = output<Event>();
 
   disabled = input<boolean>(false);
+
+  public elementRef = inject(ElementRef);
 
   type = input<'button' | 'reset' | 'submit'>('button');
 }

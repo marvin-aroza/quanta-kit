@@ -1,0 +1,80 @@
+@use '../../styles/tokens' as *;
+
+.quanta-menu-item {
+  display: block;
+}
+
+.quanta-menu-item-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 12px;
+  cursor: pointer;
+  color: var(--md-sys-color-on-surface);
+  user-select: none;
+  outline: none; // Managed by state layer
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.38;
+  }
+}
+
+// State Layer
+.quanta-state-layer {
+  position: absolute;
+  inset: 0;
+  background-color: var(--md-sys-color-on-surface);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s linear;
+}
+
+.quanta-menu-item-content:hover .quanta-state-layer {
+  opacity: var(--md-sys-state-hover-state-layer-opacity);
+}
+
+.quanta-menu-item-content:focus .quanta-state-layer {
+  opacity: var(--md-sys-state-focus-state-layer-opacity);
+}
+
+.quanta-menu-item-content:active .quanta-state-layer {
+  opacity: var(--md-sys-state-pressed-state-layer-opacity);
+}
+
+// Typography & Icons
+.quanta-menu-item-headline {
+  flex: 1;
+  font: var(--md-sys-typescale-label-large);
+  margin-left: 12px;
+  white-space: nowrap;
+}
+
+// If no icon is present, adjust padding/margin?
+// M3 spec says text starts at 12px if no leading icon.
+// My template puts icon in DOM only if present.
+// So margin-left on headline works if icon is NOT there?
+// Actually, if icon is NOT present, we probably want 12px padding on the left of container.
+// The container has 12px padding.
+// If icon is present, Icon is 24px + 12px gap.
+
+.quanta-menu-item-icon {
+  font-size: 24px;
+  color: var(--md-sys-color-on-surface-variant);
+  // Reset heading margin if icon exists?
+  // Let's rely on flex gap instead of margins.
+}
+
+.quanta-menu-item-content {
+  gap: 12px; // Consistent gap
+}
+.quanta-menu-item-headline {
+  margin-left: 0; // Reset
+}
+
+.quanta-menu-item-end {
+  display: flex;
+  align-items: center;
+  color: var(--md-sys-color-on-surface-variant);
+}
