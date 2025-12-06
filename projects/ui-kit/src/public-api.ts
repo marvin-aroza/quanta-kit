@@ -25,6 +25,8 @@ export * from './lib/molecules/list/list.component';
 export * from './lib/molecules/menu/menu-item.component';
 export * from './lib/molecules/menu/menu.component';
 export * from './lib/molecules/select/select.component';
+export * from './lib/molecules/snackbar/snackbar.component';
+export * from './lib/molecules/snackbar/snackbar.service';
 export * from './lib/molecules/tabs/tab.component';
 export * from './lib/molecules/tabs/tabs.component';
 export * from './lib/pages/style-guide/style-guide.component';

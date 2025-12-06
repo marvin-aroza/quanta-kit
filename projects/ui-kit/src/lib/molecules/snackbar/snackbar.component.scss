@@ -1,0 +1,64 @@
+:host {
+  display: block;
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%); // Start off-screen
+  z-index: 1000;
+  min-width: 300px;
+  max-width: 600px;
+  border-radius: 4px;
+  background-color: var(--md-sys-color-inverse-surface, #313033);
+  color: var(--md-sys-color-inverse-on-surface, #f4eff4);
+  box-shadow: var(--md-sys-elevation-3);
+  padding: 0 16px; // Horizontal padding
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  opacity: 0;
+  transition:
+    transform 0.25s cubic-bezier(0, 0, 0.2, 1),
+    opacity 0.25s linear;
+  pointer-events: none; // Don't block clicks when hidden (though usually removed from DOM)
+
+  &.quanta-snackbar-open {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.quanta-snackbar-content {
+  flex: 1;
+  padding: 14px 0; // Vertical padding for text
+  font-family: var(--md-sys-typescale-body-medium-font);
+  font-size: var(--md-sys-typescale-body-medium-size, 14px);
+  line-height: var(--md-sys-typescale-body-medium-line-height, 20px);
+  margin-right: 8px;
+}
+
+.quanta-snackbar-action {
+  margin-left: 8px;
+  // Use M3 button style explicitly or inverse primary color
+  button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--md-sys-color-inverse-primary, #d0bcff);
+    font-family: var(--md-sys-typescale-label-large-font);
+    font-weight: 500;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.12);
+    }
+  }
+}
