@@ -4,6 +4,7 @@ import {
   Component,
   computed,
   ContentChildren,
+  effect,
   ElementRef,
   input,
   model,
@@ -65,6 +66,18 @@ export class QuantaTabsComponent implements AfterContentInit {
 
   protected classes = computed(() => `quanta-tab-group ${this.variant()}`);
 
+  // Keep child tab panels in sync with the selectedIndex model
+  private readonly syncSelectedIndexEffect = effect(() => {
+    // Track changes from internal interactions and external bindings
+    this.selectedIndex();
+
+    if (!this.tabs || this.tabs.length === 0) {
+      return;
+    }
+
+    this.updateActiveState();
+  });
+
   private uniqueId = `quanta-tabs-${Math.random().toString(36).substr(2, 9)}`;
 
   constructor() {
@@ -80,15 +93,18 @@ export class QuantaTabsComponent implements AfterContentInit {
 
   handleKeyDown(event: KeyboardEvent, index: number) {
     let nextIndex = index;
+    let direction: -1 | 1 = 1;
     switch (event.key) {
       case 'ArrowLeft':
         nextIndex = index - 1;
+        direction = -1;
         break;
       case 'ArrowRight':
         nextIndex = index + 1;
         break;
       case 'End':
         nextIndex = this.tabs.length - 1;
+        direction = -1;
         break;
       case 'Home':
         nextIndex = 0;
@@ -101,7 +117,7 @@ export class QuantaTabsComponent implements AfterContentInit {
     if (nextIndex < 0) nextIndex = this.tabs.length - 1;
     if (nextIndex >= this.tabs.length) nextIndex = 0;
 
-    this.activateTabAndFocus(nextIndex, event.key === 'ArrowLeft' ? -1 : 1);
+    this.activateTabAndFocus(nextIndex, direction);
     event.preventDefault();
   }
 
@@ -126,7 +142,6 @@ export class QuantaTabsComponent implements AfterContentInit {
     if (!tab || tab.disabled()) return;
 
     this.selectedIndex.set(index);
-    this.updateActiveState();
   }
 
   private activateTabAndFocus(index: number, direction: -1 | 1) {
