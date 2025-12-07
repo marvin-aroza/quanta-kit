@@ -1,6 +1,7 @@
 /*
  * Public API Surface of ui-kit
  */
+export * from './lib/atoms/badge/badge.component';
 export * from './lib/atoms/button/button.component';
 export * from './lib/atoms/checkbox/checkbox.component';
 export * from './lib/atoms/chips/chip-set.component';
