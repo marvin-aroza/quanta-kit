@@ -27,10 +27,10 @@ type Story = StoryObj<QuantaMenuComponent>;
   template: `
     <quanta-button (click)="isOpen.set(!isOpen())" #trigger> Open Menu </quanta-button>
 
-    <quanta-menu [trigger]="trigger.elementRef.nativeElement" [open]="isOpen">
+    <quanta-menu [trigger]="trigger.elementRef.nativeElement" [open]="isOpen()">
       <quanta-menu-item>Item 1</quanta-menu-item>
       <quanta-menu-item>Item 2</quanta-menu-item>
-      <quanta-menu-item disabled="true">Disabled Item</quanta-menu-item>
+      <quanta-menu-item [disabled]="true">Disabled Item</quanta-menu-item>
     </quanta-menu>
   `,
 })
@@ -54,7 +54,7 @@ export const Basic: Story = {
   template: `
     <quanta-button (click)="isOpen.set(!isOpen())" #trigger> Options </quanta-button>
 
-    <quanta-menu [trigger]="trigger.elementRef.nativeElement" [open]="isOpen">
+    <quanta-menu [trigger]="trigger.elementRef.nativeElement" [open]="isOpen()">
       <quanta-menu-item icon="edit" headline="Edit"></quanta-menu-item>
       <quanta-menu-item icon="duplicate" headline="Duplicate">
         <span end class="material-icons">content_copy</span>

@@ -17,6 +17,7 @@ export * from './lib/atoms/slider/slider.component';
 export * from './lib/atoms/switch/switch.component';
 export * from './lib/atoms/tooltip/tooltip.component';
 export * from './lib/atoms/tooltip/tooltip.directive';
+export * from './lib/molecules/bottom-app-bar/bottom-app-bar.component';
 export * from './lib/molecules/card/card.component';
 export * from './lib/molecules/dialog/dialog.component';
 export * from './lib/molecules/form-field/form-field.component';
