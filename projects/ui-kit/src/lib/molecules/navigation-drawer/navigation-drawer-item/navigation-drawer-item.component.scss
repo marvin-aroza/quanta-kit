@@ -5,6 +5,11 @@
   cursor: pointer;
   border-radius: 28px; // Pill shape container area (though active indicator is the main visual)
   outline: none;
+
+  &:focus-visible {
+    outline: 2px solid var(--md-sys-color-primary, #6750a4);
+    outline-offset: 2px;
+  }
 }
 
 .quanta-nav-drawer-item-content {

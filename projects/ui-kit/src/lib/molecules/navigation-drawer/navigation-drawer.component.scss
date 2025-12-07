@@ -42,13 +42,6 @@
     border-right: 1px solid transparent; // Optional border
   }
 
-  &.standard {
-    // Usually Standard is always visible, but we might hide it if !opened logic is applied?
-    // Actually if !opened in standard mode, we probably just hide it or collapse it.
-    // For now, if standard && !opened, we hide it via generic transform logic below.
-    // But strictly standard usually implies permament.
-  }
-
   &.modal {
     position: fixed;
     top: 0;
@@ -67,26 +60,16 @@
   &.dismissible {
     width: 360px;
     margin-right: 0;
-
-    // If not open, we set width 0 or hidden?
-    // transform translate isn't great for taking up space.
-    // Usually dismissible uses negative margin or width transition.
-    // Let's use simple width/display toggle or accept that host handles layout.
-    // For simplicity: If !open in dismissible, we hide it via styles.
-  }
-
-  &:not(.modal) {
-    // Standard/Dismissible specific:
-    // If not open, hide.
-    // We rely on parent [opened] signal for logic.
+    // Dismissible mode toggles visibility via display property handled by host binding
   }
 }
 
 :host(:not(.drawer-open)) .quanta-navigation-drawer.standard {
-  display: none; // Primitive toggle for standard
+  display: none; // Hides the drawer from layout when closed
 }
+
 :host(:not(.drawer-open)) .quanta-navigation-drawer.dismissible {
-  display: none; // Primitive toggle for dismissible
+  display: none; // Hides the drawer from layout when closed
 }
 
 .quanta-navigation-drawer-content {

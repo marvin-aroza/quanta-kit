@@ -20,7 +20,7 @@ export default meta;
 
 export const Standard: StoryObj<QuantaNavigationDrawerComponent> = {
   render: (args) => {
-    const activeItem = signal('home');
+    const activeItem = signal('inbox');
     return {
       props: { ...args, activeItem, setActive: (id: string) => activeItem.set(id) },
       template: `

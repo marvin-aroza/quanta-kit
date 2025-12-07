@@ -25,9 +25,10 @@ export type NavigationDrawerMode = 'dismissible' | 'modal' | 'standard';
         class="quanta-navigation-drawer-scrim"
         (click)="scrimClick.emit()"
         (keydown.enter)="scrimClick.emit()"
-        (keydown.space)="scrimClick.emit()"
+        (keydown.space)="$event.preventDefault(); scrimClick.emit()"
         role="button"
         tabindex="0"
+        aria-label="Close navigation drawer"
       ></div>
     }
 
