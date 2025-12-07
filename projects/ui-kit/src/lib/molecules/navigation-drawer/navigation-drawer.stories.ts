@@ -25,7 +25,7 @@ export const Standard: StoryObj<QuantaNavigationDrawerComponent> = {
       props: { ...args, activeItem, setActive: (id: string) => activeItem.set(id) },
       template: `
         <div style="display: flex; height: 400px; border: 1px solid #ccc; overflow: hidden;">
-          <quanta-navigation-drawer [opened]="true" mode="standard">
+          <quanta-navigation-drawer [opened]="true" mode="standard" ariaLabel="Main navigation">
             <h2 style="padding: 0 28px; font-family: sans-serif; font-size: 1.2rem; opacity: 0.7; margin: 0;">Mail</h2>
             <quanta-navigation-drawer-item 
               icon="inbox" 
@@ -75,7 +75,7 @@ export const Modal: StoryObj<QuantaNavigationDrawerComponent> = {
             <p>Click the button to open the modal drawer.</p>
           </div>
           
-          <quanta-navigation-drawer [opened]="isOpen()" mode="modal" (scrimClick)="toggle()">
+          <quanta-navigation-drawer [opened]="isOpen()" mode="modal" (scrimClick)="toggle()" ariaLabel="Main menu">
             <h2 style="padding: 0 28px; font-family: sans-serif; font-size: 1.2rem; margin: 0;">Menu</h2>
             <quanta-navigation-drawer-item icon="settings" label="Settings"></quanta-navigation-drawer-item>
             <quanta-navigation-drawer-item icon="help" label="Help"></quanta-navigation-drawer-item>
@@ -93,7 +93,7 @@ export const DarkTheme: StoryObj<QuantaNavigationDrawerComponent> = {
       props: { ...args, activeItem, setActive: (id: string) => activeItem.set(id) },
       template: `
         <div data-theme="dark" style="display: flex; height: 400px; border: 1px solid #333; overflow: hidden; background: #121212; color: #e3e3e3;">
-          <quanta-navigation-drawer [opened]="true" mode="standard">
+          <quanta-navigation-drawer [opened]="true" mode="standard" ariaLabel="Main navigation">
             <h2 style="padding: 0 28px; font-family: sans-serif; font-size: 1.2rem; opacity: 0.7; margin: 0;">Mail</h2>
             <quanta-navigation-drawer-item 
               icon="inbox" 

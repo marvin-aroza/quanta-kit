@@ -50,9 +50,17 @@
     z-index: 1005; // Above scrim
     box-shadow: var(--md-sys-elevation-3); // Modal elevation
     transform: translateX(-100%); // Hidden by default
+    visibility: hidden; // Hide from access tree/focus when closed
+    transition:
+      transform 0.3s cubic-bezier(0.2, 0, 0, 1),
+      visibility 0s linear 0.3s; // Delay visibility change
 
     &.open {
       transform: translateX(0);
+      visibility: visible;
+      transition:
+        transform 0.3s cubic-bezier(0.2, 0, 0, 1),
+        visibility 0s linear 0s; // Immediate visibility
     }
   }
 
