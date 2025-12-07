@@ -20,6 +20,16 @@
     0px 1px 3px 0px rgba(0, 0, 0, 0.3)
   );
 
+  // Focus State
+  &:focus-visible {
+    outline: 2px solid var(--md-sys-color-primary, #6750a4);
+    outline-offset: 2px;
+  }
+
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
   &:hover {
     box-shadow: var(
       --md-sys-elevation-4,

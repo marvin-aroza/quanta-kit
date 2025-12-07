@@ -4,6 +4,7 @@ import {
   Component,
   computed,
   input,
+  output,
   ViewEncapsulation,
 } from '@angular/core';
 import { QuantaIconComponent } from '../../atoms/icon/icon.component';
@@ -15,6 +16,9 @@ export type FabVariant = 'primary' | 'secondary' | 'surface' | 'tertiary';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
   host: {
+    '(click)': 'handleClick($event)',
+    '(keydown.enter)': 'handleKeydown($event)',
+    '(keydown.space)': 'handleKeydown($event)',
     '[attr.aria-label]': 'ariaLabel() || label() || null',
     '[class]': 'hostClasses()',
     role: 'button',
@@ -35,6 +39,11 @@ export class QuantaFabComponent {
    * Explicit aria-label (overrides label if provided).
    */
   ariaLabel = input<string>();
+
+  /**
+   * Emitted when the FAB is clicked or activated via keyboard.
+   */
+  readonly clicked = output<void>();
 
   /**
    * Whether the FAB is extended (pill shape with label).
@@ -73,4 +82,14 @@ export class QuantaFabComponent {
    * The label to display when extended.
    */
   label = input<string>();
+
+  protected handleClick(event: Event): void {
+    event.stopPropagation();
+    this.clicked.emit();
+  }
+
+  protected handleKeydown(event: KeyboardEvent): void {
+    event.preventDefault();
+    this.clicked.emit();
+  }
 }

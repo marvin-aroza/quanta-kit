@@ -71,7 +71,7 @@ export const DarkTheme: StoryObj<QuantaFabComponent> = {
         <quanta-fab icon="edit" variant="primary"></quanta-fab>
         <quanta-fab icon="add" variant="secondary"></quanta-fab>
         <quanta-fab icon="palette" variant="tertiary"></quanta-fab>
-        <quanta-fab icon="navigation" label="Navigate" extended="true" variant="surface"></quanta-fab>
+        <quanta-fab icon="navigation" label="Navigate" [extended]="true" variant="surface"></quanta-fab>
       </div>
     `,
   }),
