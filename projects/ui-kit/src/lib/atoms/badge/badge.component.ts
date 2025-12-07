@@ -12,7 +12,7 @@ import {
   encapsulation: ViewEncapsulation.Emulated,
   host: {
     '[attr.aria-hidden]': '!label() ? "true" : null',
-    '[attr.aria-label]': 'label()',
+    '[attr.aria-label]': 'label() || null',
     '[class.large]': '!isSmall()',
     '[class.small]': 'isSmall()',
     class: 'quanta-badge',
