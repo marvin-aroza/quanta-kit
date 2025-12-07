@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  effect,
+  ElementRef,
   inject,
   input,
   signal,
@@ -15,12 +17,14 @@ import { QuantaSegmentedButtonToken } from './segmented-button.token';
   encapsulation: ViewEncapsulation.None,
   host: {
     '(click)': 'handleClick()',
+    '(keydown.enter)': 'handleClick()',
+    '(keydown.space)': 'handleClick()',
     '[attr.aria-checked]': 'isSelected()',
     '[attr.aria-disabled]': 'hostDisabled()',
     '[attr.role]': 'isMulti() ? "checkbox" : "radio"',
+    '[attr.tabindex]': 'hostDisabled() ? -1 : tabIndex()',
     '[class.disabled]': 'hostDisabled()',
     '[class.selected]': 'isSelected()',
-    // Keyboard support will be managed by parent or native listing for now
     class: 'quanta-segment',
   },
   imports: [CommonModule, QuantaIconComponent],
@@ -40,6 +44,8 @@ import { QuantaSegmentedButtonToken } from './segmented-button.token';
 })
 export class QuantaSegmentComponent {
   disabled = input<boolean>(false);
+  elementRef = inject(ElementRef); // Injected ElementRef
+
   hostDisabled = signal(false);
   icon = input<string>();
   isMulti = signal(false);
@@ -47,9 +53,27 @@ export class QuantaSegmentComponent {
   // State managed by parent
   isSelected = signal(false);
   label = input<string>();
+
+  // Managed by parent for roving tabindex
+  tabIndex = signal(-1); // Added tabIndex signal
   value = input.required<unknown>();
 
   private readonly parent = inject(QuantaSegmentedButtonToken);
+
+  constructor() {
+    // Added constructor
+    effect(() => {
+      // If we are disabled, force tabIndex to -1
+      if (this.hostDisabled()) {
+        // managed by binding but good to be explicit/reactive if logic grows
+      }
+    });
+  }
+
+  focus() {
+    // Added focus method
+    this.elementRef.nativeElement.focus();
+  }
 
   handleClick() {
     if (!this.hostDisabled()) {

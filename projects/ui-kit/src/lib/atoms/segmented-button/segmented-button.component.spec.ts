@@ -5,7 +5,6 @@ import { QuantaSegmentedButtonComponent } from './segmented-button.component';
 
 @Component({
   imports: [QuantaSegmentedButtonComponent, QuantaSegmentComponent],
-  standalone: true,
   template: `
     <quanta-segmented-button
       [multi]="multi"
