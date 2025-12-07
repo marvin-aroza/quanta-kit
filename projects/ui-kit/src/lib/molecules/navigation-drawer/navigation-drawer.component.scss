@@ -1,0 +1,105 @@
+:host {
+  display: flex;
+  height: 100%;
+  position: relative;
+  z-index: 0; // Create stacking context
+
+  &.drawer-modal {
+    display: block; // Host doesn't need flex in modal mode, just contains overlay
+    position: static; // Allow fixed children to locate relative to viewport
+    z-index: auto;
+  }
+}
+
+.quanta-navigation-drawer-scrim {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.32); // M3 scrim opacity
+  z-index: 1000;
+  animation: fade-in 0.2s;
+}
+
+.quanta-navigation-drawer {
+  background-color: var(--md-sys-color-surface-container-low, #f7f2fa);
+  width: 360px;
+  height: 100%;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.2, 0, 0, 1); // Emphasized decelerate
+  box-sizing: border-box;
+
+  // Standard & Dismissible: Layout behavior
+  &.standard,
+  &.dismissible {
+    position: relative; // Takes up space in layout
+    z-index: 1;
+    border-right: 1px solid transparent; // Optional border
+  }
+
+  &.standard {
+    // Usually Standard is always visible, but we might hide it if !opened logic is applied?
+    // Actually if !opened in standard mode, we probably just hide it or collapse it.
+    // For now, if standard && !opened, we hide it via generic transform logic below.
+    // But strictly standard usually implies permament.
+  }
+
+  &.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1005; // Above scrim
+    box-shadow: var(--md-sys-elevation-3); // Modal elevation
+    transform: translateX(-100%); // Hidden by default
+
+    &.open {
+      transform: translateX(0);
+    }
+  }
+
+  // Dismissible behavior: Also slides out
+  &.dismissible {
+    width: 360px;
+    margin-right: 0;
+
+    // If not open, we set width 0 or hidden?
+    // transform translate isn't great for taking up space.
+    // Usually dismissible uses negative margin or width transition.
+    // Let's use simple width/display toggle or accept that host handles layout.
+    // For simplicity: If !open in dismissible, we hide it via styles.
+  }
+
+  &:not(.modal) {
+    // Standard/Dismissible specific:
+    // If not open, hide.
+    // We rely on parent [opened] signal for logic.
+  }
+}
+
+:host(:not(.drawer-open)) .quanta-navigation-drawer.standard {
+  display: none; // Primitive toggle for standard
+}
+:host(:not(.drawer-open)) .quanta-navigation-drawer.dismissible {
+  display: none; // Primitive toggle for dismissible
+}
+
+.quanta-navigation-drawer-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 0; // Vertical padding
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

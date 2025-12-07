@@ -1,0 +1,69 @@
+:host {
+  display: block;
+  margin: 0 12px; // 12px horizontal margin for items inside drawer
+  margin-bottom: 4px; // Small vertical gap
+  cursor: pointer;
+  border-radius: 28px; // Pill shape container area (though active indicator is the main visual)
+  outline: none;
+}
+
+.quanta-nav-drawer-item-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 56px;
+  padding: 0 16px 0 24px; // 24px left padding for icon, 16px right
+  color: var(--md-sys-color-on-surface-variant, #49454f);
+  font-family: var(--md-sys-typescale-label-large-font);
+  font-size: var(--md-sys-typescale-label-large-size, 14px);
+  line-height: var(--md-sys-typescale-label-large-line-height, 20px);
+  font-weight: 500;
+  border-radius: 28px;
+  overflow: hidden; // Contain indicator
+
+  &.active {
+    color: var(--md-sys-color-on-secondary-container, #1d192b);
+
+    .quanta-nav-drawer-item-icon {
+      color: var(--md-sys-color-on-secondary-container, #1d192b);
+    }
+  }
+}
+
+.quanta-nav-drawer-item-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--md-sys-color-secondary-container, #e8def8);
+  opacity: 0;
+  z-index: 0;
+  transition: opacity 0.2s;
+
+  // Active state logic via parent class
+}
+
+.active .quanta-nav-drawer-item-indicator {
+  opacity: 1;
+}
+
+.quanta-nav-drawer-item-icon {
+  position: relative;
+  z-index: 1;
+  margin-right: 12px;
+  font-size: 24px;
+  color: var(--md-sys-color-on-surface-variant, #49454f);
+}
+
+.quanta-nav-drawer-item-label {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.quanta-nav-drawer-item-badge {
+  position: relative;
+  z-index: 1;
+  margin-left: auto;
+}
