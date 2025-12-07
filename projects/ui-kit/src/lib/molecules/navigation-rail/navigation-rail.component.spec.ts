@@ -13,6 +13,7 @@ describe('QuantaNavigationRailComponent', () => {
 
     fixture = TestBed.createComponent(QuantaNavigationRailComponent);
     component = fixture.componentInstance;
+    fixture.componentRef.setInput('ariaLabel', 'Main rail');
     fixture.detectChanges();
   });
 
