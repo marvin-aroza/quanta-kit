@@ -1,0 +1,78 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  flex: 1;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: var(--md-sys-color-on-surface-variant, #49454f);
+  gap: 4px;
+
+  &.active {
+    color: var(--md-sys-color-on-surface, #1d1b20);
+  }
+}
+
+.quanta-navigation-item-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 32px;
+  border-radius: 16px; // Pill shape
+
+  &.active {
+    .quanta-navigation-item-active-indicator {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .quanta-navigation-item-icon {
+      color: var(--md-sys-color-on-secondary-container, #1d192b);
+    }
+  }
+}
+
+.quanta-navigation-item-active-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--md-sys-color-secondary-container, #e8def8);
+  border-radius: 16px;
+  opacity: 0;
+  transform: scaleX(0.4);
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+  z-index: 0;
+}
+
+.quanta-navigation-item-icon {
+  position: relative;
+  z-index: 1;
+  font-size: 24px; // M3 standard
+  transition: color 0.2s;
+}
+
+.quanta-navigation-item-label {
+  font-family: var(--md-sys-typescale-label-medium-font);
+  font-size: var(--md-sys-typescale-label-medium-size, 12px);
+  line-height: var(--md-sys-typescale-label-medium-line-height, 16px);
+  letter-spacing: var(--md-sys-typescale-label-medium-tracking, 0.5px);
+  font-weight: 500;
+  transition:
+    color 0.2s,
+    font-weight 0.2s;
+
+  &.active {
+    font-weight: 700; // Bold when active (optional M3 preference)
+    color: var(--md-sys-color-on-surface, #1d1b20);
+  }
+}
