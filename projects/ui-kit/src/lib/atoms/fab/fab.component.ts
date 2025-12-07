@@ -88,7 +88,7 @@ export class QuantaFabComponent {
     this.clicked.emit();
   }
 
-  protected handleKeydown(event: KeyboardEvent): void {
+  protected handleKeydown(event: Event): void {
     event.preventDefault();
     this.clicked.emit();
   }
