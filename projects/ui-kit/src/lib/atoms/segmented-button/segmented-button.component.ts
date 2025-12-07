@@ -4,6 +4,7 @@ import {
   Component,
   contentChildren,
   effect,
+  forwardRef,
   input,
   model,
   ViewEncapsulation,
@@ -22,7 +23,12 @@ import { QuantaSegmentedButtonToken } from './segmented-button.token';
     class: 'quanta-segmented-button',
   },
   imports: [CommonModule],
-  providers: [{ provide: QuantaSegmentedButtonToken, useExisting: QuantaSegmentedButtonComponent }],
+  providers: [
+    {
+      provide: QuantaSegmentedButtonToken,
+      useExisting: forwardRef(() => QuantaSegmentedButtonComponent),
+    },
+  ],
   selector: 'quanta-segmented-button',
   styleUrl: './segmented-button.component.scss',
   template: `<ng-content select="quanta-segment" />`,

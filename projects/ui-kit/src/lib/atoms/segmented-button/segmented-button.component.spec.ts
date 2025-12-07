@@ -5,11 +5,12 @@ import { QuantaSegmentedButtonComponent } from './segmented-button.component';
 
 @Component({
   imports: [QuantaSegmentedButtonComponent, QuantaSegmentComponent],
+  standalone: true,
   template: `
     <quanta-segmented-button
       [multi]="multi"
       [selected]="selected"
-      (selectedChange)="selected = $event"
+      (selectedChange)="selected = $any($event)"
     >
       <quanta-segment value="1" label="One"></quanta-segment>
       <quanta-segment value="2" label="Two"></quanta-segment>
