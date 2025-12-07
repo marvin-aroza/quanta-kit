@@ -21,5 +21,5 @@ import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@a
   `,
 })
 export class QuantaNavigationRailComponent {
-  ariaLabel = input<string>();
+  ariaLabel = input.required<string>();
 }
