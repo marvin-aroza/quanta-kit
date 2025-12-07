@@ -1,0 +1,85 @@
+:host {
+  display: inline-flex;
+  border-radius: 9999px; // High enough to pill the ends
+  // Or M3 standard: height 40px, rounded ends.
+  min-height: 40px;
+  overflow: hidden; // Clip children
+  // Border logic is complex; usually container has no border, segments have borders
+}
+
+.quanta-segmented-button {
+  display: inline-flex;
+  flex-direction: row;
+  border-radius: 20px; // Standard M3 full radius
+  // border: 1px solid var(--md-sys-color-outline);
+}
+
+// Global host style for segment since encapsulation is None for correct grouping
+.quanta-segment {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  min-width: 48px;
+  height: 40px;
+  cursor: pointer;
+  user-select: none;
+  background-color: transparent;
+  color: var(--md-sys-color-on-surface);
+  border: 1px solid var(--md-sys-color-outline);
+  margin-left: -1px; // Collapse borders
+
+  &:first-child {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin-left: 0;
+  }
+
+  &:last-child {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  // Hover state
+  &:not(.disabled):hover {
+    background-color: rgba(0, 0, 0, 0.08); // Simple hover, use tokens ideally
+    z-index: 1; // Bring border to top
+  }
+
+  // Selected State
+  &.selected {
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    border-color: var(--md-sys-color-secondary-container); // Hide border or match
+    z-index: 2; // Selected sits above unselected
+
+    &:not(.disabled):hover {
+      // Darken/Lighten for selected hover
+      &::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-color: currentColor;
+        opacity: 0.08;
+      }
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    opacity: 0.38;
+    z-index: 0;
+  }
+
+  .quanta-segment-icon,
+  .quanta-segment-check {
+    margin-right: 8px;
+  }
+
+  .quanta-segment-label {
+    // Label styles
+    font-size: 14px;
+    font-weight: 500;
+  }
+}
