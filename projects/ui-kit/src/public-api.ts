@@ -16,6 +16,8 @@ export * from './lib/molecules/navigation-bar/navigation-bar.component';
 export * from './lib/molecules/navigation-bar/navigation-item/navigation-item.component';
 export * from './lib/molecules/navigation-drawer/navigation-drawer-item/navigation-drawer-item.component';
 export * from './lib/molecules/navigation-drawer/navigation-drawer.component';
+export * from './lib/molecules/navigation-rail/navigation-rail-item/navigation-rail-item.component';
+export * from './lib/molecules/navigation-rail/navigation-rail.component';
 export * from './lib/molecules/select/select.component';
 export * from './lib/molecules/snackbar/snackbar.component';
 export * from './lib/molecules/snackbar/snackbar.service';
