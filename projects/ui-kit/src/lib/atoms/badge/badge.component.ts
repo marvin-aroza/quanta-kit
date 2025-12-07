@@ -29,8 +29,8 @@ import {
 export class QuantaBadgeComponent {
   /**
    * The number to display in the badge.
-   * If unset or 0, showing a dot (unless `dot` is false, but usually 0 implies hidden or dot).
-   * For this component, let's say if count is defined, we show it.
+   * If undefined, showing a small dot (unless `dot` input forces it).
+   * Any defined number (including 0) is rendered numerically.
    */
   count = input<number>();
 
