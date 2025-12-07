@@ -1,5 +1,19 @@
 # quanta-kit
 
+## 0.1.0-alpha.9
+
+### Minor Changes
+
+- 0a30a91: Added navigation drawer
+- e077ea6: Added navigation rail component
+- 521b6ed: Added slider component
+- a43d776: Added fab component
+- a33d843: Added snackbar component
+
+### Patch Changes
+
+- 56bdfe4: Added badge component
+
 ## 0.1.0-alpha.8
 
 ### Minor Changes
