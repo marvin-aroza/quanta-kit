@@ -61,40 +61,43 @@ export class QuantaSegmentedButtonComponent<T = unknown> implements QuantaSegmen
 
   constructor() {
     effect(() => {
-      const currentSelected = this.selected();
+      // TabIndex / Focus Initialization implementation
+      // We need to react to changes in selection/multi/segments to ensure ONE item is tabbable.
+
       const isMulti = this.multi();
       const segments = this.segments();
 
-      // State Pass-down
-      segments.forEach((segment: QuantaSegmentComponent) => {
-        segment.isMulti.set(isMulti);
-        segment.hostDisabled.set(this.disabled() || segment.disabled());
+      // Note: Child components now derive their own 'selected' and 'disabled' state via computed signals.
+      // We only need to manage the roving tabindex here.
 
-        let isSelected = false;
-        if (isMulti) {
-          const selArray = Array.isArray(currentSelected) ? currentSelected : [];
-          isSelected = selArray.includes(segment.value() as T);
-        } else {
-          isSelected = currentSelected === (segment.value() as T);
-        }
-        segment.isSelected.set(isSelected);
-      });
+      // We can check the computed 'isSelected' of children?
+      // Yes, signals are available on the child instances.
 
-      // TabIndex / Focus Initialization (Simplified)
-      // If Single Select: Selected item is 0, others -1.
-      // If None selected: Index 0 is 0.
       if (!isMulti) {
-        const selectedIndex = segments.findIndex((s) => s.isSelected());
-        const focusIndex = selectedIndex !== -1 ? selectedIndex : 0;
+        // Single Select: The selected item gets tabIndex 0.
+        // Fallback: If none selected, the first item gets 0.
 
-        segments.forEach((s, i) => {
-          s.tabIndex.set(i === focusIndex ? 0 : -1);
+        // Note: computed signals in children might not be updated *immediately* in this effect due to signal graph?
+        // Actually, if we access them, they evaluate. (Pull-based).
+
+        let foundSelected = false;
+        segments.forEach((s) => {
+          if (s.isSelected()) {
+            s.tabIndex.set(0);
+            foundSelected = true;
+          } else {
+            s.tabIndex.set(-1);
+          }
         });
+
+        if (!foundSelected && segments.length > 0) {
+          segments[0].tabIndex.set(0);
+        }
       } else {
-        // Multi-Select Logic:
-        // Just defaulting 0 to 0 for entrance.
-        // Roving logic depends on interaction.
-        // For now, let's keep it simple: First item is 0, unless we want to persist last focused.
+        // Multi-Select:
+        // Standard practice: If user tabs out and back in, where do they land?
+        // Simple implementation: Index 0 is entrance, OR last focused (if we tracked it).
+        // Let's stick to Index 0 for simplicity.
         segments.forEach((s, i) => {
           s.tabIndex.set(i === 0 ? 0 : -1);
         });
@@ -130,9 +133,11 @@ export class QuantaSegmentedButtonComponent<T = unknown> implements QuantaSegmen
     switch (event.key) {
       case ' ':
       case 'Enter':
-        event.preventDefault();
-        this.toggle(segments[currentIndex].value());
-        return; // Selection handled, no move needed (unless single select moves focus?)
+        if (!isMulti) {
+          event.preventDefault();
+          this.toggle(segments[currentIndex].value());
+        }
+        return;
       case 'ArrowDown':
       case 'ArrowRight':
         event.preventDefault();

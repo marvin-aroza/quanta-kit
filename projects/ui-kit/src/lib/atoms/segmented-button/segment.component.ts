@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
   effect,
   ElementRef,
   inject,
@@ -43,35 +44,43 @@ import { QuantaSegmentedButtonToken } from './segmented-button.token';
   `,
 })
 export class QuantaSegmentComponent {
+  // Inputs
   disabled = input<boolean>(false);
-  elementRef = inject(ElementRef); // Injected ElementRef
+  // Injections
+  elementRef = inject(ElementRef);
+  private readonly parent = inject(QuantaSegmentedButtonToken);
+  // Computed State derived from Parent
+  hostDisabled = computed(() => this.parent.disabled() || this.disabled());
 
-  hostDisabled = signal(false);
   icon = input<string>();
-  isMulti = signal(false);
+  isMulti = this.parent.multi;
 
-  // State managed by parent
-  isSelected = signal(false);
+  value = input.required<unknown>();
+  isSelected = computed(() => {
+    const currentSelected = this.parent.selected();
+    const isMulti = this.parent.multi();
+    const value = this.value();
+
+    if (isMulti) {
+      const selArray = Array.isArray(currentSelected) ? currentSelected : [];
+      return selArray.includes(value);
+    } else {
+      return currentSelected === value;
+    }
+  });
+
   label = input<string>();
 
-  // Managed by parent for roving tabindex
-  tabIndex = signal(-1); // Added tabIndex signal
-  value = input.required<unknown>();
-
-  private readonly parent = inject(QuantaSegmentedButtonToken);
+  // Managed by parent for roving tabindex (this remains writable as parent sets it via interaction)
+  tabIndex = signal(-1);
 
   constructor() {
-    // Added constructor
     effect(() => {
-      // If we are disabled, force tabIndex to -1
-      if (this.hostDisabled()) {
-        // managed by binding but good to be explicit/reactive if logic grows
-      }
+      // Logic placeholder for side-effects if needed
     });
   }
 
   focus() {
-    // Added focus method
     this.elementRef.nativeElement.focus();
   }
 
