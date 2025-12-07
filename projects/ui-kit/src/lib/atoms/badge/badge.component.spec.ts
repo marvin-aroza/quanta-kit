@@ -25,7 +25,7 @@ describe('QuantaBadgeComponent', () => {
     fixture.detectChanges();
     const element = fixture.nativeElement as HTMLElement;
     expect(element.textContent?.trim()).toBe('5');
-    expect(element.classList.contains('large')).toBeTrue();
+    expect(element.classList.contains('large')).toBe(true);
   });
 
   it('should show + if over maxCount', () => {
@@ -40,7 +40,7 @@ describe('QuantaBadgeComponent', () => {
     fixture.componentRef.setInput('dot', true);
     fixture.detectChanges();
     const element = fixture.nativeElement as HTMLElement;
-    expect(element.classList.contains('small')).toBeTrue();
+    expect(element.classList.contains('small')).toBe(true);
     expect(element.textContent?.trim()).toBe('');
   });
 });

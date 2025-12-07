@@ -11,9 +11,10 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
   host: {
+    '[attr.aria-hidden]': '!label() ? "true" : null',
+    '[attr.aria-label]': 'label()',
     '[class.large]': '!isSmall()',
     '[class.small]': 'isSmall()',
-    'aria-hidden': 'true', // Usually strictly visual
     class: 'quanta-badge',
   },
   imports: [CommonModule],
