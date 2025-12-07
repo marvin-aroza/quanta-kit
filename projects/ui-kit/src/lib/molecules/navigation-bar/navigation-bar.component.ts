@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -8,9 +8,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   selector: 'quanta-navigation-bar',
   styleUrl: './navigation-bar.component.scss',
   template: `
-    <nav class="quanta-navigation-bar">
+    <nav class="quanta-navigation-bar" [attr.aria-label]="ariaLabel()">
       <ng-content></ng-content>
     </nav>
   `,
 })
-export class QuantaNavigationBarComponent {}
+export class QuantaNavigationBarComponent {
+  ariaLabel = input<string>('Main navigation');
+}

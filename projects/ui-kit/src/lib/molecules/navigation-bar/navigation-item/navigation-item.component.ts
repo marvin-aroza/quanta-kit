@@ -2,16 +2,19 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input, ViewEncapsulation } from '@angular/core';
 import { QuantaIconComponent } from '../../../atoms/icon/icon.component';
 
+import { output } from '@angular/core';
+
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.Emulated,
   host: {
+    '(click)': 'itemClick.emit()',
+    '(keydown.enter)': 'itemClick.emit()',
+    '(keydown.space)': '$event.preventDefault(); itemClick.emit()',
     '[class.active]': 'active()',
     class: 'quanta-navigation-item',
-    // 'role': 'tab', // Or link, depending on usage. Typically navigation bar items are links or buttons.
-    // Use button behavior for now? Or just div and let user wrap?
-    // Material typically handles click. We can add hostbinding for click?
-    // For now, let's just be presentational.
+    role: 'button',
+    tabindex: '0',
   },
   imports: [CommonModule, QuantaIconComponent],
   selector: 'quanta-navigation-item',
@@ -29,5 +32,6 @@ import { QuantaIconComponent } from '../../../atoms/icon/icon.component';
 export class QuantaNavigationItemComponent {
   active = input<boolean>(false);
   icon = input.required<string>();
+  itemClick = output<void>();
   label = input.required<string>();
 }
