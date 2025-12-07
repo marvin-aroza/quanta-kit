@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.quanta-navigation-bar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; // Or space-around / even depending on M3. M3 usually divides space equally.
+  // Actually M3: "Destinations are equally spaced and take up equal width".
+  // So children (items) should have flex: 1. (Handled in item component).
+
+  height: 80px;
+  background-color: var(--md-sys-color-surface-container, #f3f3f6);
+  color: var(--md-sys-color-on-surface-variant, #49454f);
+  padding: 0; // No padding, items control spacing? Usually maybe 12px or 16px horizontal padding total for bar?
+  // Let's assume full width items.
+
+  box-sizing: border-box;
+}

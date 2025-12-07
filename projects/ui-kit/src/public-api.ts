@@ -12,6 +12,8 @@ export * from './lib/atoms/input/input.component';
 export * from './lib/atoms/progress/circular-progress.component';
 export * from './lib/atoms/progress/linear-progress.component';
 export * from './lib/atoms/radio/radio-button.component';
+export * from './lib/molecules/navigation-bar/navigation-bar.component';
+export * from './lib/molecules/navigation-bar/navigation-item/navigation-item.component';
 export * from './lib/molecules/select/select.component';
 export * from './lib/molecules/snackbar/snackbar.component';
 export * from './lib/molecules/snackbar/snackbar.service';
