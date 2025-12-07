@@ -1,0 +1,135 @@
+:host {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  transition:
+    background-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+
+  // Elevation
+  box-shadow: var(
+    --md-sys-elevation-3,
+    0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+    0px 1px 3px 0px rgba(0, 0, 0, 0.3)
+  );
+
+  &:hover {
+    box-shadow: var(
+      --md-sys-elevation-4,
+      0px 6px 10px 4px rgba(0, 0, 0, 0.15),
+      0px 2px 3px 0px rgba(0, 0, 0, 0.3)
+    );
+
+    // State layer handled securely by specific variants or overlay
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: currentColor;
+      opacity: var(--md-sys-state-hover-state-layer-opacity, 0.08);
+      pointer-events: none;
+    }
+  }
+
+  &:active {
+    box-shadow: var(
+      --md-sys-elevation-3,
+      0px 4px 8px 3px rgba(0, 0, 0, 0.15),
+      0px 1px 3px 0px rgba(0, 0, 0, 0.3)
+    );
+    &::after {
+      opacity: var(--md-sys-state-pressed-state-layer-opacity, 0.12);
+    }
+  }
+
+  // Sizes & Shapes
+  &.size-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px; // approx for small
+
+    .quanta-fab-icon {
+      font-size: 24px;
+    }
+  }
+
+  &.size-medium {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+
+    .quanta-fab-icon {
+      font-size: 24px;
+    }
+  }
+
+  &.size-large {
+    width: 96px;
+    height: 96px;
+    border-radius: 28px;
+
+    .quanta-fab-icon {
+      font-size: 36px; // Larger icon
+    }
+  }
+
+  // Extended
+  &.extended {
+    width: auto;
+    height: 56px;
+    padding: 0 16px; // Spacing
+    border-radius: 16px;
+    min-width: 80px;
+
+    .quanta-fab-icon {
+      margin-right: 8px;
+    }
+
+    &.size-small {
+      height: 40px; // Extended small? uncommon but possible
+      padding: 0 12px;
+      .quanta-fab-icon {
+        margin-right: 4px;
+      }
+    }
+  }
+
+  // Variants Colors
+  &.variant-surface {
+    background-color: var(--md-sys-color-surface-container-high, #ece6f0);
+    color: var(--md-sys-color-primary, #6750a4);
+  }
+
+  &.variant-primary {
+    background-color: var(--md-sys-color-primary-container, #eaddff);
+    color: var(--md-sys-color-on-primary-container, #21005d);
+  }
+
+  &.variant-secondary {
+    background-color: var(--md-sys-color-secondary-container, #e8def8);
+    color: var(--md-sys-color-on-secondary-container, #1d192b);
+  }
+
+  &.variant-tertiary {
+    background-color: var(--md-sys-color-tertiary-container, #ffd8e4);
+    color: var(--md-sys-color-on-tertiary-container, #31111d);
+  }
+}
+
+.quanta-fab-label {
+  font-family: var(--md-sys-typescale-label-large-font, Roboto, sans-serif);
+  font-weight: var(--md-sys-typescale-label-large-weight, 500);
+  font-size: var(--md-sys-typescale-label-large-size, 14px);
+  line-height: var(--md-sys-typescale-label-large-line-height, 20px);
+  white-space: nowrap;
+}
